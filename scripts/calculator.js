@@ -80,40 +80,27 @@ function calculateMolarMass(str) {
 	document.querySelector("#calculator .result").innerHTML = formula + " = "+ res;
 
 	function calculate(arr) {
-		let sign = "+";
-		let numBuf = [];
-		let res = 0;
 
-		arr.forEach((item, i) => {
-			if (item === "+")      sign = "+";
-			else if (item === "*") sign = "*";
+		while(arr.includes("(")) {
+			let leftI = arr.indexOf("(");
+			let rightI = arr.indexOf(")");
 
-			else if (item === "(") {
-				let num;
-				if(arr[arr.indexOf(")", i) + 1] == "*") {
-					num = calculate(arr.splice(i + 1, arr.indexOf(")", i) - 1 - i)) * arr[arr.indexOf(")", i) + 2];
-					arr.splice(i, 3);
-				} else {
-					num = calculate(arr.splice(i + 1, arr.indexOf(")", i) - 1));
-					arr.splice(i, 1);
-				}
-				numBuf.push(num);
-
-			} else if (item !== ")") {
-				numBuf.push(item);
-			}
-
-			if (numBuf.length > 1) {
-				if (sign === "+") res += +numBuf[0] + +numBuf[1];
-				else              res += +numBuf[0] * +numBuf[1];
-				numBuf = [];
-			}
-		});
-
-		if (numBuf.length) {
-			res += +numBuf[0];
+			arr.splice(leftI, 2,
+				calculate( arr.splice(leftI + 1, rightI - leftI - 1) )
+			);
 		}
-		return (+res.toFixed(5)).toString();
+		
+		while(arr.includes("*")) {
+			let i = arr.indexOf("*");
+			arr.splice(i - 1, 3, +arr[i - 1] * +arr[i + 1] + "");
+		}
+
+		let result = arr.reduce( (sum, current) => {
+			if (current === "+") return sum;
+			return sum + +current;
+		}, 0);
+		
+		return (+result.toFixed(5)).toString();
 	}
 }
 
