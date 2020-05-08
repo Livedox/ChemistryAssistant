@@ -106,5 +106,3 @@ function calculateMolarMass(str) {
 		return (+result.toFixed(5)).toString();
 	}
 }
-
-
