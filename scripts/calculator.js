@@ -64,10 +64,13 @@ function calculateMolarMass(str) {
 	let formula = `M(${str})`;
 	str = str.replaceAll("[", "(").replaceAll("]", ")");
 
+	if(str !== "H2O") {
+		str = str.replaceAll("*", "+").replaceAll("H2O", "*18.01528").replaceAll("+*", "+");
+	}
+
 	atomicMass.forEach( (item) => {
 		str = str.replaceAll(item[0], `+${item[1]}*`);
 	});
-
 	
 	str = str.replaceAll("(+", "+(").replaceAll("*)", ")").replaceAll("*+", "+").replaceAll(")", ")*").slice(1);
 	if (str.slice(-1) === "*") str = str.slice(0, -1);
