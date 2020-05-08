@@ -1,0 +1,59 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+html {
+	scroll-behavior: smooth;
+}
+body{
+	background: #dfe6e9;
+}
+#name-solubility-table{
+	display: inline-block;
+	width: auto;
+	margin-top: 50px;
+	margin-left: 5%;
+	padding: 0 15px 0 15px;
+	font-size: 2vw;
+	border-radius: 15px 15px 0 0;
+	background: #2d3436;
+	color: #dfe6e9;
+}
+#solubilityTable{
+	margin: 0 auto;
+	margin-top: -4px;
+	margin-bottom: 40px;
+	width: 95%;
+	border: 2px solid #2d3436;
+	min-width: 500px;
+	text-align: center;
+	border-spacing: 0;
+	table-layout: fixed;
+	font-size: 1.5vw;
+	user-select: none;
+	background: #636e72;
+}
+#solubilityTable td, #solubilityTable th{
+	border: 1px solid black;
+	font-size: 1em;
+	position: relative;
+	overflow: hidden;
+}
+#solubilityTable th{
+	background: #2d3436;
+	color: #dfe6e9;
+}
+#solubilityTable th:first-child{
+	width: 8%;
+}
+#solubilityTable td.highlighted:after{
+	content: "";
+	position: absolute;
+	top: 0;left: 0;right: 0;bottom: 0;
+	background: rgba(255, 255, 255, 0.4);
+}
+#solubilityTable td.active{
+	color: #fff;
+	font-size: 1.1em;
+	border: 2px solid red;
+}

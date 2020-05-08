@@ -1,0 +1,111 @@
+header{
+	height: 50px;
+	width: 100%;
+	min-width: 884px;
+	background: #2d3436;
+	position: fixed;
+	z-index: 100;
+	display: flex;
+	align-items: center;
+	transition: 0.2s;
+	top: -50px;
+	box-shadow: 0 0 5px grey;
+}
+header.active, header.picker-active{
+	top: 0;
+}
+#header-toggle{
+	position: absolute;
+	left: 50%;transform: translateX(-50%);
+	top: 100%;
+	background: #2d3436;
+	padding: 2px;
+	cursor: pointer;
+}
+#header-toggle svg{
+	width: 72px;
+	fill: #dfe6e9;
+}
+#button-menu{
+	height: 30px;
+	width: 30px;
+	padding: 10px 20px 10px 10px;
+	fill: #b2bec3;
+	cursor: pointer;
+}
+#menu:hover #storege-menu-links{
+	display: block;
+}
+#menu:hover #button-menu{
+	fill: #000000;
+}
+#storege-menu-links{
+	display: none;
+	top: 50px;
+	background-color: #2d3436;
+	position: absolute;
+	transition: 1s;
+	z-index: 99;
+	width: 300px;
+}
+#storege-menu-links ol{
+	list-style: none;
+}
+#storege-menu-links a{
+	text-align: center;
+	padding: 15px 0 15px 0;
+	text-decoration: none;
+	display: block;
+	width: 100%;
+	color: #b2bec3;
+	border-bottom: 1px solid #636e72;
+	border-top: 1px solid #636e72;
+	transition: 0.2s;
+}
+#storege-menu-links a:hover{
+	background-color: #636e72;
+	color: white;
+}
+
+.name-sait{
+	font-size: 20px;
+	color: #b2bec3;
+	text-decoration: none;
+	position: relative;
+}
+#open-calculator{
+	position: relative;
+	margin-left: auto;
+	margin-right: 10px;
+	font-size: 20px;
+	color: #b2bec3;
+	cursor: pointer;
+}
+.name-sait::before, #open-calculator::before{
+	content: "";
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	width: 0;
+	height: 2px;
+	background-color: #b2bec3;
+	transition: 0.2s;
+}
+.name-sait:hover::before, #open-calculator:hover::before{
+	width: 100%;
+}
+#button-color-picker{
+	background: #fe83b5;
+	width: 80px;height: 40px;
+	box-sizing: border-box;
+	border: 2px solid black;
+	margin-right: 25px;
+	text-align: center;
+	line-height: 32px;
+	font-size: 20px;
+	font-family: Arial;
+	color: #fff;
+	text-shadow: 1px 1px #000, 1px -1px #000, -1px 1px #000, -1px -1px #000;
+	user-select: none;
+	cursor: pointer;
+}

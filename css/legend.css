@@ -1,0 +1,45 @@
+#legend{
+	position: absolute;
+	width: 100%;
+	height: 125%;
+	top: 0;
+	padding: 0 3px 0 3px;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: space-around;
+	z-index: 40;
+}
+
+#element-legend{
+	width: 25%;
+	box-sizing: border-box;
+	height: 15.86vw;
+	border: 0.22vw solid #2d3436;
+	border-radius: 12px;
+	box-sizing: border-box;
+	font-size: 0.13vw;
+	display: flex;
+	padding: 4px;
+	flex-wrap: wrap;
+	position: relative;
+}
+.legend-inf{
+	width: 70%;
+	height: 15.86vw;
+	border: 0.22vw solid #2d3436;
+	border-radius: 12px;
+	padding: 4px;
+	box-sizing: border-box;
+	overflow-y: auto;
+}
+.legend-inf p {
+	margin: 3px 0 3px 0;
+}
+@media screen and (max-width: 880px) {
+	#element-legend, .legend-inf {
+		height: 140px;
+	}
+	#element-legend{
+		font-size: 1.144px;
+	}
+}

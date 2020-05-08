@@ -1,0 +1,51 @@
+#tableMendeleev{
+	width: 100%;
+	table-layout: fixed;
+	align-content: center;
+	border-spacing: 0;
+	margin: 20px 0 20px -2.3%;
+	border-collapse: collapse;
+}
+.number-group{
+	position: relative;
+ 	text-align: center;
+ 	vertical-align: bottom;
+	user-select: none;
+	font-size: 1.1vw;
+ 	font-family: arial;
+	transition: 0.5s;
+	z-index: 4;
+}
+.number-period{
+	position: relative;
+ 	text-align: right;
+ 	user-select: none;
+ 	padding-right: 3px;
+ 	font-size: 1.1vw;
+ 	font-family: arial;
+ 	transition: 0.5s;
+	z-index: 4;
+}
+.number-period.active, .number-group.active{
+	font-weight: 1000;
+}
+.LA{
+ 	text-align: right;
+ 	font-size: 30px;
+ 	color: green;
+}
+#IPTCE{
+	position: relative;
+}
+#IPTCE div{
+	position: absolute;
+	font-size: 5vw;
+	left: 10%;
+	color: #2d3436;
+	font-family: Georgia;
+}
+@media screen and (max-width: 880px) {
+	#tableMendeleev{
+		width: 890px;
+	}
+} 
