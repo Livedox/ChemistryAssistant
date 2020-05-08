@@ -150,9 +150,9 @@
 
 				<div id="legend">
 					<div id="element-legend" class="p radioactive" style="background: #ffd737;">
-						<div class="symbol"  data-textAlert="Химический символ - сокращённое буквенное обозначение химических элементов, состоят из первой буквы или первой и одной 
+						<div class="symbol"  data-textAlert="Химический символ - сокращённое буквенное обозначение химических элементов, состоят из первой буквы или первой и одной
                         из следующих букв латинского названия элементов" onclick="highlight('symbol')">Po</div>
-						<div class="number" onclick="highlight('number')"><span data-textAlert="Атомный (порядковый) номер - номер химического элемента в периодической системе элементов. 
+						<div class="number" onclick="highlight('number')"><span data-textAlert="Атомный (порядковый) номер - номер химического элемента в периодической системе элементов.
                         Равен числу протонов и электронов в атоме и определяет положительный заряд ядра">84</span></div>
 						<div class="Ar" onclick="highlight('Ar')"><span data-textAlert="Ar - относительная атомная масса — значение массы атома, выраженное в атомных единицах массы (а.е.м)">208,98</span></div>
 						<ol class="oxidation" onclick="highlight('oxidation')"><li data-textAlert='Степень окисления - вспомогательная условная величина для записи процессов окисления, восстановления и окислительно-восстановительных реакций (указан самый частый показатель)'>+4</li></ol>
@@ -169,10 +169,11 @@
                         		<li>Все элементы, расположенные выше жирной линии - <b>неметаллы</b>, ниже - <b>металлы</b>.</li>
                         		<li>Свойства некоторых <b>элементов</b> расписаны более подробно, нажмите на <b>основные свойства</b> в информации о соответствующем элементе.</li>
                         		<li>Чтобы подробнее узнать о проекте, нажмите на <b>ИПСХЭ</b></big>.</li>
+														<li>Пожелания к сайту и сообщения об ошибках ждем на нашей рабочей почте: <b>chem.assist.q@gmail.com</b></big>.</li>
                         	</ol>
                         </div>
 					</div>
-				</div>	
+				</div>
 			</td>
 
 
@@ -1511,7 +1512,7 @@
 					<div class="name-la">Promethium</div>
 				</div>
 			</td>
-			<td class="element-storage"> 
+			<td class="element-storage">
 				<div class="element f-light metal" id="Sm" style="background: #90cd8e">
 					<div class="symbol">Sm</div>
 					<div class="number">62</div>
@@ -1889,7 +1890,7 @@
 		function createModalWindow(data) {
 			if(document.querySelector(".modal-window")) document.querySelector(".modal-window").remove();
 			document.body.insertAdjacentHTML("afterbegin",`
-				<div class="modal-window">		
+				<div class="modal-window">
 					<div class="close-modal-window" onclick="this.parentElement.remove()"><svg enable-background="new 0 0 413.348 413.348" height="10px" viewBox="0 0 413.348 413.348" width="10px" xmlns="http://www.w3.org/2000/svg"><path d="m413.348 24.354-24.354-24.354-182.32 182.32-182.32-182.32-24.354 24.354 182.32 182.32-182.32 182.32 24.354 24.354 182.32-182.32 182.32 182.32 24.354-24.354-182.32-182.32z"/></svg></div>
 					<div class="content-modal-window"><span>${data}</span></div>
 				</div>
@@ -1909,7 +1910,7 @@
 					else modalWindow.style.left = pageX - shiftX + "px";
 					if (pageY - shiftY < 0) modalWindow.style.top = 0;
 					else if (pageY - shiftY > document.documentElement.scrollHeight - modalWindow.clientHeight - 10) modalWindow.style.top = document.documentElement.scrollHeight - modalWindow.clientlHeight - 10 + "px";
-					else modalWindow.style.top = pageY - shiftY + "px";		
+					else modalWindow.style.top = pageY - shiftY + "px";
 				}
 
 
@@ -1943,12 +1944,12 @@
 
         function highlight(cls) {
 			if(!active) {
-			active = true;	
+			active = true;
 				for (let i = 0; i < document.getElementsByClassName(cls).length; i++) {
 					document.getElementsByClassName(cls)[i].classList.toggle('active');
 					setTimeout(() => document.getElementsByClassName(cls)[i].classList.toggle('active'), 500);
 				}
-			setTimeout(() => active = false, 1000);			
+			setTimeout(() => active = false, 1000);
 			}
 		}
 
