@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>ИГРЫ</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="chartist/chartist.min.css">
+</head>
+<body>
+	<header>
+		<div id="menu">
+			<svg version="1.1" id="button-menu" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	  viewBox="0 0 124 124" xml:space="preserve">
+				<g>
+					<path d="M112,6H12C5.4,6,0,11.4,0,18s5.4,12,12,12h100c6.6,0,12-5.4,12-12S118.6,6,112,6z"/>
+					<path d="M112,50H12C5.4,50,0,55.4,0,62c0,6.6,5.4,12,12,12h100c6.6,0,12-5.4,12-12C124,55.4,118.6,50,112,50z"/>
+					<path d="M112,94H12c-6.6,0-12,5.4-12,12s5.4,12,12,12h100c6.6,0,12-5.4,12-12S118.6,94,112,94z"/>
+				</g>
+			</svg>
+
+			<div id="menu-links">
+				<ol>
+					<li><a href="#" class="links">Главная</a></li>
+					<li><a href="#" class="links">Таблица Менделеева</a></li>
+					<li><a href="Tablesolubility.html" class="links">Таблица растворимости</a></li>
+					<li><a href="#" class="links">4</a></li>
+					<li><a href="#" class="links">Здесь могла быть ваша реклама</a></li>
+				</ol>
+			</div>
+		</div>
+
+
+		<a class="name-sait" href="#">НазваниеСайта.org</a>
+		<p id="calculator" title="Открыть на этой странице">Калькулятор</p>
+
+   		<div class="calcSumAr" id="calcSumAr" style="display: none;">
+    		<div id="molar-mass-calculator-movement"><div id="close-molar-mass-calculator">✕</div></div>
+    		<div class="all">
+     	  	<div class="inputMolarMass">
+     	     <input type="text" name="elements" id="formula" value="Введите формулу вещества" style="color: #808e9b" onfocus="this.value = '';this.style.color = 'black'">
+     	     <input type="button" name="gg" value="➜" onclick="calculatorSumAr()" id="input-button-calc">
+     		 	</div>
+      		<div class="clear"></div>
+      		<div id="result-all-blocks">
+       		 	<p id="calculations">Расчёты</p>
+        		<p id="molarMassCalculation"></p>
+        		<p id="molar-mass-calculation-result"></p>
+      		</div>
+        	<div id="invalidInput" style="display: none;">Неверный ввод</div>
+      		<div id="molarMassPlots" style="display: none;">
+      	 		<p class="ct-chart ct-golden-section" id="chart1" style="left: -20px;"></p>
+       			<p class="ct-chart ct-golden-section" id="chart2"></p>
+      		</div>
+				</div>
+			</div>
+	</header>
+	<section class="storage-games">
+		<div class="game-selection">
+			<div class="game-inorganic">
+				<div style="position: absolute;">Неорганика</div>
+				<ol class="ol-game">
+					<li class="test" onclick="game1Start('inorganic')"><div>Обычный тест</div></li>
+					<li class="tabl"><div>Пока не знаю</div></li>
+					<li class="speedTest"><div>Тест на скорость</div></li>
+				</ol>
+			</div>
+			<div class="game-common">
+				<div style="position: absolute;">Общие</div>
+				<ol class="ol-game">
+					<li class="test" onclick="game1Start('common')"><div>Обычный тест</div></li>
+					<li class="tabl"><div>Пока не знаю</div></li>
+					<li class="speedTest"><div>Тест на скорость</div></li>
+				</ol>
+			</div>
+			<div class="game-organics">
+				<div style="position: absolute;">Органика</div>
+				<ol class="ol-game">
+					<li class="test" onclick="game1Start('organics')"><div>Обычный тест</div></li>
+					<li class="tabl"><div>Пока не знаю</div></li>
+					<li class="speedTest"><div>Тест на скорость</div></li>
+				</ol>
+			</div>
+		</div>
+	</section>
+	<section class="game" id="gamesStorage">
+		<div id="game1Storage">
+			<div id="game1Exit1" onclick="game1Exit()">⬅</div>
+			<div id="game1Hearts">❤❤❤</div>
+			<div id="game1Score">Счёт: 0</div>
+			<div id="game1NeedChemicalName"></div>
+			<div class="game1-storage-chemical-names">
+				<div class="game1-block-chemical-name"></div>
+				<div class="game1-block-chemical-name"></div>
+				<div class="game1-block-chemical-name"></div>
+				<div class="game1-block-chemical-name"></div>
+				<div class="game1-block-chemical-name"></div>
+				<div class="game1-block-chemical-name"></div>
+			</div>
+			<div id="game1Result">
+				<div id="game1Record">Ваш рекорд 100000000000000000000<br>Вы - настоящий химик!</div>
+				<div id="game1Restart" onclick="game1Start()">Начать заново</div>
+				<div id="game1Exit2" onclick="game1Exit()">Выход</div>
+			</div>
+		</div>
+	</section>
+<script src="scripts/elements.js"></script>
+<script src="scripts/script.js"></script>
+<script src="chartist/chartist.min.js"></script>
+<script src="scripts/games.js"></script>
+</body>
+</html>
