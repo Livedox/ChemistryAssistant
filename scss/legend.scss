@@ -3,8 +3,7 @@
 	display: flex;
 	justify-content: center;
 }
-
-#legend {
+#legend{
 	top: 2vw;
 	left: 15%;
 	position: absolute;
@@ -16,7 +15,7 @@
 	z-index: 40;
 }
 
-#element-legend {
+#element-legend{
 	width: 25%;
 	box-sizing: border-box;
 	height: 15.86vw;
@@ -29,8 +28,7 @@
 	flex-wrap: wrap;
 	position: relative;
 }
-
-.legend-inf {
+.legend-inf{
 	width: 70%;
 	height: 15.86vw;
 	border: 0.22vw solid #2d3436;
@@ -39,12 +37,11 @@
 	box-sizing: border-box;
 	overflow-y: auto;
 }
-
 .legend-inf p {
 	margin: 3px 0 3px 0;
 }
 
-#IPTCE {
+#IPTCE{
 	position: absolute;
 	font-size: 5vw;
 	left: 66%;
@@ -57,8 +54,7 @@
 	#element-legend, .legend-inf {
 		height: 140px;
 	}
-
-	#element-legend {
+	#element-legend{
 		font-size: 1.144px;
 	}
 }

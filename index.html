@@ -13,6 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="css/picker.css">
 	<link rel="stylesheet" type="text/css" href="css/modalWindow.css">
 	<link rel="stylesheet" type="text/css" href="css/calculator.css">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 
 <body>
@@ -88,1726 +89,71 @@
 		<div id="colors-by-default" onclick="changeDefaultColors()">Восстановить по умолчанию</div>
 	</div>
 
+	<div id="IPTCE">ИПСХЭ<span style="font-size: 1vw">v0.2.6b</span></div>
+
+	<div id="legend">
+		<div id="element-legend" class="p radioactive" style="background: #ffd737;">
+			<div class="symbol"  data-textAlert="Химический символ - сокращённое буквенное обозначение химических элементов, состоят из первой буквы или первой и одной 
+            из следующих букв латинского названия элементов" onclick="highlight('symbol')">Po</div>
+			<div class="number" onclick="highlight('number')"><span data-textAlert="Атомный (порядковый) номер - номер химического элемента в периодической системе элементов. 
+            Равен числу протонов и электронов в атоме и определяет положительный заряд ядра">84</span></div>
+			<div class="Ar" onclick="highlight('Ar')"><span data-textAlert="Ar - относительная атомная масса — значение массы атома, выраженное в атомных единицах массы (а.е.м)">208,98</span></div>
+			<ol class="oxidation" onclick="highlight('oxidation')"><li data-textAlert='Степень окисления - вспомогательная условная величина для записи процессов окисления, восстановления и окислительно-восстановительных реакций (указан самый частый показатель)'>+4</li></ol>
+			<div class="name-ru" onclick="highlight('name-ru')"><span data-textAlert="Название элемента на русском языке">Полоний</span></div>
+			<div class="name-la" onclick="highlight('name-la')"><span data-textAlert="Название элемента на латыни">Polonium</span></div>
+		</div>
+
+		<div class="legend-inf">
+            <div style="font-size: 18px;">
+            	<p><h3><big>Правила:</h3></p>
+            	<ol style="list-style-position: inside;">
+            		<li>Всю информацию о составляющих <b onclick="a()" style="cursor: pointer;">ячейки</b> таблицы можно найти <a href="https://google.com" style="color: black;text-decoration: none;font-weight: 1000;">здесь</a>.</li>
+            		<li>Чтобы подробнее узнать о закономерностях в периодах и группах, наведите на их <b onclick="b()">номера</b>.</li>
+            		<li>Все элементы, расположенные выше жирной линии - <b>неметаллы</b>, ниже - <b>металлы</b>.</li>
+            		<li>Свойства некоторых <b>элементов</b> расписаны более подробно, нажмите на <b>основные свойства</b> в информации о соответствующем элементе.</li>
+            		<li>Чтобы подробнее узнать о проекте, нажмите на <b>ИПСХЭ</b></big>.</li>
+            	</ol>
+            </div>
+		</div>
+	</div>
+
+
+	<div id="app">
+		<div id="table" style="display: flex; width: 95%;flex-wrap: wrap;" :class="isWideTable ? 'wideTable' : 'shortTable'">
+			<ol class="group">
+				<li class="first"><span v-on:mouseover="createAlert($event.target.getBoundingClientRect(), 'period-info')" v-on:mouseout="deleteAlert()">1</span></li>
+				<li class="tp1"><span>2</span></li>
+				<li class="tp3"><span>3</span></li>
+				<li class="tp3"><span>4</span></li>
+				<li class="tp3"><span>5</span></li>
+				<li class="tp3"><span>6</span></li>
+				<li class="tp3"><span>7</span></li>
+				<li class="tp3"><span>8</span></li>
+				<li class="tp3"><span>9</span></li>
+				<li class="tp3"><span>10</span></li>
+				<li class="tp3" v-show="isWideTable"><span>11</span></li>
+				<li class="tp3" v-show="isWideTable"><span>12</span></li>
+				<li class="tp1" v-show="isWideTable"><span>13</span></li>
+				<li class="tp1" v-show="isWideTable"><span>14</span></li>
+				<li class="tp1" v-show="isWideTable"><span>15</span></li>
+				<li class="tp1" v-show="isWideTable"><span>16</span></li>
+				<li class="tp1" v-show="isWideTable"><span>17</span></li>
+				<li v-show="isWideTable"><span v-on:mouseover="createAlert($event.target.getBoundingClientRect(), 'period-info')" v-on:mouseout="deleteAlert()">18</span></li>
+			</ol>
+			<div style="display: flex; width: 100%;">
+				<ol class="period">
+					<li v-for="n in 7":key="'k'+n" class="number-period" v-on:mouseover="createAlert($event.target.getBoundingClientRect(), 'period-info')" v-on:mouseout="deleteAlert()">{{ n }}</li>
+				</ol>
+				<ol>
+					<li is="item-element" v-for="(el, i) in table":key="'c'+i" :data="el"></li>
+				</ol>
+			</div>	
+		</div>
+		<div class="alert" v-show="alert.isAlert" :style="alert.coords"><component :is="alert.component"></component></div>
+		
+	</div>
 
-	<table id="tableMendeleev">
-		<tr>
-			<td></td>
 
-			<td class="number-group">
-				<span id="AlkalineearthMe" data-textAlert="В группах с увеличением заряда ядра (сверху вниз):<br>
-					<strong>радиус</strong> атомов <strong>увеличивается</strong><br>
-					<strong>электроотрицательность уменьшается</strong><br>
-					<strong>металлические</strong> свойства <strong>усиливаются</strong><br>
-					<strong>неметаллические</strong> свойства <strong>ослабевают</strong><br>
-                    <strong>восстановительные</strong> свойства <strong>усиливаются</strong><br>
-                    <strong>окислительные</strong> свойства <strong>ослабевают</strong>" onclick="createModalWindow(data['alkaliMetals'])">1</span></td>
-
-			<td colspan="11"></td>
-
-
-			<td colspan="5" id="IPTCE"><div>ИПСХЭ<span style="font-size: 1vw">v0.2.6b</span></div></td>
-			<td class="number-group">
-				<span id="Inertgas"  data-textAlert="В группах с увеличением заряда ядра (сверху вниз):<br>
-					<strong>радиус</strong> атомов <strong>увеличивается</strong><br>
-					<strong>электроотрицательность уменьшается</strong><br>
-					<strong>металлические</strong> свойства <strong>усиливаются</strong><br>
-					<strong>неметаллические</strong> свойства <strong>ослабевают</strong><br>
-                    <strong>восстановительные</strong> свойства <strong>усиливаются</strong><br>
-                    <strong>окислительные</strong> свойства <strong>ослабевают</strong>">18</span></td>
-		</tr>
-		<tr>
-			<td class="number-period">
-				<span data-textAlert="В периодах справа налево:<br>
-					<strong>металлические и восстановительные</strong> свойства <strong>ослабевают</strong><br>
-					<strong>неметаллические и окислительные</strong> свойства <strong>усиливаются</strong><br>
-					<strong>электроотрицательность увеличивается</strong><br>
-					<strong>радиус</strong> атомов <strong>уменьшается</strong>">1</span></td>
-
-			<td class="element-storage">
-				<div class="element s nmetal" id="H" style="background: #fe83b5">
-				<div class="symbol">H</div>
-				<div class="number">1</div>
-				<div class="Ar">1,00794</div>
-				<ol class="oxidation">
-					<li>+1</li>
-				</ol>
-				<div class="name-ru">Водород</div>
-				<div class="name-la">Hydragenium</div>
-				</div>
-			</td>
-
-			<td class="number-group">
-				<span id="AlkalineearthMe" data-textAlert="В группах с увеличением заряда ядра (сверху вниз):<br>
-					<strong>радиус</strong> атомов <strong>увеличивается</strong><br>
-					<strong>электроотрицательность уменьшается</strong><br>
-					<strong>металлические</strong> свойства <strong>усиливаются</strong><br>
-					<strong>неметаллические</strong> свойства <strong>ослабевают</strong><br>
-                    <strong>восстановительные</strong> свойства <strong>усиливаются</strong><br>
-                    <strong>окислительные</strong> свойства <strong>ослабевают</strong>" onclick="createModalWindow(data['alkalineEarthMetals'])">2</span></td>
-
-			<!-- LEGEND -->
-			<td colspan="10" rowspan="2" style="position: relative;">
-
-				<div id="legend">
-					<div id="element-legend" class="p radioactive" style="background: #ffd737;">
-						<div class="symbol"  data-textAlert="Химический символ - сокращённое буквенное обозначение химических элементов, состоят из первой буквы или первой и одной 
-                        из следующих букв латинского названия элементов" onclick="highlight('symbol')">Po</div>
-						<div class="number" onclick="highlight('number')"><span data-textAlert="Атомный (порядковый) номер - номер химического элемента в периодической системе элементов. 
-                        Равен числу протонов и электронов в атоме и определяет положительный заряд ядра">84</span></div>
-						<div class="Ar" onclick="highlight('Ar')"><span data-textAlert="Ar - относительная атомная масса — значение массы атома, выраженное в атомных единицах массы (а.е.м)">208,98</span></div>
-						<ol class="oxidation" onclick="highlight('oxidation')"><li data-textAlert='Степень окисления - вспомогательная условная величина для записи процессов окисления, восстановления и окислительно-восстановительных реакций (указан самый частый показатель)'>+4</li></ol>
-						<div class="name-ru" onclick="highlight('name-ru')"><span data-textAlert="Название элемента на русском языке">Полоний</span></div>
-						<div class="name-la" onclick="highlight('name-la')"><span data-textAlert="Название элемента на латыни">Polonium</span></div>
-					</div>
-
-					<div class="legend-inf">
-                        <div style="font-size: 18px;">
-                        	<p><h3><big>Правила:</h3></p>
-                        	<ol style="list-style-position: inside;">
-                        		<li>Всю информацию о составляющих <b onclick="a()" style="cursor: pointer;">ячейки</b> таблицы можно найти <a href="https://google.com" style="color: black;text-decoration: none;font-weight: 1000;">здесь</a>.</li>
-                        		<li>Чтобы подробнее узнать о закономерностях в периодах и группах, наведите на их <b onclick="b()">номера</b>.</li>
-                        		<li>Все элементы, расположенные выше жирной линии - <b>неметаллы</b>, ниже - <b>металлы</b>.</li>
-                        		<li>Свойства некоторых <b>элементов</b> расписаны более подробно, нажмите на <b>основные свойства</b> в информации о соответствующем элементе.</li>
-                        		<li>Чтобы подробнее узнать о проекте, нажмите на <b>ИПСХЭ</b></big>.</li>
-                        	</ol>
-                        </div>
-					</div>
-				</div>	
-			</td>
-
-
-			<td class="number-group">
-				<span id="AlkalineearthMe" data-textAlert="В группах с увеличением заряда ядра (сверху вниз):<br>
-					<strong>радиус</strong> атомов <strong>увеличивается</strong><br>
-					<strong>электроотрицательность уменьшается</strong><br>
-					<strong>металлические</strong> свойства <strong>усиливаются</strong><br>
-					<strong>неметаллические</strong> свойства <strong>ослабевают</strong><br>
-                    <strong>восстановительные</strong> свойства <strong>усиливаются</strong><br>
-                    <strong>окислительные</strong> свойства <strong>ослабевают</strong>">13</span></td>
-			<td class="number-group">
-				<span id="AlkalineearthMe" data-textAlert="В группах с увеличением заряда ядра (сверху вниз):<br>
-					<strong>радиус</strong> атомов <strong>увеличивается</strong><br>
-					<strong>электроотрицательность уменьшается</strong><br>
-					<strong>металлические</strong> свойства <strong>усиливаются</strong><br>
-					<strong>неметаллические</strong> свойства <strong>ослабевают</strong><br>
-                    <strong>восстановительные</strong> свойства <strong>усиливаются</strong><br>
-                    <strong>окислительные</strong> свойства <strong>ослабевают</strong>">14</span></td>
-			<td class="number-group">
-				<span id="AlkalineearthMe" data-directionAlert="left"  data-textAlert="В группах с увеличением заряда ядра (сверху вниз):<br>
-					<strong>радиус</strong> атомов <strong>увеличивается</strong><br>
-					<strong>электроотрицательность уменьшается</strong><br>
-					<strong>металлические</strong> свойства <strong>усиливаются</strong><br>
-					<strong>неметаллические</strong> свойства <strong>ослабевают</strong><br>
-                    <strong>восстановительные</strong> свойства <strong>усиливаются</strong><br>
-                    <strong>окислительные</strong> свойства <strong>ослабевают</strong>">15</span></td>
-			<td class="number-group">
-				<span data-textAlert="В группах с увеличением заряда ядра (сверху вниз):<br>
-					<strong>радиус</strong> атомов <strong>увеличивается</strong><br>
-					<strong>электроотрицательность уменьшается</strong><br>
-					<strong>металлические</strong> свойства <strong>усиливаются</strong><br>
-					<strong>неметаллические</strong> свойства <strong>ослабевают</strong><br>
-                    <strong>восстановительные</strong> свойства <strong>усиливаются</strong><br>
-                    <strong>окислительные</strong> свойства <strong>ослабевают</strong>" onclick="createModalWindow(data['chalcogenes'])">16</span></td>
-			<td class="number-group">
-				<span data-textAlert="В группах с увеличением заряда ядра (сверху вниз):<br>
-					<strong>радиус</strong> атомов <strong>увеличивается</strong><br>
-					<strong>электроотрицательность уменьшается</strong><br>
-					<strong>металлические</strong> свойства <strong>усиливаются</strong><br>
-					<strong>неметаллические</strong> свойства <strong>ослабевают</strong><br>
-                    <strong>восстановительные</strong> свойства <strong>усиливаются</strong><br>
-                    <strong>окислительные</strong> свойства <strong>ослабевают</strong>" onclick="createModalWindow(data['halogens'])">17</span></td>
-
-			<td class="element-storage">
-				<div class="element s nmetal" id="He" style="background: #fe83b5">
-					<div class="symbol">He</div>
-					<div class="number">2</div>
-					<div class="Ar">2,0026</div>
-					<ol class="oxidation">
-						<li>0</li>
-					</ol>
-					<div class="name-ru">Гелий</div>
-					<div class="name-la">Helium</div>
-				</div>
-			</td>
-		</tr>
-
-		<tr>
-			<td class="number-period">
-				<span data-textAlert="В периодах справа налево:<br>
-					<strong>металлические и восстановительные</strong> свойства <strong>ослабевают</strong><br>
-					<strong>неметаллические и окислительные</strong> свойства <strong>усиливаются</strong><br>
-					<strong>электроотрицательность увеличивается</strong><br>
-					<strong>радиус</strong> атомов <strong>уменьшается</strong>">2</span></td>
-
-			<td class="element-storage">
-				<div class="element s metal" id="Li" style="background: #fe83b5">
-				<div class="symbol">Li</div>
-				<div class="number">3</div>
-				<div class="Ar">6,941</div>
-				<ol class="oxidation">
-					<li>+1</li>
-				</ol>
-				<div class="name-ru">Литий</div>
-				<div class="name-la">Lithium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element s metal" id="Be" style="background: #fe83b5">
-				<div class="symbol">Be</div>
-				<div class="number">4</div>
-				<div class="Ar">9,0122</div>
-				<ol class="oxidation">
-					<li>+2</li>
-				</ol>
-				<div class="name-ru">Бериллий</div>
-				<div class="name-la">Beryllium</div>
-				</div>
-			</td>
-
-			<td class="element-storage" style="border-bottom: 3px solid #000;border-left: 3px solid #000;">
-				<div class="element p nmetal" id="B" style="background: #ffd737;">
-				<div class="symbol">B</div>
-				<div class="number">5</div>
-				<div class="Ar">10,811</div>
-				<ol class="oxidation">
-					<li>+3</li>
-				</ol>
-				<div class="name-ru">Бор</div>
-				<div class="name-la">Borum</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element p nmetal" id="C" style="background: #ffd737">
-				<div class="symbol">C</div>
-				<div class="number">6</div>
-				<div class="Ar">12,0107</div>
-				<ol class="oxidation">
-					<li>+4</li>
-				</ol>
-				<div class="name-ru">Углерод</div>
-				<div class="name-la">Carboneum</div>
-				</div>
-
-			<td class="element-storage">
-				<div class="element p nmetal" id="N" style="background: #ffd737">
-				<div class="symbol">N</div>
-				<div class="number">7</div>
-
-				<div class="Ar">14,0067</div>
-				<ol class="oxidation">
-					<li>+4</li>
-				</ol>
-				<div class="name-ru">Азот</div>
-				<div class="name-la">Nitrogenium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element p nmetal" id="O" style="background: #ffd737">
-				<div class="symbol">O</div>
-				<div class="number">8</div>
-				<div class="Ar">15,9994</div>
-				<ol class="oxidation">
-					<li>-2</li>
-				</ol>
-				<div class="name-ru">Кислород</div>
-				<div class="name-la">Oxygenium</div>
-				</div>
-
-			<td class="element-storage">
-				<div class="element p nmetal" id="F" style="background: #ffd737">
-				<div class="symbol">F</div>
-				<div class="number">9</div>
-				<div class="Ar">18,9984</div>
-				<ol class="oxidation">
-					<li>-1</li>
-				</ol>
-				<div class="name-ru">Фтор</div>
-				<div class="name-la">Fluorum</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element p nmetal" id="Ne" style="background: #ffd737">
-				<div class="symbol">Ne</div>
-				<div class="number">10</div>
-
-				<div class="Ar">20,1797</div>
-				<ol class="oxidation">
-					<li>+1</li>
-				</ol>
-				<div class="name-ru">Неон</div>
-				<div class="name-la">Neon</div>
-				</div>
-			</td>
-		</tr>
-
-		<tr>
-			<td class="number-period">
-				<span data-textAlert="В периодах справа налево:<br>
-					<strong>металлические и восстановительные</strong> свойства <strong>ослабевают</strong><br>
-					<strong>неметаллические и окислительные</strong> свойства <strong>усиливаются</strong><br>
-					<strong>электроотрицательность увеличивается</strong><br>
-					<strong>радиус</strong> атомов <strong>уменьшается</strong>">3</span></td>
-
-			<td class="element-storage">
-				<div class="element s metal" id="Na" style="background: #fe83b5">
-				<div class="symbol">Na</div>
-				<div class="number">11</div>
-				<div class="Ar">22,1797</div>
-				<ol class="oxidation">
-					<li>+1</li>
-				</ol>
-				<div class="name-ru">Натрий</div>
-				<div class="name-la">Natrium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element s metal" id="Mg" style="background: #fe83b5">
-				<div class="symbol">Mg</div>
-				<div class="number">12</div>
-				<div class="Ar">24,305</div>
-				<ol class="oxidation">
-					<li>+2</li>
-				</ol>
-				<div class="name-ru">Магний</div>
-				<div class="name-la">Magnesium</div>
-				</div>
-			</td>
-
-			<td class="number-group">
-				<span>3</span></td>
-			<td class="number-group">
-				<span>4</span></td>
-			<td class="number-group">
-				<span>5</span></td>
-			<td class="number-group">
-				<span>6</span></td>
-			<td class="number-group">
-				<span>7</span></td>
-			<td class="number-group">
-				<span>8</span></td>
-			<td class="number-group">
-				<span>9</span></td>
-			<td class="number-group">
-				<span>10</span></td>
-			<td class="number-group">
-				<span>11</span></td>
-			<td class="number-group">
-				<span>12</span></td>
-
-			<td class="element-storage">
-				<div class="element p metal" style="background: #ffd737">
-					<div class="symbol">Al</div>
-					<div class="number">13</div>
-					<div class="Ar">26,9815</div>
-					<ol class="oxidation">
-						<li>+3</li>
-					</ol>
-					<div class="name-ru">Алюминий</div>
-					<div class="name-la">Aluminium</div>
-				</div>
-			</td>
-
-			<td class="element-storage" style="border-left: 3px solid #000;border-bottom: 3px solid #000">
-				<div class="element p nmetal" id="Si" style="background: #ffd737">
-				<div class="symbol">Si</div>
-				<div class="number">14</div>
-				<div class="Ar">28,0855</div>
-				<ol class="oxidation">
-					<li>+4</li>
-				</ol>
-				<div class="name-ru">Кремний</div>
-				<div class="name-la">Silicium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element p nmetal" id="P" style="background: #ffd737">
-				<div class="symbol">P</div>
-				<div class="number">15</div>
-				<div class="Ar">30,9738</div>
-				<ol class="oxidation">
-					<li>+5</li>
-				</ol>
-				<div class="name-ru">Фосфор</div>
-				<div class="name-la">Phosphorus</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element p nmetal" id="S" style="background: #ffd737">
-				<div class="symbol">S</div>
-				<div class="number">16</div>
-					<div class="Ar">32,066</div>
-				<ol class="oxidation">
-					<li>+6</li>
-				</ol>
-				<div class="name-ru">Сера</div>
-				<div class="name-la">Sulfur</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element p nmetal" id="Cl" style="background: #ffd737">
-				<div class="symbol">Cl</div>
-				<div class="number">17</div>
-				<div class="Ar">35,45</div>
-				<ol class="oxidation">
-					<li>+6</li>
-				</ol>
-				<div class="name-ru">Хлор</div>
-				<div class="name-la">Chlorum</div>
-				</div>
-			</td>
-
-				<td class="element-storage">
-				<div class="element p nmetal" id="Ar" style="background: #ffd737">
-				<div class="symbol">Ar</div>
-				<div class="number">18</div>
-				<div class="Ar">39,948</div>
-				<ol class="oxidation">
-					<li>0</li>
-				</ol>
-				<div class="name-ru">Аргон</div>
-				<div class="name-la">Argon</div>
-				</div>
-			</td>
-
-		</tr>
-
-		<tr>
-
-			<td class="number-period">
-					<span  data-textAlert="В периодах справа налево:<br>
-					<strong>металлические и восстановительные</strong> свойства <strong>ослабевают</strong><br>
-					<strong>неметаллические и окислительные</strong> свойства <strong>усиливаются</strong><br>
-					<strong>электроотрицательность увеличивается</strong><br>
-					<strong>радиус</strong> атомов <strong>уменьшается</strong>">4</span></td>
-
-			<td class="element-storage">
-				<div class="element s metal" id="K" style="background: #fe83b5">
-				<div class="symbol">K</div>
-				<div class="number">19</div>
-				<div class="Ar">39,0983</div>
-				<ol class="oxidation">
-					<li>+1</li>
-				</ol>
-				<div class="name-ru">Калий</div>
-				<div class="name-la">Kalium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element s metal" id="Ca" style="background: #fe83b5">
-				<div class="symbol">Ca</div>
-				<div class="number">20</div>
-				<div class="Ar">40,078</div>
-				<ol class="oxidation">
-					<li>+2</li>
-				</ol>
-				<div class="name-ru">Кальций</div>
-				<div class="name-la">Calcium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="Sc" style="background: #5ca7e0">
-				<div class="symbol">Sc</div>
-				<div class="number">21</div>
-				<div class="Ar">44,9559</div>
-				<ol class="oxidation">
-					<li>+3</li>
-				</ol>
-				<div class="name-ru">Скандий</div>
-				<div class="name-la">Scandium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="Ti" style="background: #5ca7e0">
-				<div class="symbol">Ti</div>
-				<div class="number">22</div>
-				<div class="Ar">47,867</div>
-				<ol class="oxidation">
-					<li>+4</li>
-				</ol>
-				<div class="name-ru">Титан</div>
-				<div class="name-la">Titanium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="V" style="background: #5ca7e0">
-				<div class="symbol">V</div>
-				<div class="number">23</div>
-				<div class="Ar">50,9415</div>
-				<ol class="oxidation">
-					<li>+5</li>
-				</ol>
-				<div class="name-ru">Ванадий</div>
-				<div class="name-la">Vanadium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="Cr" style="background: #5ca7e0">
-				<div class="symbol">Cr</div>
-				<div class="number">24</div>
-				<div class="Ar">51,9961</div>
-				<ol class="oxidation">
-					<li>+3</li>
-				</ol>
-				<div class="name-ru">Хром</div>
-				<div class="name-la">Cromium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="Mn" style="background: #5ca7e0">
-				<div class="symbol">Mn</div>
-				<div class="number">25</div>
-				<div class="Ar">54,938</div>
-				<ol class="oxidation">
-					<li>+2</li>
-					<li>+4</li>
-				</ol>
-				<div class="name-ru">Марганец</div>
-				<div class="name-la">Manganum</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="Fe" style="background: #5ca7e0">
-				<div class="symbol">Fe</div>
-				<div class="number">26</div>
-				<div class="Ar">55,845</div>
-				<ol class="oxidation">
-					<li>+2</li>
-					<li>+3</li>
-				</ol>
-				<div class="name-ru">Железо</div>
-				<div class="name-la">Ferrum</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="Co" style="background: #5ca7e0">
-				<div class="symbol">Co</div>
-				<div class="number">27</div>
-				<div class="Ar">58,9332</div>
-				<ol class="oxidation">
-					<li>+2</li>
-				</ol>
-				<div class="name-ru">Кобальт</div>
-				<div class="name-la">Cobaltum</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="Ni" style="background: #5ca7e0">
-				<div class="symbol">Ni</div>
-				<div class="number">28</div>
-				<div class="Ar">58,6934</div>
-				<ol class="oxidation">
-					<li>+2</li>
-				</ol>
-				<div class="name-ru">Никель</div>
-				<div class="name-la">Niccolum</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="Cu" style="background: #5ca7e0">
-				<div class="symbol">Cu</div>
-				<div class="number">29</div>
-				<div class="Ar">63,546</div>
-				<ol class="oxidation">
-					<li>+2</li>
-				</ol>
-				<div class="name-ru">Медь</div>
-				<div class="name-la">Cuprum</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="Zn" style="background: #5ca7e0">
-				<div class="symbol">Zn</div>
-				<div class="number">30</div>
-				<div class="Ar">65,38</div>
-				<ol class="oxidation">
-					<li>+2</li>
-				</ol>
-				<div class="name-ru">Цинк</div>
-				<div class="name-la">Zincum</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element p metal" id="Ga" style="background: #ffd737">
-				<div class="symbol">Ga</div>
-				<div class="number">31</div>
-				<div class="Ar">69,723</div>
-				<ol class="oxidation">
-					<li>+3</li>
-				</ol>
-				<div class="name-ru">Галлий</div>
-				<div class="name-la">Gallium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element p metal" id="Ge" style="background: #ffd737">
-				<div class="symbol">Ge</div>
-				<div class="number">32</div>
-				<div class="Ar">72,63</div>
-				<ol class="oxidation">
-					<li>+4</li>
-				</ol>
-				<div class="name-ru">Германий</div>
-				<div class="name-la">Germanium</div>
-				</div>
-			</td>
-
-			<td class="element-storage" style="border-left: 3px solid #000;border-bottom: 3px solid #000">
-				<div class="element p nmetal" id="As" style="background: #ffd737">
-				<div class="symbol">As</div>
-				<div class="number">33</div>
-				<div class="Ar">74,9216</div>
-				<ol class="oxidation">
-					<li>+3</li>
-				</ol>
-				<div class="name-ru">Мышьяк</div>
-				<div class="name-la">Arsenicum</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element p nmetal" id="Se" style="background: #ffd737">
-				<div class="symbol">Se</div>
-				<div class="number">34</div>
-				<div class="Ar">78,96</div>
-				<ol class="oxidation">
-					<li>+4</li>
-				</ol>
-				<div class="name-ru">Селен</div>
-				<div class="name-la">Selenium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element p nmetal" id="Br" style="background: #ffd737">
-				<div class="symbol">Br</div>
-				<div class="number">35</div>
-				<div class="Ar">79,904</div>
-				<ol class="oxidation">
-					<li>-1</li>
-				</ol>
-				<div class="name-ru">Бром</div>
-				<div class="name-la">Bromum</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element p nmetal" id="Kr" style="background: #ffd737">
-				<div class="symbol">Kr</div>
-				<div class="number">36</div>
-				<div class="Ar">83,798</div>
-				<ol class="oxidation">
-					<li>+2</li>
-				</ol>
-				<div class="name-ru">Криптон</div>
-				<div class="name-la">Krypton</div>
-				</div>
-			</td>
-
-		</tr>
-
-		<tr class="wideTable">
-
-			<td class="number-period">
-					<span data-textAlert="В периодах справа налево:<br>
-						<strong>металлические и восстановительные</strong> свойства <strong>ослабевают</strong><br>
-						<strong>неметаллические и окислительные</strong> свойства <strong>усиливаются</strong><br>
-						<strong>электроотрицательность увеличивается</strong><br>
-						<strong>радиус</strong> атомов <strong>уменьшается</strong>">5</span>
-			</td>
-
-			<td class="element-storage">
-				<div class="element s metal" id="Rb" style="background: #fe83b5">
-				<div class="symbol">Rb</div>
-				<div class="number">37</div>
-				<div class="Ar">85,4678</div>
-				<ol class="oxidation">
-					<li>+1</li>
-				</ol>
-				<div class="name-ru">Рубидий</div>
-				<div class="name-la">Rubidium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element s metal" id="Sr" style="background: #fe83b5">
-				<div class="symbol">Sr</div>
-				<div class="number">38</div>
-				<div class="Ar">87,62</div>
-				<ol class="oxidation">
-					<li>+2</li>
-				</ol>
-				<div class="name-ru">Стронций</div>
-				<div class="name-la">Strontium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="Y" style="background: #5ca7e0">
-				<div class="symbol">Y</div>
-				<div class="number">39</div>
-				<div class="Ar">88,9059</div>
-				<ol class="oxidation">
-					<li>+3</li>
-				</ol>
-				<div class="name-ru">Иттрий</div>
-				<div class="name-la">Yttrium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="Zr" style="background: #5ca7e0">
-				<div class="symbol">Zr</div>
-				<div class="number">40</div>
-				<div class="Ar">91,224</div>
-				<ol class="oxidation">
-					<li>+4</li>
-				</ol>
-				<div class="name-ru">Цирконий</div>
-				<div class="name-la">Zirconium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="Nb" style="background: #5ca7e0">
-				<div class="symbol">Nb</div>
-				<div class="number">41</div>
-				<div class="Ar">92,9064</div>
-				<ol class="oxidation">
-					<li>+5</li>
-				</ol>
-				<div class="name-ru">Ниобий</div>
-				<div class="name-la">Niobium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="Mo" style="background: #5ca7e0">
-				<div class="symbol">Mo</div>
-				<div class="number">42</div>
-				<div class="Ar">95,96</div>
-				<ol class="oxidation">
-					<li>+6</li>
-				</ol>
-				<div class="name-ru">Молибден</div>
-				<div class="name-la">Molybdaenum</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element radioactive d metal" id="Tc" style="background: #5ca7e0">
-				<div class="symbol">Tc</div>
-				<div class="number">43</div>
-				<div class="Ar">97,907</div>
-				<ol class="oxidation">
-					<li>+7</li>
-				</ol>
-				<div class="name-ru">Технеций</div>
-				<div class="name-la">Technetium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="Ru" style="background: #5ca7e0">
-				<div class="symbol">Ru</div>
-				<div class="number">44</div>
-				<div class="Ar">101,07</div>
-				<ol class="oxidation">
-					<li>+4</li>
-				</ol>
-				<div class="name-ru">Рутений</div>
-				<div class="name-la">Ruthenium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="Rh" style="background: #5ca7e0">
-				<div class="symbol">Rh</div>
-				<div class="number">45</div>
-				<div class="Ar">102,9055</div>
-				<ol class="oxidation">
-					<li>+3</li>
-				</ol>
-				<div class="name-ru">Родий</div>
-				<div class="name-la">Rhodium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="Pd" style="background: #5ca7e0">
-				<div class="symbol">Pd</div>
-				<div class="number">46</div>
-				<div class="Ar">106,42</div>
-				<ol class="oxidation">
-					<li>+2</li>
-				</ol>
-				<div class="name-ru">Палладий</div>
-				<div class="name-la">Palladium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="Ag" style="background: #5ca7e0">
-				<div class="symbol">Ag</div>
-				<div class="number">47</div>
-				<div class="Ar">107,8682</div>
-				<ol class="oxidation">
-					<li>+1</li>
-				</ol>
-				<div class="name-ru">Серебро</div>
-				<div class="name-la">Argentum</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="Cd" style="background: #5ca7e0">
-				<div class="symbol">Cd</div>
-				<div class="number">48</div>
-				<div class="Ar">112,411</div>
-				<ol class="oxidation">
-					<li>+2</li>
-				</ol>
-				<div class="name-ru">Кадмий</div>
-				<div class="name-la">Cadmium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element p metal" id="In" style="background: #ffd737">
-				<div class="symbol">In</div>
-				<div class="number">49</div>
-				<div class="Ar">114,818</div>
-				<ol class="oxidation">
-					<li>+3</li>
-				</ol>
-				<div class="name-ru">Индий</div>
-				<div class="name-la">Indium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element p metal" id="Sn" style="background: #ffd737">
-				<div class="symbol">Sn</div>
-				<div class="number">50</div>
-				<div class="Ar">118,71</div>
-				<ol class="oxidation">
-					<li>+4</li>
-				</ol>
-				<div class="name-ru">Олово</div>
-				<div class="name-la">Stannum</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element p metal" id="Sb" style="background: #ffd737">
-				<div class="symbol">Sb</div>
-				<div class="number">51</div>
-				<div class="Ar">121,76</div>
-				<ol class="oxidation">
-					<li>+3</li>
-				</ol>
-				<div class="name-ru">Сурьма</div>
-				<div class="name-la">Stibium</div>
-			</div>
-			</td>
-
-			<td class="element-storage" style="border-left: 3px solid #000;border-bottom: 3px solid #000">
-				<div class="element p nmetal" id="Te" style="background: #ffd737">
-				<div class="symbol">Te</div>
-				<div class="number">52</div>
-				<div class="Ar">127,6</div>
-				<ol class="oxidation">
-					<li>+4</li>
-				</ol>
-				<div class="name-ru">Теллур</div>
-				<div class="name-la">Tellurium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element p nmetal" id="I" style="background: #ffd737">
-					<div class="symbol">I</div>
-					<div class="number">53</div>
-					<div class="Ar">126,9045</div>
-					<ol class="oxidation">
-						<li>-1</li>
-					</ol>
-					<div class="name-ru">Йод</div>
-					<div class="name-la">Iodum</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element p nmetal" id="Xe" style="background: #ffd737">
-				<div class="symbol">Xe</div>
-				<div class="number">54</div>
-				<div class="Ar">131,29</div>
-				<ol class="oxidation">
-					<li>+6</li>
-				</ol>
-				<div class="name-ru">Ксенон</div>
-				<div class="name-la">Xenon</div>
-				</div>
-		</td>
-
-	</tr>
-
-	<tr class="wideTable">
-		<td class="number-period"><span data-textAlert="В периодах справа налево:<br>
-				<strong>металлические и восстановительные</strong> свойства <strong>ослабевают</strong><br>
-				<strong>неметаллические и окислительные</strong> свойства <strong>усиливаются</strong><br>
-				<strong>электроотрицательность увеличивается</strong><br>
-				<strong>радиус</strong> атомов <strong>уменьшается</strong>">6</span>
-		</td>
-
-		<td class="element-storage">
-				<div class="element s metal" id="Cs" style="background: #fe83b5">
-				<div class="symbol">Cs</div>
-				<div class="number">55</div>
-				<div class="Ar">132,9055</div>
-				<ol class="oxidation">
-					<li>+1</li>
-				</ol>
-				<div class="name-ru">Цезий</div>
-				<div class="name-la">Caesium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element s metal" id="Ba" style="background: #fe83b5">
-				<div class="symbol">Ba</div>
-				<div class="number">56</div>
-				<div class="Ar">137,327</div>
-				<ol class="oxidation">
-					<li>+2</li>
-				</ol>
-				<div class="name-ru">Барий</div>
-				<div class="name-la">Barium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal lanthanide" id="La" style="background: #5ca7e0">
-				<div class="symbol">La</div>
-				<div class="number">57</div>
-				<div class="Ar">138,9055</div>
-				<ol class="oxidation">
-					<li>+3</li>
-				</ol>
-				<div class="name-ru">Лантан</div>
-				<div class="name-la">Lanthanum</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="Hf" style="background: #5ca7e0">
-				<div class="symbol">Hf</div>
-				<div class="number">72</div>
-				<div class="Ar">178,49</div>
-				<ol class="oxidation">
-					<li>+4</li>
-				</ol>
-				<div class="name-ru">Гафний</div>
-				<div class="name-la">Hafnium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="Ta" style="background: #5ca7e0">
-				<div class="symbol">Ta</div>
-				<div class="number">73</div>
-				<div class="Ar">180,9479</div>
-				<ol class="oxidation">
-					<li>+5</li>
-				</ol>
-				<div class="name-ru">Тантал</div>
-				<div class="name-la">Tantalum</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="W" style="background: #5ca7e0">
-				<div class="symbol">W</div>
-				<div class="number">74</div>
-				<div class="Ar">183,84</div>
-				<ol class="oxidation">
-					<li>+6</li>
-				</ol>
-				<div class="name-ru">Вольфрам</div>
-				<div class="name-la">Wolframium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="Re" style="background: #5ca7e0">
-				<div class="symbol">Re</div>
-				<div class="number">75</div>
-				<div class="Ar">186,207</div>
-				<ol class="oxidation">
-					<li>+7</li>
-				</ol>
-				<div class="name-ru">Рений</div>
-				<div class="name-la">Rhenium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="Os" style="background: #5ca7e0">
-				<div class="symbol">Os</div>
-				<div class="number">76</div>
-				<div class="Ar">190,23</div>
-				<ol class="oxidation">
-					<li>+8</li>
-					<li>+4</li>
-				</ol>
-				<div class="name-ru">Осмий</div>
-				<div class="name-la">Osmium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="Ir" style="background: #5ca7e0">
-				<div class="symbol">Ir</div>
-				<div class="number">77</div>
-				<div class="Ar">192,217</div>
-				<ol class="oxidation">
-					<li>+3</li>
-					<li>+4</li>
-				</ol>
-				<div class="name-ru">Иридий</div>
-				<div class="name-la">Iridium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="Pt" style="background: #5ca7e0">
-				<div class="symbol">Pt</div>
-				<div class="number">78</div>
-				<div class="Ar">195,084</div>
-				<ol class="oxidation">
-					<li>+2</li>
-					<li>+4</li>
-				</ol>
-				<div class="name-ru">Платина</div>
-				<div class="name-la">Platinum</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="Au" style="background: #5ca7e0">
-				<div class="symbol">Au</div>
-				<div class="number">79</div>
-				<div class="Ar">196,966</div>
-				<ol class="oxidation">
-					<li>+3</li>
-				</ol>
-				<div class="name-ru">Золото</div>
-				<div class="name-la">Aurum</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element d metal" id="Hg" style="background: #5ca7e0">
-				<div class="symbol">Hg</div>
-				<div class="number">80</div>
-				<div class="Ar">200,59</div>
-				<ol class="oxidation">
-					<li>+2</li>
-				</ol>
-				<div class="name-ru">Ртуть</div>
-				<div class="name-la">Hydrargyrum</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element p metal" id="Tl" style="background: #ffd737">
-				<div class="symbol">Tl</div>
-				<div class="number">81</div>
-				<div class="Ar">204,3833</div>
-				<ol class="oxidation">
-					<li>+1</li>
-				</ol>
-				<div class="name-ru">Таллий</div>
-				<div class="name-la">Thallium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element p metal" id="Pb" style="background: #ffd737">
-				<div class="symbol">Pb</div>
-				<div class="number">82</div>
-				<div class="Ar">207,2</div>
-				<ol class="oxidation">
-					<li>+2</li>
-				</ol>
-				<div class="name-ru">Свинец</div>
-				<div class="name-la">Plumbum</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element radioactive p metal" id="Bi" style="background: #ffd737">
-				<div class="symbol">Bi</div>
-				<div class="number">83</div>
-				<div class="Ar">208,9804</div>
-				<ol class="oxidation">
-					<li>+3</li>
-				</ol>
-				<div class="name-ru">Висмут</div>
-				<div class="name-la">Bismuthum</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element radioactive p metal" id="Po" style="background: #ffd737">
-				<div class="symbol">Po</div>
-				<div class="number">84</div>
-				<div class="Ar">208,98</div>
-				<ol class="oxidation">
-					<li>+4</li>
-				</ol>
-				<div class="name-ru">Полоний</div>
-				<div class="name-la">Polonium</div>
-				</div>
-			</td>
-
-			<td class="element-storage" style="border-left: 3px solid #000;border-bottom: 3px solid #000">
-				<div class="element radioactive p nmetal" id="At" style="background: #ffd737">
-				<div class="symbol">At</div>
-				<div class="number">85</div>
-				<div class="Ar">[210]</div>
-				<ol class="oxidation">
-					<li>+4</li>
-				</ol>
-				<div class="name-ru">Астат</div>
-				<div class="name-la">Astatium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element radioactive p nmetal" id="Rn" style="background: #ffd737">
-				<div class="symbol">Rn</div>
-				<div class="number">86</div>
-				<div class="Ar">[222]</div>
-				<ol class="oxidation">
-					<li>+2</li>
-				</ol>
-				<div class="name-ru">Радон</div>
-				<div class="name-la">Radon</div>
-				</div>
-			</td>
-
-		</tr>
-
-		<tr class="wideTable">
-
-			<td class="number-period">
-				<span data-textAlert="В периодах справа налево:
-				<br><strong>металлические и восстановительные</strong> свойства <strong>ослабевают</strong>
-				<br><strong>неметаллические и окислительные</strong> свойства <strong>усиливаются</strong>
-				<br><strong>электроотрицательность увеличивается</strong>
-				<br><strong>радиус</strong> атомов <strong>уменьшается</strong>">7</span>
-			</td>
-
-			<td class="element-storage">
-				<div class="element radioactive s metal" id="Fr" style="background: #fe83b5">
-				<div class="symbol">Fr</div>
-				<div class="number">87</div>
-				<div class="Ar">[223]</div>
-				<ol class="oxidation">
-					<li>+1</li>
-				</ol>
-				<div class="name-ru">Франций</div>
-				<div class="name-la">Francium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element radioactive s metal" id="Ra" style="background: #fe83b5">
-				<div class="symbol">Ra</div>
-				<div class="number">88</div>
-				<div class="Ar">226,025</div>
-				<ol class="oxidation">
-					<li>+2</li>
-				</ol>
-				<div class="name-ru">Радий</div>
-				<div class="name-la">Radium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element radioactive d metal actinoid" id="Ac" style="background: #5ca7e0">
-				<div class="symbol">Ac</div>
-				<div class="number">89</div>
-				<div class="Ar">227,0278</div>
-				<ol class="oxidation">
-					<li>+3</li>
-				</ol>
-				<div class="name-ru">Актиний</div>
-				<div class="name-la">Actinium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element radioactive d metal" id="Rf" style="background: #5ca7e0">
-				<div class="symbol">Rf</div>
-				<div class="number">104</div>
-				<div class="Ar">[261]</div>
-				<ol class="oxidation">
-					<li></li>
-				</ol>
-				<div class="name-ru">Резерфордий</div>
-				<div class="name-la">Rutherfordium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element radioactive d metal" id="Db" style="background: #5ca7e0">
-				<div class="symbol">Db</div>
-				<div class="number">105</div>
-				<div class="Ar">[262]</div>
-				<ol class="oxidation">
-					<li></li>
-				</ol>
-				<div class="name-ru">Дубний</div>
-				<div class="name-la">Dubnium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element radioactive d metal" id="Sg" style="background: #5ca7e0">
-				<div class="symbol">Sg</div>
-				<div class="number">106</div>
-				<div class="Ar">[263]</div>
-				<ol class="oxidation">
-					<li></li>
-				</ol>
-				<div class="name-ru">Сиборгий</div>
-				<div class="name-la">Seaborgium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element radioactive d metal" id="Bh" style="background: #5ca7e0">
-				<div class="symbol">Bh</div>
-				<div class="number">107</div>
-				<div class="Ar">[267]</div>
-				<ol class="oxidation">
-					<li></li>
-				</ol>
-				<div class="name-ru">Борий</div>
-				<div class="name-la">Bohrium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element radioactive d metal" id="Hs" style="background: #5ca7e0">
-				<div class="symbol">Hs</div>
-				<div class="number">108</div>
-				<div class="Ar">[269]</div>
-				<ol class="oxidation">
-					<li></li>
-				</ol>
-				<div class="name-ru">Хассий</div>
-				<div class="name-la">Hassium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element radioactive d metal" id="Mt" style="background: #5ca7e0">
-				<div class="symbol">Mt</div>
-				<div class="number">109</div>
-				<div class="Ar">[278]</div>
-				<ol class="oxidation">
-					<li></li>
-				</ol>
-				<div class="name-ru">Мейтнерий</div>
-				<div class="name-la">Meitnerium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element radioactive d metal" id="Ds" style="background: #5ca7e0">
-				<div class="symbol">Ds</div>
-				<div class="number">110</div>
-				<div class="Ar">[281]</div>
-				<ol class="oxidation">
-					<li></li>
-				</ol>
-				<div class="name-ru">Дармштадтий</div>
-				<div class="name-la">Darmstadtium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element radioactive d metal" id="Rg" style="background: #5ca7e0">
-				<div class="symbol">Rg</div>
-				<div class="number">111</div>
-				<div class="Ar">[281]</div>
-				<ol class="oxidation">
-					<li></li>
-				</ol>
-				<div class="name-ru">Рентгений</div>
-				<div class="name-la">Roentgenium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element radioactive d metal" id="Cn" style="background: #5ca7e0">
-				<div class="symbol">Cn</div>
-				<div class="number">112</div>
-				<div class="Ar">[262]</div>
-				<ol class="oxidation">
-					<li></li>
-				</ol>
-				<div class="name-ru">Коперниций</div>
-				<div class="name-la">Copernicium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element radioactive p metal" id="Nh" style="background: #ffd737">
-				<div class="symbol">Nh</div>
-				<div class="number">113</div>
-				<div class="Ar">[283]</div>
-				<ol class="oxidation"><li></li></ol>
-				<div class="name-ru">Нихоний</div>
-				<div class="name-la">Nihonium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element radioactive p metal" id="Fl" style="background: #ffd737">
-				<div class="symbol">Fl</div>
-				<div class="number">114</div>
-				<div class="Ar">[289]</div>
-				<ol class="oxidation"><li></li></ol>
-				<div class="name-ru">Флеровий</div>
-				<div class="name-la">Flerovium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element radioactive p metal" id="Mc" style="background: #ffd737">
-				<div class="symbol">Mc</div>
-				<div class="number">115</div>
-				<div class="Ar">[289]</div>
-				<ol class="oxidation"><li></li></ol>
-				<div class="name-ru">Московий</div>
-				<div class="name-la">Moscovium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element radioactive p metal" id="Lv" style="background: #ffd737">
-				<div class="symbol">Lv</div>
-				<div class="number">116</div>
-				<div class="Ar">[293]</div>
-				<ol class="oxidation"><li></li></ol>
-				<div class="name-ru">Ливерморий</div>
-				<div class="name-la">Livermorium</div>
-				</div>
-			</td>
-
-			<td class="element-storage">
-				<div class="element radioactive p metal" id="Ts" style="background: #ffd737">
-				<div class="symbol">Ts</div>
-				<div class="number">117</div>
-				<div class="Ar">[294]</div>
-				<ol class="oxidation"><li></li></ol>
-				<div class="name-ru">Теннессин</div>
-				<div class="name-la">Tennessine</div>
-				</div>
-			</td>
-
-			<td class="element-storage" style="border-left: 3px solid #000;border-bottom: 3px solid black">
-				<div class="element radioactive p nmetal" id="Og" style="background: #ffd737">
-				<div class="symbol">Og</div>
-				<div class="number">118</div>
-				<div class="Ar">[294]</div>
-				<ol class="oxidation">
-					<li>0</li>
-				</ol>
-				<div class="name-ru">Оганесон</div>
-				<div class="name-la">Oganesson</div>
-				</div>
-			</td>
-
-		</tr>
-
-		<tr>
-			<td style="height: 25px;" colspan="19"></td>
-		</tr>
-
-		<tr>
-			<td colspan="2" rowspan="2"></td>
-			<td class="LA" id="Lanthanides">*</td>
-
-			<td class="element-storage">
-				<div class="element f-light metal" id="Ce" style="background: #90cd8e">
-					<div class="symbol">Ce</div>
-					<div class="number">58</div>
-					<div class="Ar">140,116</div>
-					<ol class="oxidation">
-						<li>+3</li>
-					</ol>
-					<div class="name-ru">Церий</div>
-					<div class="name-la">Cerium</div>
-				</div>
-			</td>
-			<td class="element-storage">
-				<div class="element f-light metal" id="Pr" style="background: #90cd8e">
-					<div class="symbol">Pr</div>
-					<div class="number">59</div>
-					<div class="Ar">140,9077</div>
-					<ol class="oxidation">
-						<li>+3</li>
-					</ol>
-					<div class="name-ru">Празеодим</div>
-					<div class="name-la">Praseodymium</div>
-				</div>
-			</td>
-			<td class="element-storage">
-				<div class="element f-light metal" id="Nd" style="background: #90cd8e">
-					<div class="symbol">Nd</div>
-					<div class="number">60</div>
-					<div class="Ar">144,24</div>
-					<ol class="oxidation">
-						<li>+3</li>
-					</ol>
-					<div class="name-ru">Неодим</div>
-					<div class="name-la">Neodymium</div>
-				</div>
-			</td>
-			<td class="element-storage">
-				<div class="element radioactive f-light metal" id="Pm" style="background: #90cd8e">
-					<div class="symbol">Pm</div>
-					<div class="number">61</div>
-					<div class="Ar">[145]</div>
-					<ol class="oxidation">
-						<li>+3</li>
-					</ol>
-					<div class="name-ru">Прометий</div>
-					<div class="name-la">Promethium</div>
-				</div>
-			</td>
-			<td class="element-storage"> 
-				<div class="element f-light metal" id="Sm" style="background: #90cd8e">
-					<div class="symbol">Sm</div>
-					<div class="number">62</div>
-					<div class="Ar">150,36</div>
-					<ol class="oxidation">
-						<li>+3</li>
-					</ol>
-					<div class="name-ru">Самарий</div>
-					<div class="name-la">Samarium</div>
-				</div>
-			</td>
-			<td class="element-storage">
-				<div class="element f-light metal" id="Eu" style="background: #90cd8e">
-					<div class="symbol">Eu</div>
-					<div class="number">63</div>
-					<div class="Ar">151,964</div>
-					<ol class="oxidation">
-						<li>+3</li>
-					</ol>
-					<div class="name-ru">Европий</div>
-					<div class="name-la">Europium</div>
-				</div>
-			</td>
-			<td class="element-storage">
-				<div class="element f-light metal" id="Gd" style="background: #90cd8e">
-					<div class="symbol">Gd</div>
-					<div class="number">64</div>
-					<div class="Ar">157,25</div>
-					<ol class="oxidation">
-						<li>+3</li>
-					</ol>
-					<div class="name-ru">Гадолиний</div>
-					<div class="name-la">Gadolinium</div>
-				</div>
-			</td>
-			<td class="element-storage">
-				<div class="element f-light metal" id="Tb" style="background: #90cd8e">
-					<div class="symbol">Tb</div>
-					<div class="number">65</div>
-					<div class="Ar">158,9253</div>
-					<ol class="oxidation">
-						<li>+3</li>
-					</ol>
-					<div class="name-ru">Тербий</div>
-					<div class="name-la">Terbium</div>
-				</div>
-			</td>
-			<td class="element-storage">
-				<div class="element f-light metal" id="Dy" style="background: #90cd8e">
-					<div class="symbol">Dy</div>
-					<div class="number">66</div>
-					<div class="Ar">162,5</div>
-					<ol class="oxidation">
-						<li>+3</li>
-					</ol>
-					<div class="name-ru">Диспрозий</div>
-					<div class="name-la">Dysprosium</div>
-				</div>
-			</td>
-			<td class="element-storage">
-				<div class="element f-light metal" id="Ho" style="background: #90cd8e">
-					<div class="symbol">Ho</div>
-					<div class="number">67</div>
-					<div class="Ar">164,9303</div>
-					<ol class="oxidation">
-						<li>+3</li>
-					</ol>
-					<div class="name-ru">Гольмий</div>
-					<div class="name-la">Holmium</div>
-				</div>
-			</td>
-			<td class="element-storage">
-				<div class="element f-light metal" id="Er" style="background: #90cd8e">
-					<div class="symbol">Er</div>
-					<div class="number">68</div>
-					<div class="Ar">167,26</div>
-					<ol class="oxidation">
-						<li>+3</li>
-					</ol>
-					<div class="name-ru">Эрбий</div>
-					<div class="name-la">Erbium</div>
-				</div>
-			</td>
-			<td class="element-storage">
-				<div class="element f-light metal" id="Tm" style="background: #90cd8e">
-					<div class="symbol">Tm</div>
-					<div class="number">69</div>
-					<div class="Ar">168,9342</div>
-					<ol class="oxidation">
-						<li>+3</li>
-					</ol>
-					<div class="name-ru">Тулий</div>
-					<div class="name-la">Thulium</div>
-				</div>
-			</td>
-			<td class="element-storage">
-				<div class="element f-light metal" id="Yb" style="background: #90cd8e">
-					<div class="symbol">Yb</div>
-					<div class="number">70</div>
-					<div class="Ar">173,045</div>
-					<ol class="oxidation">
-						<li>+3</li>
-					</ol>
-					<div class="name-ru">Иттербий</div>
-					<div class="name-la">Ytterbium</div>
-				</div>
-			</td>
-			<td class="element-storage">
-				<div class="element f-light metal" id="Lu" style="background: #90cd8e">
-					<div class="symbol">Lu</div>
-					<div class="number">71</div>
-					<div class="Ar">174,967</div>
-					<ol class="oxidation">
-						<li>+3</li>
-					</ol>
-					<div class="name-ru">Лютеций</div>
-					<div class="name-la">Lutetium</div>
-				</div>
-			</td>
-			<td colspan="2" rowspan="2">
-		</tr>
-
-		<tr>
-			<td class="LA" id="Actinides">**</td>
-			<td class="element-storage">
-				<div class="element radioactive f-dark metal" id="Th" style="background: #78bd62">
-					<div class="symbol">Th</div>
-					<div class="number">90</div>
-					<div class="Ar">232,038</div>
-					<ol class="oxidation">
-						<li>+4</li>
-					</ol>
-					<div class="name-ru">Торий</div>
-					<div class="name-la">Thorium</div>
-				</div>
-			</td>
-			<td class="element-storage">
-				<div class="element radioactive f-dark metal" id="Pa" style="background: #78bd62">
-					<div class="symbol">Pa</div>
-					<div class="number">91</div>
-					<div class="Ar">231,036</div>
-					<ol class="oxidation">
-						<li>+5</li>
-					</ol>
-					<div class="name-ru">Протактиний</div>
-					<div class="name-la">Protactinium</div>
-				</div>
-			</td>
-			<td class="element-storage">
-				<div class="element radioactive f-dark metal" id="U" style="background: #78bd62">
-					<div class="symbol">U</div>
-					<div class="number">92</div>
-					<div class="Ar">238,029</div>
-					<ol class="oxidation">
-						<li>+6</li>
-					</ol>
-					<div class="name-ru">Уран</div>
-					<div class="name-la">Uranium</div>
-				</div>
-			</td>
-			<td class="element-storage">
-				<div class="element radioactive f-dark metal" id="Np" style="background: #78bd62">
-					<div class="symbol">Np</div>
-					<div class="number">93</div>
-					<div class="Ar">237,048</div>
-					<ol class="oxidation">
-						<li>+5</li>
-					</ol>
-					<div class="name-ru">Нептуний</div>
-					<div class="name-la">Neptunium</div>
-				</div>
-			</td>
-			<td class="element-storage">
-				<div class="element radioactive f-dark metal" id="Pu" style="background: #78bd62">
-					<div class="symbol">Pu</div>
-					<div class="number">94</div>
-					<div class="Ar">[244]</div>
-					<ol class="oxidation">
-						<li>+3</li>
-						<li>+4</li>
-					</ol>
-					<div class="name-ru">Плутоний</div>
-					<div class="name-la">Plutonium</div>
-				</div>
-			</td>
-			<td class="element-storage">
-				<div class="element radioactive f-dark metal" id="Am" style="background: #78bd62">
-					<div class="symbol">Am</div>
-					<div class="number">95</div>
-					<div class="Ar">[243]</div>
-					<ol class="oxidation">
-						<li>+3</li>
-					</ol>
-					<div class="name-ru">Америций</div>
-					<div class="name-la">Americium</div>
-				</div>
-			</td>
-			<td class="element-storage">
-				<div class="element radioactive f-dark metal" id="Cm" style="background: #78bd62">
-					<div class="symbol">Cm</div>
-					<div class="number">96</div>
-					<div class="Ar">[247]</div>
-					<ol class="oxidation">
-						<li>+3</li>
-					</ol>
-					<div class="name-ru">Кюрий</div>
-					<div class="name-la">Curium</div>
-				</div>
-			</td>
-			<td class="element-storage">
-				<div class="element radioactive f-dark metal" id="Bk" style="background: #78bd62">
-					<div class="symbol">Bk</div>
-					<div class="number">97</div>
-					<div class="Ar">[247]</div>
-					<ol class="oxidation">
-						<li>+3</li>
-					</ol>
-					<div class="name-ru">Берклий</div>
-					<div class="name-la">Berkelium</div>
-				</div>
-			</td>
-			<td class="element-storage">
-				<div class="element radioactive f-dark metal" id="Cf" style="background: #78bd62">
-					<div class="symbol">Cf</div>
-					<div class="number">98</div>
-					<div class="Ar">[251]</div>
-					<ol class="oxidation">
-						<li>+3</li>
-					</ol>
-					<div class="name-ru">Калифорний</div>
-					<div class="name-la">Californium</div>
-				</div>
-			</td>
-			<td class="element-storage">
-				<div class="element radioactive f-dark metal" id="Es" style="background: #78bd62">
-					<div class="symbol">Es</div>
-					<div class="number">99</div>
-					<div class="Ar">[252]</div>
-					<ol class="oxidation">
-						<li>+3</li>
-					</ol>
-					<div class="name-ru">Эйнштейний</div>
-					<div class="name-la">Einsteinium</div>
-				</div>
-			</td>
-			<td class="element-storage">
-				<div class="element radioactive f-dark metal" id="Fm" style="background: #78bd62">
-					<div class="symbol">Fm</div>
-					<div class="number">100</div>
-					<div class="Ar">[257]</div>
-					<ol class="oxidation">
-						<li>+3</li>
-					</ol>
-					<div class="name-ru">Фермий</div>
-					<div class="name-la">Fermium</div>
-				</div>
-			</td>
-			<td class="element-storage">
-				<div class="element radioactive f-dark metal" id="Md" style="background: #78bd62">
-					<div class="symbol">Md</div>
-					<div class="number">101</div>
-					<div class="Ar">[258]</div>
-					<ol class="oxidation">
-						<li>+3</li>
-					</ol>
-					<div class="name-ru">Менделевий</div>
-					<div class="name-la">Mendelevium</div>
-				</div>
-			</td>
-			<td class="element-storage">
-				<div class="element radioactive f-dark metal" id="No" style="background: #78bd62">
-					<div class="symbol">No</div>
-					<div class="number">102</div>
-					<div class="Ar">[259]</div>
-					<ol class="oxidation">
-						<li>+2</li>
-					</ol>
-					<div class="name-ru">Нобелий</div>
-					<div class="name-la">Nobelium</div>
-				</div>
-			</td>
-			<td class="element-storage">
-				<div class="element radioactive f-dark metal" id="Lr" style="background: #78bd62">
-					<div class="symbol">Lr</div>
-					<div class="number">103</div>
-					<div class="Ar">[260]</div>
-					<ol class="oxidation">
-						<li>+3</li>
-					</ol>
-					<div class="name-ru">Лоуренсий</div>
-					<div class="name-la">Lawrencium</div>
-				</div>
-			</td>
-		</tr>
-
-	</table>
 	<script src="scripts/elements.js"></script>
 	<script src="scripts/script.js"></script>
 	<script src="scripts/alert.js"></script>
@@ -1815,11 +161,189 @@
 	<script src="scripts/picker.js"></script>
 	<script src="scripts/calculator.js"></script>
 	<script src="scripts/data.js"></script>
+	<script src="vue/components.js"></script>
 	<script>
+		Vue.component("item-element", {
+			props: ["data"],
+			template: `
+			<li class="element-storage" :id="data.sym">
+				<div class="element" :class="data.cls" :style="data.st">
+					<div class="symbol">{{ data.sym }}</div>
+					<div class="number">{{ data.num }}</div>
+					<div class="Ar">{{ data.Ar }}</div>
+					<ol class="oxidation">
+						<li v-for="i in data.oxs">{{ i }}</li>
+					</ol>
+					<div class="name-ru">{{ data.ru }}</div>
+					<div class="name-la">{{ data.la }}</div>
+				</div>
+			</li>`
+		});
+
+		Vue.component("period-info", {
+			template: `
+			<div>
+				В периодах справа налево:<br>
+				<strong>металлические и восстановительные</strong> свойства <strong>ослабевают</strong><br>
+				<strong>неметаллические и окислительные</strong> свойства <strong>усиливаются</strong><br>
+				<strong>электроотрицательность увеличивается</strong><br>
+				<strong>радиус</strong> атомов <strong>уменьшается</strong>
+			</div>`
+		});
+
+		let app = new Vue({
+			el: "#app",
+			data: {
+				isWideTable: true,
+				alert: {
+					isAlert: false,
+					component: "",
+					coords: {
+						top: "0px",
+						left: "0px"
+					}
+				},
+				table: [
+					{ sym:"H", num:"1", Ar:"1,00794", oxs:[+1], ru:"Водород", la:"Hydragenium", cls:"s nmetal ", st: {background: "#fe83b5",color: "#000"}},
+					{ sym:"He", num:"2", Ar:"2,0026", oxs:[0], ru:"Гелий", la:"Helium", cls:"s nmetal ", st: {background: "#fe83b5",color: "#000"}},
+					{ sym:"Li", num:"3", Ar:"6,941", oxs:[+1], ru:"Литий", la:"Lithium", cls:"s metal ", st: {background: "#fe83b5",color: "#000"}},
+					{ sym:"Be", num:"4", Ar:"9,0122", oxs:[+2], ru:"Бериллий", la:"Beryllium", cls:"s metal ", st: {background: "#fe83b5",color: "#000"}},
+					{ sym:"B", num:"5", Ar:"10,811", oxs:[+3], ru:"Бор", la:"Borum", cls:"p nmetal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"C", num:"6", Ar:"12,0107", oxs:[+4], ru:"Углерод", la:"Carboneum", cls:"p nmetal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"N", num:"7", Ar:"14,0067", oxs:[+4], ru:"Азот", la:"Nitrogenium", cls:"p nmetal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"O", num:"8", Ar:"15,9994", oxs:[-2], ru:"Кислород", la:"Oxygenium", cls:"p nmetal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"F", num:"9", Ar:"18,9984", oxs:[-1], ru:"Фтор", la:"Fluorum", cls:"p nmetal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Ne", num:"10", Ar:"20,1797", oxs:[+1], ru:"Неон", la:"Neon", cls:"p nmetal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Na", num:"11", Ar:"22,1797", oxs:[+1], ru:"Натрий", la:"Natrium", cls:"s metal ", st: {background: "#fe83b5",color: "#000"}},
+					{ sym:"Mg", num:"12", Ar:"24,305", oxs:[+2], ru:"Магний", la:"Magnesium", cls:"s metal ", st: {background: "#fe83b5",color: "#000"}},
+					{ sym:"Al", num:"13", Ar:"26,9815", oxs:[+3], ru:"Алюминий", la:"Aluminium", cls:"p metal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Si", num:"14", Ar:"28,0855", oxs:[+4], ru:"Кремний", la:"Silicium", cls:"p nmetal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"P", num:"15", Ar:"30,9738", oxs:[+5], ru:"Фосфор", la:"Phosphorus", cls:"p nmetal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"S", num:"16", Ar:"32,066", oxs:[+6], ru:"Сера", la:"Sulfur", cls:"p nmetal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Cl", num:"17", Ar:"35,45", oxs:[+6], ru:"Хлор", la:"Chlorum", cls:"p nmetal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Ar", num:"18", Ar:"39,948", oxs:[0], ru:"Аргон", la:"Argon", cls:"p nmetal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"K", num:"19", Ar:"39,0983", oxs:[+1], ru:"Калий", la:"Kalium", cls:"s metal ", st: {background: "#fe83b5",color: "#000"}},
+					{ sym:"Ca", num:"20", Ar:"40,078", oxs:[+2], ru:"Кальций", la:"Calcium", cls:"s metal ", st: {background: "#fe83b5",color: "#000"}},
+					{ sym:"Sc", num:"21", Ar:"44,9559", oxs:[+3], ru:"Скандий", la:"Scandium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Ti", num:"22", Ar:"47,867", oxs:[+4], ru:"Титан", la:"Titanium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"V", num:"23", Ar:"50,9415", oxs:[+5], ru:"Ванадий", la:"Vanadium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Cr", num:"24", Ar:"51,9961", oxs:[+3], ru:"Хром", la:"Cromium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Mn", num:"25", Ar:"54,938", oxs:[+2,+4], ru:"Марганец", la:"Manganum", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Fe", num:"26", Ar:"55,845", oxs:[+2,+3], ru:"Железо", la:"Ferrum", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Co", num:"27", Ar:"58,9332", oxs:[+2], ru:"Кобальт", la:"Cobaltum", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Ni", num:"28", Ar:"58,6934", oxs:[+2], ru:"Никель", la:"Niccolum", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Cu", num:"29", Ar:"63,546", oxs:[+2], ru:"Медь", la:"Cuprum", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Zn", num:"30", Ar:"65,38", oxs:[+2], ru:"Цинк", la:"Zincum", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Ga", num:"31", Ar:"69,723", oxs:[+3], ru:"Галлий", la:"Gallium", cls:"p metal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Ge", num:"32", Ar:"72,63", oxs:[+4], ru:"Германий", la:"Germanium", cls:"p metal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"As", num:"33", Ar:"74,9216", oxs:[+3], ru:"Мышьяк", la:"Arsenicum", cls:"p nmetal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Se", num:"34", Ar:"78,96", oxs:[+4], ru:"Селен", la:"Selenium", cls:"p nmetal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Br", num:"35", Ar:"79,904", oxs:[-1], ru:"Бром", la:"Bromum", cls:"p nmetal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Kr", num:"36", Ar:"83,798", oxs:[+2], ru:"Криптон", la:"Krypton", cls:"p nmetal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Rb", num:"37", Ar:"85,4678", oxs:[+1], ru:"Рубидий", la:"Rubidium", cls:"s metal ", st: {background: "#fe83b5",color: "#000"}},
+					{ sym:"Sr", num:"38", Ar:"87,62", oxs:[+2], ru:"Стронций", la:"Strontium", cls:"s metal ", st: {background: "#fe83b5",color: "#000"}},
+					{ sym:"Y", num:"39", Ar:"88,9059", oxs:[+3], ru:"Иттрий", la:"Yttrium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Zr", num:"40", Ar:"91,224", oxs:[+4], ru:"Цирконий", la:"Zirconium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Nb", num:"41", Ar:"92,9064", oxs:[+5], ru:"Ниобий", la:"Niobium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Mo", num:"42", Ar:"95,96", oxs:[+6], ru:"Молибден", la:"Molybdaenum", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Tc", num:"43", Ar:"97,907", oxs:[+7], ru:"Технеций", la:"Technetium", cls:"radioactive d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Ru", num:"44", Ar:"101,07", oxs:[+4], ru:"Рутений", la:"Ruthenium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Rh", num:"45", Ar:"102,9055", oxs:[+3], ru:"Родий", la:"Rhodium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Pd", num:"46", Ar:"106,42", oxs:[+2], ru:"Палладий", la:"Palladium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Ag", num:"47", Ar:"107,8682", oxs:[+1], ru:"Серебро", la:"Argentum", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Cd", num:"48", Ar:"112,411", oxs:[+2], ru:"Кадмий", la:"Cadmium", cls:"d metal, ", st: {background: "#5ca7e0",color: "#000"}, st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"In", num:"49", Ar:"114,818", oxs:[+3], ru:"Индий", la:"Indium", cls:"p metal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Sn", num:"50", Ar:"118,71", oxs:[+4], ru:"Олово", la:"Stannum", cls:"p metal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Sb", num:"51", Ar:"121,76", oxs:[+3], ru:"Сурьма", la:"Stibium", cls:"p metal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Te", num:"52", Ar:"127,6", oxs:[+4], ru:"Теллур", la:"Tellurium", cls:"p nmetal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"I", num:"53", Ar:"126,9045", oxs:[-1], ru:"Йод", la:"Iodum", cls:"p nmetal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Xe", num:"54", Ar:"131,29", oxs:[+6], ru:"Ксенон", la:"Xenon", cls:"p nmetal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Cs", num:"55", Ar:"132,9055", oxs:[+1], ru:"Цезий", la:"Caesium", cls:"s metal ", st: {background: "#fe83b5",color: "#000"}},
+					{ sym:"Ba", num:"56", Ar:"137,327", oxs:[+2], ru:"Барий", la:"Barium", cls:"s metal ", st: {background: "#fe83b5",color: "#000"}},
+					{ sym:"La", num:"57", Ar:"138,9055", oxs:[+3], ru:"Лантан", la:"Lanthanum", cls:"d metal lanthanide ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Hf", num:"72", Ar:"178,49", oxs:[+4], ru:"Гафний", la:"Hafnium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Ta", num:"73", Ar:"180,9479", oxs:[+5], ru:"Тантал", la:"Tantalum", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"W", num:"74", Ar:"183,84", oxs:[+6], ru:"Вольфрам", la:"Wolframium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Re", num:"75", Ar:"186,207", oxs:[+7], ru:"Рений", la:"Rhenium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Os", num:"76", Ar:"190,23", oxs:[+8,+4], ru:"Осмий", la:"Osmium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Ir", num:"77", Ar:"192,217", oxs:[+3,+4], ru:"Иридий", la:"Iridium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Pt", num:"78", Ar:"195,084", oxs:[+2,+4], ru:"Платина", la:"Platinum", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Au", num:"79", Ar:"196,966", oxs:[+3], ru:"Золото", la:"Aurum", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Hg", num:"80", Ar:"200,59", oxs:[+2], ru:"Ртуть", la:"Hydrargyrum", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Tl", num:"81", Ar:"204,3833", oxs:[+1], ru:"Таллий", la:"Thallium", cls:"p metal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Pb", num:"82", Ar:"207,2", oxs:[+2], ru:"Свинец", la:"Plumbum", cls:"p metal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Bi", num:"83", Ar:"208,9804", oxs:[+3], ru:"Висмут", la:"Bismuthum", cls:"radioactive p metal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Po", num:"84", Ar:"208,98", oxs:[+4], ru:"Полоний", la:"Polonium", cls:"radioactive p metal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"At", num:"85", Ar:"[210]", oxs:[+4], ru:"Астат", la:"Astatium", cls:"radioactive p nmetal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Rn", num:"86", Ar:"[222]", oxs:[+2], ru:"Радон", la:"Radon", cls:"radioactive p nmetal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Fr", num:"87", Ar:"[223]", oxs:[+1], ru:"Франций", la:"Francium", cls:"radioactive s metal ", st: {background: "#fe83b5",color: "#000"}},
+					{ sym:"Ra", num:"88", Ar:"226,025", oxs:[+2], ru:"Радий", la:"Radium", cls:"radioactive s metal ", st: {background: "#fe83b5",color: "#000"}},
+					{ sym:"Ac", num:"89", Ar:"227,0278", oxs:[+3], ru:"Актиний", la:"Actinium", cls:"radioactive d metal actinoid ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Rf", num:"104", Ar:"[261]", oxs:[], ru:"Резерфордий", la:"Rutherfordium", cls:"radioactive d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Db", num:"105", Ar:"[262]", oxs:[], ru:"Дубний", la:"Dubnium", cls:"radioactive d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Sg", num:"106", Ar:"[263]", oxs:[], ru:"Сиборгий", la:"Seaborgium", cls:"radioactive d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Bh", num:"107", Ar:"[267]", oxs:[], ru:"Борий", la:"Bohrium", cls:"radioactive d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Hs", num:"108", Ar:"[269]", oxs:[], ru:"Хассий", la:"Hassium", cls:"radioactive d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Mt", num:"109", Ar:"[278]", oxs:[], ru:"Мейтнерий", la:"Meitnerium", cls:"radioactive d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Ds", num:"110", Ar:"[281]", oxs:[], ru:"Дармштадтий", la:"Darmstadtium", cls:"radioactive d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Rg", num:"111", Ar:"[281]", oxs:[], ru:"Рентгений", la:"Roentgenium", cls:"radioactive d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Cn", num:"112", Ar:"[262]", oxs:[], ru:"Коперниций", la:"Copernicium", cls:"radioactive d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Nh", num:"113", Ar:"[283]", oxs:[], ru:"Нихоний", la:"Nihonium", cls:"radioactive p metal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Fl", num:"114", Ar:"[289]", oxs:[], ru:"Флеровий", la:"Flerovium", cls:"radioactive p metal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Mc", num:"115", Ar:"[289]", oxs:[], ru:"Московий", la:"Moscovium", cls:"radioactive p metal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Lv", num:"116", Ar:"[293]", oxs:[], ru:"Ливерморий", la:"Livermorium", cls:"radioactive p metal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Ts", num:"117", Ar:"[294]", oxs:[], ru:"Теннессин", la:"Tennessine", cls:"radioactive p metal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Og", num:"118", Ar:"[294]", oxs:[0], ru:"Оганесон", la:"Oganesson", cls:"radioactive p nmetal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Ce", num:"58", Ar:"140,116", oxs:[+3], ru:"Церий", la:"Cerium", cls:"f-light metal ", st: {background: "#90cd8e",color: "#000"}},
+					{ sym:"Pr", num:"59", Ar:"140,9077", oxs:[+3], ru:"Празеодим", la:"Praseodymium", cls:"f-light metal ", st: {background: "#90cd8e",color: "#000"}},
+					{ sym:"Nd", num:"60", Ar:"144,24", oxs:[+3], ru:"Неодим", la:"Neodymium", cls:"f-light metal ", st: {background: "#90cd8e",color: "#000"}},
+					{ sym:"Pm", num:"61", Ar:"[145]", oxs:[+3], ru:"Прометий", la:"Promethium", cls:"radioactive f-light metal ", st: {background: "#90cd8e",color: "#000"}},
+					{ sym:"Sm", num:"62", Ar:"150,36", oxs:[+3], ru:"Самарий", la:"Samarium", cls:"f-light metal ", st: {background: "#90cd8e",color: "#000"}},
+					{ sym:"Eu", num:"63", Ar:"151,964", oxs:[+3], ru:"Европий", la:"Europium", cls:"f-light metal ", st: {background: "#90cd8e",color: "#000"}},
+					{ sym:"Gd", num:"64", Ar:"157,25", oxs:[+3], ru:"Гадолиний", la:"Gadolinium", cls:"f-light metal ", st: {background: "#90cd8e",color: "#000"}},
+					{ sym:"Tb", num:"65", Ar:"158,9253", oxs:[+3], ru:"Тербий", la:"Terbium", cls:"f-light metal ", st: {background: "#90cd8e",color: "#000"}},
+					{ sym:"Dy", num:"66", Ar:"162,5", oxs:[+3], ru:"Диспрозий", la:"Dysprosium", cls:"f-light metal ", st: {background: "#90cd8e",color: "#000"}},
+					{ sym:"Ho", num:"67", Ar:"164,9303", oxs:[+3], ru:"Гольмий", la:"Holmium", cls:"f-light metal ", st: {background: "#90cd8e",color: "#000"}},
+					{ sym:"Er", num:"68", Ar:"167,26", oxs:[+3], ru:"Эрбий", la:"Erbium", cls:"f-light metal ", st: {background: "#90cd8e",color: "#000"}},
+					{ sym:"Tm", num:"69", Ar:"168,9342", oxs:[+3], ru:"Тулий", la:"Thulium", cls:"f-light metal ", st: {background: "#90cd8e",color: "#000"}},
+					{ sym:"Yb", num:"70", Ar:"173,045", oxs:[+3], ru:"Иттербий", la:"Ytterbium", cls:"f-light metal ", st: {background: "#90cd8e",color: "#000"}},
+					{ sym:"Lu", num:"71", Ar:"174,967", oxs:[+3], ru:"Лютеций", la:"Lutetium", cls:"f-light metal ", st: {background: "#90cd8e",color: "#000"}},
+					{ sym:"Th", num:"90", Ar:"232,038", oxs:[+4], ru:"Торий", la:"Thorium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}},
+					{ sym:"Pa", num:"91", Ar:"231,036", oxs:[+5], ru:"Протактиний", la:"Protactinium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}},
+					{ sym:"U", num:"92", Ar:"238,029", oxs:[+6], ru:"Уран", la:"Uranium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}},
+					{ sym:"Np", num:"93", Ar:"237,048", oxs:[+5], ru:"Нептуний", la:"Neptunium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}},
+					{ sym:"Pu", num:"94", Ar:"[244]", oxs:[+3,+4], ru:"Плутоний", la:"Plutonium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}},
+					{ sym:"Am", num:"95", Ar:"[243]", oxs:[+3], ru:"Америций", la:"Americium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}},
+					{ sym:"Cm", num:"96", Ar:"[247]", oxs:[+3], ru:"Кюрий", la:"Curium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}},
+					{ sym:"Bk", num:"97", Ar:"[247]", oxs:[+3], ru:"Берклий", la:"Berkelium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}},
+					{ sym:"Cf", num:"98", Ar:"[251]", oxs:[+3], ru:"Калифорний", la:"Californium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}},
+					{ sym:"Es", num:"99", Ar:"[252]", oxs:[+3], ru:"Эйнштейний", la:"Einsteinium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}},
+					{ sym:"Fm", num:"100", Ar:"[257]", oxs:[+3], ru:"Фермий", la:"Fermium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}},
+					{ sym:"Md", num:"101", Ar:"[258]", oxs:[+3], ru:"Менделевий", la:"Mendelevium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}},
+					{ sym:"No", num:"102", Ar:"[259]", oxs:[+2], ru:"Нобелий", la:"Nobelium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}},
+					{ sym:"Lr", num:"103", Ar:"[260]", oxs:[+3], ru:"Лоуренсий", la:"Lawrencium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}}
+				]
+			},
+			methods: {
+				createAlert: function(coords, component) {
+					this.alert.component = component;
+					this.alert.isAlert = true;
+					let windowWidth = document.documentElement.clientWidth;
+					let width = 450;
+					let left = coords.right + width < windowWidth ?  coords.right + "px" : coords.left - width + "px";
+					this.alert.coords = {
+						top: coords.top + "px",
+						left: left
+					}
+				},
+				deleteAlert: function() {
+					this.alert.isAlert = false;
+				}
+			}
+		});
 		function getRandomInt(min, max) {
 			return Math.floor(Math.random() * (max - min + 1)) + min;
 		}
-
 
 		picker.init();
 		document.getElementById("tableMendeleev").onmouseover =

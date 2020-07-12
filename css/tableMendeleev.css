@@ -34,16 +34,6 @@
  	font-size: 30px;
  	color: green;
 }
-#IPTCE{
-	position: relative;
-}
-#IPTCE div{
-	position: absolute;
-	font-size: 5vw;
-	left: 10%;
-	color: #2d3436;
-	font-family: Georgia;
-}
 @media screen and (max-width: 880px) {
 	#tableMendeleev{
 		width: 890px;
