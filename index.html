@@ -140,6 +140,10 @@
 			</div>	
 		</div>
 		<div class="alert" v-show="alert.isAlert" :style="alert.coords"><component :is="alert.component"></component></div>
+		<div class="modal-window" v-on:mousedown="moveModal" v-on:mousemove="moveModal" v-on:mouseup="moveModal">
+			<div class="close-modal-window" onclick="this.parentElement.remove()"><svg enable-background="new 0 0 413.348 413.348" height="10px" viewBox="0 0 413.348 413.348" width="10px" xmlns="http://www.w3.org/2000/svg"><path d="m413.348 24.354-24.354-24.354-182.32 182.32-182.32-182.32-24.354 24.354 182.32 182.32-182.32 182.32 24.354 24.354 182.32-182.32 182.32 182.32 24.354-24.354-182.32-182.32z"/></svg></div>
+			<div class="content-modal-window"><div v-html="modal.text"></div></div>
+		</div>
 	</div>
 
 	<script src="scripts/elements.js"></script>
@@ -205,6 +209,10 @@
 						top: "0px",
 						left: "0px"
 					}
+				},
+				modal: {
+					isMouseDown: false,
+					text: "asffgdhfgjhkl,kjhngfvdsadfgbhnjm,kl.jmhngfdsvfbnhmjhngfvdcffgbhjmhngfvd"
 				},
 				table: [
 					{ sym:"H", num:"1", Ar:"1,00794", oxs:[+1], ru:"Водород", la:"Hydragenium", cls:"s nmetal ", st: {background: "#fe83b5",color: "#000"}},
@@ -353,6 +361,25 @@
 					this.legend.cls = data.cls;
 					this.legend.st = data.st;
 					this.legend.text = elements[data.sym].infoChemistryElement; 
+				},
+				moveModal: function(e) {
+					let modal = e.currentTarget;
+					let shiftX, shiftY;
+					if(e.type === "mousedown") {
+						this.modal.isMouseDown = true;
+						shiftX = e.clientX - modal.getBoundingClientRect().left;
+						shiftY = e.clientY - modal.getBoundingClientRect().top;
+						modal.style.left = e.clientX + "px";
+						console.log(modal.style.left);
+					}
+					if(e.type === "mouseup") this.modal.isMouseDown = false;
+
+					if(this.modal.isMouseDown === true) {
+						console.log(shiftX)
+						
+						console.log(e);
+					}
+
 				}
 			}
 		});
