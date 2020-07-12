@@ -89,36 +89,26 @@
 		<div id="colors-by-default" onclick="changeDefaultColors()">Восстановить по умолчанию</div>
 	</div>
 
-	<div id="IPTCE">ИПСХЭ<span style="font-size: 1vw">v0.2.6b</span></div>
 
-	<div id="legend">
-		<div id="element-legend" class="p radioactive" style="background: #ffd737;">
-			<div class="symbol"  data-textAlert="Химический символ - сокращённое буквенное обозначение химических элементов, состоят из первой буквы или первой и одной 
-            из следующих букв латинского названия элементов" onclick="highlight('symbol')">Po</div>
-			<div class="number" onclick="highlight('number')"><span data-textAlert="Атомный (порядковый) номер - номер химического элемента в периодической системе элементов. 
-            Равен числу протонов и электронов в атоме и определяет положительный заряд ядра">84</span></div>
-			<div class="Ar" onclick="highlight('Ar')"><span data-textAlert="Ar - относительная атомная масса — значение массы атома, выраженное в атомных единицах массы (а.е.м)">208,98</span></div>
-			<ol class="oxidation" onclick="highlight('oxidation')"><li data-textAlert='Степень окисления - вспомогательная условная величина для записи процессов окисления, восстановления и окислительно-восстановительных реакций (указан самый частый показатель)'>+4</li></ol>
-			<div class="name-ru" onclick="highlight('name-ru')"><span data-textAlert="Название элемента на русском языке">Полоний</span></div>
-			<div class="name-la" onclick="highlight('name-la')"><span data-textAlert="Название элемента на латыни">Polonium</span></div>
-		</div>
-
-		<div class="legend-inf">
-            <div style="font-size: 18px;">
-            	<p><h3><big>Правила:</h3></p>
-            	<ol style="list-style-position: inside;">
-            		<li>Всю информацию о составляющих <b onclick="a()" style="cursor: pointer;">ячейки</b> таблицы можно найти <a href="https://google.com" style="color: black;text-decoration: none;font-weight: 1000;">здесь</a>.</li>
-            		<li>Чтобы подробнее узнать о закономерностях в периодах и группах, наведите на их <b onclick="b()">номера</b>.</li>
-            		<li>Все элементы, расположенные выше жирной линии - <b>неметаллы</b>, ниже - <b>металлы</b>.</li>
-            		<li>Свойства некоторых <b>элементов</b> расписаны более подробно, нажмите на <b>основные свойства</b> в информации о соответствующем элементе.</li>
-            		<li>Чтобы подробнее узнать о проекте, нажмите на <b>ИПСХЭ</b></big>.</li>
-            	</ol>
-            </div>
-		</div>
-	</div>
 
 
 	<div id="app">
+		<div id="IPTCE">ИПСХЭ<span style="font-size: 1vw">v0.2.6b</span></div>
+
+		<div id="legend">
+			<div id="element-legend" :class="legend.cls" :style="legend.st">
+				<div class="symbol"  data-textAlert="Химический символ - сокращённое буквенное обозначение химических элементов, состоят из первой буквы или первой и одной 
+	            из следующих букв латинского названия элементов" onclick="highlight('symbol')">{{ legend.sym }}</div>
+				<div class="number" onclick="highlight('number')"><span data-textAlert="Атомный (порядковый) номер - номер химического элемента в периодической системе элементов. 
+	            Равен числу протонов и электронов в атоме и определяет положительный заряд ядра">{{ legend.num }}</span></div>
+				<div class="Ar" onclick="highlight('Ar')"><span data-textAlert="Ar - относительная атомная масса — значение массы атома, выраженное в атомных единицах массы (а.е.м)">{{ legend.Ar }}</span></div>
+				<ol class="oxidation" onclick="highlight('oxidation')"><li data-textAlert='Степень окисления - вспомогательная условная величина для записи процессов окисления, восстановления и окислительно-восстановительных реакций (указан самый частый показатель)'>+4</li></ol>
+				<div class="name-ru" onclick="highlight('name-ru')"><span data-textAlert="Название элемента на русском языке">{{ legend.ru }}</span></div>
+				<div class="name-la" onclick="highlight('name-la')"><span data-textAlert="Название элемента на латыни">{{ legend.la }}</span></div>
+			</div>
+
+			<div class="legend-inf" v-html="legend.text"></div>
+		</div>
 		<div id="table" style="display: flex; width: 95%;flex-wrap: wrap;" :class="isWideTable ? 'wideTable' : 'shortTable'">
 			<ol class="group">
 				<li class="first"><span v-on:mouseover="createAlert($event.target.getBoundingClientRect(), 'period-info')" v-on:mouseout="deleteAlert()">1</span></li>
@@ -145,14 +135,12 @@
 					<li v-for="n in 7":key="'k'+n" class="number-period" v-on:mouseover="createAlert($event.target.getBoundingClientRect(), 'period-info')" v-on:mouseout="deleteAlert()">{{ n }}</li>
 				</ol>
 				<ol>
-					<li is="item-element" v-for="(el, i) in table":key="'c'+i" :data="el"></li>
+					<li is="item-element" v-for="(el, i) in table":key="'c'+i" :data="el"  v-on:element-click="changeLegend"></li>
 				</ol>
 			</div>	
 		</div>
 		<div class="alert" v-show="alert.isAlert" :style="alert.coords"><component :is="alert.component"></component></div>
-		
 	</div>
-
 
 	<script src="scripts/elements.js"></script>
 	<script src="scripts/script.js"></script>
@@ -167,7 +155,7 @@
 			props: ["data"],
 			template: `
 			<li class="element-storage" :id="data.sym">
-				<div class="element" :class="data.cls" :style="data.st">
+				<div class="element" :class="data.cls" :style="data.st" v-on:click="$emit('element-click', data)">
 					<div class="symbol">{{ data.sym }}</div>
 					<div class="number">{{ data.num }}</div>
 					<div class="Ar">{{ data.Ar }}</div>
@@ -195,6 +183,21 @@
 			el: "#app",
 			data: {
 				isWideTable: true,
+				legend: {
+					sym:"Po", num:"84", Ar:"208,98", oxs:[+4], ru:"Полоний", la:"Polonium",
+					cls:"radioactive p metal ",st: {background: "#ffd737",color: "#000"},
+					text: `
+					<div style="font-size: 18px;">
+						<p><h3><big>Правила:</h3></p>
+						<ol style="list-style-position: inside;">
+							<li>Всю информацию о составляющих <b onclick="a()" style="cursor: pointer;">ячейки</b> таблицы можно найти <a href="https://google.com" style="color: black;text-decoration: none;font-weight: 1000;">здесь</a>.</li>
+							<li>Чтобы подробнее узнать о закономерностях в периодах и группах, наведите на их <b onclick="b()">номера</b>.</li>
+							<li>Все элементы, расположенные выше жирной линии - <b>неметаллы</b>, ниже - <b>металлы</b>.</li>
+							<li>Свойства некоторых <b>элементов</b> расписаны более подробно, нажмите на <b>основные свойства</b> в информации о соответствующем элементе.</li>
+							<li>Чтобы подробнее узнать о проекте, нажмите на <b>ИПСХЭ</b></big>.</li>
+						</ol>
+					</div>`
+				},
 				alert: {
 					isAlert: false,
 					component: "",
@@ -338,6 +341,18 @@
 				},
 				deleteAlert: function() {
 					this.alert.isAlert = false;
+				},
+				changeLegend: function(data) {
+					document.documentElement.scrollIntoView();
+					this.legend.sym = data.sym;
+					this.legend.num = data.num;
+					this.legend.Ar = data.Ar;
+					this.legend.oxs = data.oxs;
+					this.legend.ru = data.ru;
+					this.legend.la = data.la;
+					this.legend.cls = data.cls;
+					this.legend.st = data.st;
+					this.legend.text = elements[data.sym].infoChemistryElement; 
 				}
 			}
 		});
@@ -352,25 +367,6 @@
 		for (let i = 0; i < document.getElementsByClassName("element").length; i++) {
 			document.getElementsByClassName("element")[i].onclick = showItemInformation;
 		}
-
-
-		function showItemInformation(e) {
-			document.documentElement.scrollIntoView(true);
-
-			elementLegend.className = e.currentTarget.className.replace("element", "");
-
-			elementLegend.style.background = e.currentTarget.style.background;
-			elementLegend.querySelector(".symbol").innerHTML = e.currentTarget.querySelector(".symbol").innerHTML;
-			elementLegend.querySelector(".number span").innerHTML = e.currentTarget.querySelector(".number").innerHTML;
-			elementLegend.querySelector(".Ar span").innerHTML = e.currentTarget.querySelector(".Ar").innerHTML;
-			elementLegend.querySelector(".oxidation").innerHTML = e.currentTarget.querySelector(".oxidation").innerHTML.replace("li",
-			"li  data-textAlert='Степень окисления - вспомогательная условная величина для записи процессов окисления, восстановления и окислительно-восстановительных реакций (указан самый частый показатель)'");
-			elementLegend.querySelector(".name-ru span").innerHTML = e.currentTarget.querySelector(".name-ru").innerHTML;
-			elementLegend.querySelector(".name-la span").innerHTML = e.currentTarget.querySelector(".name-la").innerHTML;
-
-			document.querySelector(".legend-inf").innerHTML = elements[e.currentTarget.querySelector(".symbol").innerHTML].infoChemistryElement;
-		}
-
 
 		function change(element) {
 			abcde.classList.toggle("active");
@@ -413,10 +409,7 @@
 		function createModalWindow(data) {
 			if(document.querySelector(".modal-window")) document.querySelector(".modal-window").remove();
 			document.body.insertAdjacentHTML("afterbegin",`
-				<div class="modal-window">		
-					<div class="close-modal-window" onclick="this.parentElement.remove()"><svg enable-background="new 0 0 413.348 413.348" height="10px" viewBox="0 0 413.348 413.348" width="10px" xmlns="http://www.w3.org/2000/svg"><path d="m413.348 24.354-24.354-24.354-182.32 182.32-182.32-182.32-24.354 24.354 182.32 182.32-182.32 182.32 24.354 24.354 182.32-182.32 182.32 182.32 24.354-24.354-182.32-182.32z"/></svg></div>
-					<div class="content-modal-window"><span>${data}</span></div>
-				</div>
+				
 			`);
 			let modalWindow = document.querySelector(".modal-window");
 			modalWindow.style.width = modalWindow.offsetWidth + "px";
