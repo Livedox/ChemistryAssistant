@@ -68,6 +68,8 @@ ol{
 	width: 50%;
 	text-align: right;
 	font-size: 16.5em;
+	opacity: 1;
+	transition: 1s;
 }
 .Ar{
 	font-family: "Arial";
@@ -198,5 +200,29 @@ ol{
 	}
 }
 
+.num-none{
+	.number{
+		opacity: 0;
+	}
 
-
+}
+.Ar-none{
+	.Ar{
+		opacity: 0;
+	}
+}
+.oxs-none{
+	.oxidation{
+		opacity: 0;
+	}
+}
+.ru-none{
+	.name-ru{
+		opacity: 0;
+	}
+}
+.la-none{
+	.name-la{
+		opacity: 0;
+	}
+}
