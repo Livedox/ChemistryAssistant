@@ -149,8 +149,6 @@
 						{{ legend.el.la }}
 					</span>
 				</div>
-			</div>
-
 			<div class="legend-inf" v-html="legend.text"></div>
 		</div>
 		<div id="table" style="display: flex; width: 95%;flex-wrap: wrap;" :class="classTable">
@@ -218,7 +216,6 @@
 				</div>
 			</li>`
 		});
-
 		let app = new Vue({
 			el: "#app",
 			data: {
@@ -410,6 +407,18 @@
 					cls += this.laActive ? "" : "la-none ";				
 					return cls
 				}
+			},
+			computed: {
+				classTable: function() {
+					let cls = this.isWideTable ? "wideTable " : "shortTable ";
+					cls += this.numActive ? "" : "num-none ";
+					cls += this.radActive ? "" : "rad-none ";
+					cls += this.oxsActive ? "" : "oxs-none ";
+					cls += this.ArActive ? "" : "Ar-none ";
+					cls += this.ruActive ? "" : "ru-none ";
+					cls += this.laActive ? "" : "la-none ";				
+					return cls
+				}
 			}
 		});
 
@@ -418,8 +427,6 @@
 		function getRandomInt(min, max) {
 			return Math.floor(Math.random() * (max - min + 1)) + min;
 		}
-
-
 
 /*
 		function change(element) {
