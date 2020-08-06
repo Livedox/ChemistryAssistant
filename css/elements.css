@@ -1,0 +1,215 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+table {
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+
+ol {
+	list-style: none;
+	width: 100%;
+}
+
+#table {
+	width: 98%;
+}
+
+.element-storage {
+	box-sizing: border-box;
+	height: 6vw;
+	display: inline-block;
+	padding: 0;
+	transition: 1s ease-in;
+	margin: -1px 0 0 -1px;
+}
+
+.element {
+	width: 5vw;
+	cursor: pointer;
+	position: relative;
+	height: 100%;
+	background: green;
+	z-index: 4;
+	display: flex;
+	flex-wrap: wrap;
+	padding: 1px;
+	box-sizing: border-box;
+	border: 1px solid #000;
+	transform-style: flat;
+	font-size: 0.05vw;
+	transition: transform 0.2s, border 0.2s, box-shadow 0.2s, width 1s ease-in;
+}
+.element:hover, .element.active {
+	z-index: 5;
+	transform: scale(1.4);
+	border: 1px solid black;
+	box-shadow: 0 0 10px 1px rgba(111, 111, 111, 0.5);
+}
+
+.radioactive .number {
+	background: url("../img/radiation.svg") no-repeat;
+	background-size: 1em 1em;
+	background-position: 100% 80%;
+}
+
+.symbol {
+	font-family: "Times New Roman";
+	width: 50%;
+	font-size: 53em;
+	line-height: 0.8;
+	letter-spacing: -0.04em;
+}
+
+.number {
+	font-family: "Arial";
+	width: 50%;
+	text-align: right;
+	font-size: 16.5em;
+	opacity: 1;
+	transition: 1s;
+}
+
+.Ar {
+	font-family: "Arial";
+	width: 50%;
+	line-height: 2;
+	font-size: 15em;
+	box-sizing: border-box;
+	height: 25%;
+}
+
+.oxidation {
+	width: 47%;
+	list-style: none;
+	text-align: right;
+	margin: 0;
+	padding: 0;
+	line-height: 1;
+	font-size: 14em;
+	height: 20%;
+}
+
+.name-ru, .name-la {
+	font-family: "Arial";
+	min-width: 55%;
+	line-height: 0.8;
+	font-size: 14.6em;
+}
+
+.name-ru {
+	font-size: 13.8em;
+	font-weight: 600;
+}
+
+.symbol.active, .number.active, .Ar.active, .oxidation.active, .name-ru.active, .name-la.active {
+	transform: scale(1.3);
+}
+
+.number, .symbol, .Ar, .oxidation, .name-ru, .name-la {
+	transition: 0.5s transform;
+}
+
+.group {
+	width: 100%;
+	flex: 0 0 auto;
+}
+.group li {
+	position: relative;
+	width: 5vw;
+	display: inline-block;
+	margin-left: -5px;
+	text-align: center;
+	padding-bottom: 2px;
+	transition: 1s ease-in;
+}
+.group .first {
+	margin-left: 2%;
+	padding-left: 3px;
+}
+.group .tp1 {
+	top: 6vw;
+}
+.group .tp3 {
+	top: 18vw;
+}
+
+.period {
+	width: 2%;
+	text-align: right;
+	margin-right: 3px;
+}
+.period li {
+	height: 6vw;
+	line-height: 6vw;
+	margin-top: -1px;
+}
+
+.shortTable .element {
+	width: 9vw;
+}
+.shortTable .f-dark, .shortTable .f-light {
+	width: 5vw;
+}
+.shortTable #H {
+	margin-right: 58.3%;
+}
+.shortTable #He, .shortTable #Ne, .shortTable #Ar, .shortTable #Kr, .shortTable #Xe, .shortTable #Rn, .shortTable #Og {
+	margin-right: 20%;
+}
+.shortTable #Ce {
+	margin-top: 20px;
+}
+.shortTable #Lu {
+	margin-right: 20%;
+}
+.shortTable .group li {
+	width: 9vw;
+}
+.shortTable .group .tp1, .shortTable .group .tp3 {
+	top: 0;
+}
+
+.wideTable #H {
+	margin-right: 80vw;
+}
+.wideTable #He {
+	margin-left: -17px;
+}
+.wideTable #Be, .wideTable #Mg {
+	margin-right: 50vw;
+}
+.wideTable #B, .wideTable #Al {
+	margin-left: -11px;
+}
+.wideTable #Ce {
+	margin-top: 20px;
+}
+.wideTable #Lu {
+	margin-right: 11%;
+}
+.wideTable #Th, .wideTable #Ce {
+	margin-left: 11%;
+}
+
+.num-none .number {
+	opacity: 0;
+}
+
+.Ar-none .Ar {
+	opacity: 0;
+}
+
+.oxs-none .oxidation {
+	opacity: 0;
+}
+
+.ru-none .name-ru {
+	opacity: 0;
+}
+
+.la-none .name-la {
+	opacity: 0;
+}

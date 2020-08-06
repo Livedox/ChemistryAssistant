@@ -1,42 +1,25 @@
-let elem;
-let createAlert = function(e) {
-	let elemDirection = "right";
-	if (e.type === "mouseover" && e.target.hasAttribute("data-textAlert")) {
-		elem = document.createElement("div");
-		elem.className = "alert";
-		elem.innerHTML = e.target.getAttribute("data-textAlert");
-		elem.style.top = e.target.getBoundingClientRect().top -7+ "px";
-		document.body.prepend(elem);
+function toggleAlert(e, text) {
+	if(e.type === "mouseover") {
+		let element = document.createElement("div");
+		let coords = e.target.getBoundingClientRect();
 
-		if (e.target.hasAttribute("data-classStyleAlert")) {
-			elem.classList.add(e.target.getAttribute("data-classStyleAlert"));
-		}
+		element.className = "alert";
+		element.innerHTML = text;
+		element.style.top = coords.top - 7 + "px";
+		document.body.prepend(element);
 
-		elemDirection = "right";
-		if (e.target.hasAttribute("data-directionAlert")) {
-			elemDirection = e.target.getAttribute("data-directionAlert");
-		}
 
-		if (
-			 e.target.getBoundingClientRect().left+
-			 e.target.offsetWidth+
-			 elem.offsetWidth + 2 <
-			 document.documentElement.clientWidth
-			 && elemDirection !== "left"
-		) {
-			elem.classList.add("right");
-			elem.style.left = e.target.getBoundingClientRect().left+e.target.offsetWidth +2+ "px";
+		if (coords.left + coords.width + element.offsetWidth + 2 < document.documentElement.clientWidth) {
+			element.classList.add("right");
+			element.style.left = coords.left + coords.width + 2 + "px";
 		} else {
-			elem.classList.add("left");
-			elem.style.right = document.documentElement.clientWidth-
-				e.target.getBoundingClientRect().right + e.target.offsetWidth +2+ "px";
-		}
-
+			element.classList.add("left");
+			element.style.right = document.documentElement.clientWidth - coords.right + coords.width + 2 + "px";
+		}		
+	} else if(e.type === "mouseout") {
+		document.querySelector(".alert").remove();
+		
 	}
-
-
-	if (e.type === "mouseout") {
-		if (elem) elem.remove();
-	}
+	
 
 }

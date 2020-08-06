@@ -3,26 +3,54 @@
 
 <head>
 	<meta charset="utf-8">
+	<meta content="width=device-width" name="viewport">
 	<title>Интерактивная периодическая система элементов</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<link rel="stylesheet" type="text/css" href="css/alert.css">
-	<link rel="stylesheet" type="text/css" href="css/chemicalElement.css">
+	<link rel="stylesheet" type="text/css" href="css/alert.css">	
 	<link rel="stylesheet" type="text/css" href="css/header.css">
 	<link rel="stylesheet" type="text/css" href="css/tableMendeleev.css">
 	<link rel="stylesheet" type="text/css" href="css/legend.css">
 	<link rel="stylesheet" type="text/css" href="css/picker.css">
 	<link rel="stylesheet" type="text/css" href="css/modalWindow.css">
 	<link rel="stylesheet" type="text/css" href="css/calculator.css">
+	<link rel="stylesheet" type="text/css" href="css/settings.css">
+	<link rel="stylesheet" type="text/css" href="css/elements.css">
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<style type="text/css">
+		.sticker{
+			cursor: auto;
+		}
+	</style>
 </head>
 
 <body>
-	<div id="top-head">
+	<script type="text/javascript">
+		async function getElementData(symbol) {
+			let response = await fetch('php/server.php', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json;charset=utf-8'
+				},
+				body: JSON.stringify({ symbol: symbol })
+			});
+
+			let result = await response.json();
+			return result;
+		}
+	</script>
+	<div id="app">
 		<header>
-			<div id="header-toggle" onclick="this.parentElement.classList.toggle('active')"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 260" xml:space="preserve"><rect x="0" y="213.333" width="1000" height="42.667"/><rect x="0" y="106.667" width="1000" height="42.667"/><rect x="0" y="0" width="1000" height="42.667"/></svg></div>
+			<div id="header-toggle" onclick="this.parentElement.classList.toggle('active')">
+				<svg x="0px" y="0px" viewBox="0 0 1000 260" xml:space="preserve">
+					<rect x="0" y="213.333" width="1000" height="42.667"/>
+					<rect x="0" y="106.667" width="1000" height="42.667"/>
+					<rect x="0" y="0" width="1000" height="42.667"/>
+				</svg>
+			</div>
+
+
 			<div id="menu">
-				<svg version="1.1" id="button-menu" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-		  viewBox="0 0 124 124" xml:space="preserve">
+				<svg version="1.1" id="button-menu" x="0px" y="0px" viewBox="0 0 124 124" xml:space="preserve">
 					<g>
 						<path d="M112,6H12C5.4,6,0,11.4,0,18s5.4,12,12,12h100c6.6,0,12-5.4,12-12S118.6,6,112,6z"/>
 						<path d="M112,50H12C5.4,50,0,55.4,0,62c0,6.6,5.4,12,12,12h100c6.6,0,12-5.4,12-12C124,55.4,118.6,50,112,50z"/>
@@ -39,81 +67,95 @@
 			</div>
 			<a class="name-sait" href="#">ChemistryAssistant.ru</a>
 			<p id="open-calculator" title="Открыть на этой странице" onclick="createCalculator()">Калькулятор</p>
-			<div id="button-color-picker" class="s" onclick="toggleColorPicker()">s p d f</div>
-			<div><svg height="512pt" viewBox="0 0 512 512" width="512pt" style="height: 40px;width: 40px"><path d="m499.953125 197.703125-39.351563-8.554687c-3.421874-10.476563-7.660156-20.695313-12.664062-30.539063l21.785156-33.886719c3.890625-6.054687 3.035156-14.003906-2.050781-19.089844l-61.304687-61.304687c-5.085938-5.085937-13.035157-5.941406-19.089844-2.050781l-33.886719 21.785156c-9.84375-5.003906-20.0625-9.242188-30.539063-12.664062l-8.554687-39.351563c-1.527344-7.03125-7.753906-12.046875-14.949219-12.046875h-86.695312c-7.195313 0-13.421875 5.015625-14.949219 12.046875l-8.554687 39.351563c-10.476563 3.421874-20.695313 7.660156-30.539063 12.664062l-33.886719-21.785156c-6.054687-3.890625-14.003906-3.035156-19.089844 2.050781l-61.304687 61.304687c-5.085937 5.085938-5.941406 13.035157-2.050781 19.089844l21.785156 33.886719c-5.003906 9.84375-9.242188 20.0625-12.664062 30.539063l-39.351563 8.554687c-7.03125 1.53125-12.046875 7.753906-12.046875 14.949219v86.695312c0 7.195313 5.015625 13.417969 12.046875 14.949219l39.351563 8.554687c3.421874 10.476563 7.660156 20.695313 12.664062 30.539063l-21.785156 33.886719c-3.890625 6.054687-3.035156 14.003906 2.050781 19.089844l61.304687 61.304687c5.085938 5.085937 13.035157 5.941406 19.089844 2.050781l33.886719-21.785156c9.84375 5.003906 20.0625 9.242188 30.539063 12.664062l8.554687 39.351563c1.527344 7.03125 7.753906 12.046875 14.949219 12.046875h86.695312c7.195313 0 13.421875-5.015625 14.949219-12.046875l8.554687-39.351563c10.476563-3.421874 20.695313-7.660156 30.539063-12.664062l33.886719 21.785156c6.054687 3.890625 14.003906 3.039063 19.089844-2.050781l61.304687-61.304687c5.085937-5.085938 5.941406-13.035157 2.050781-19.089844l-21.785156-33.886719c5.003906-9.84375 9.242188-20.0625 12.664062-30.539063l39.351563-8.554687c7.03125-1.53125 12.046875-7.753906 12.046875-14.949219v-86.695312c0-7.195313-5.015625-13.417969-12.046875-14.949219zm-152.160156 58.296875c0 50.613281-41.179688 91.792969-91.792969 91.792969s-91.792969-41.179688-91.792969-91.792969 41.179688-91.792969 91.792969-91.792969 91.792969 41.179688 91.792969 91.792969zm0 0"/></svg></div>
+			<div v-on:click="settings.isActive = !settings.isActive" class="toggle-settings">
+				<svg height="512pt" viewBox="0 0 512 512" width="512pt">
+					<path d="m499.953125 197.703125-39.351563-8.554687c-3.421874-10.476563-7.660156-20.695313-12.664062-30.539063l21.785156-33.886719c3.890625-6.054687 3.035156-14.003906-2.050781-19.089844l-61.304687-61.304687c-5.085938-5.085937-13.035157-5.941406-19.089844-2.050781l-33.886719 21.785156c-9.84375-5.003906-20.0625-9.242188-30.539063-12.664062l-8.554687-39.351563c-1.527344-7.03125-7.753906-12.046875-14.949219-12.046875h-86.695312c-7.195313 0-13.421875 5.015625-14.949219 12.046875l-8.554687 39.351563c-10.476563 3.421874-20.695313 7.660156-30.539063 12.664062l-33.886719-21.785156c-6.054687-3.890625-14.003906-3.035156-19.089844 2.050781l-61.304687 61.304687c-5.085937 5.085938-5.941406 13.035157-2.050781 19.089844l21.785156 33.886719c-5.003906 9.84375-9.242188 20.0625-12.664062 30.539063l-39.351563 8.554687c-7.03125 1.53125-12.046875 7.753906-12.046875 14.949219v86.695312c0 7.195313 5.015625 13.417969 12.046875 14.949219l39.351563 8.554687c3.421874 10.476563 7.660156 20.695313 12.664062 30.539063l-21.785156 33.886719c-3.890625 6.054687-3.035156 14.003906 2.050781 19.089844l61.304687 61.304687c5.085938 5.085937 13.035157 5.941406 19.089844 2.050781l33.886719-21.785156c9.84375 5.003906 20.0625 9.242188 30.539063 12.664062l8.554687 39.351563c1.527344 7.03125 7.753906 12.046875 14.949219 12.046875h86.695312c7.195313 0 13.421875-5.015625 14.949219-12.046875l8.554687-39.351563c10.476563-3.421874 20.695313-7.660156 30.539063-12.664062l33.886719 21.785156c6.054687 3.890625 14.003906 3.039063 19.089844-2.050781l61.304687-61.304687c5.085937-5.085938 5.941406-13.035157 2.050781-19.089844l-21.785156-33.886719c5.003906-9.84375 9.242188-20.0625 12.664062-30.539063l39.351563-8.554687c7.03125-1.53125 12.046875-7.753906 12.046875-14.949219v-86.695312c0-7.195313-5.015625-13.417969-12.046875-14.949219zm-152.160156 58.296875c0 50.613281-41.179688 91.792969-91.792969 91.792969s-91.792969-41.179688-91.792969-91.792969 41.179688-91.792969 91.792969-91.792969 91.792969 41.179688 91.792969 91.792969zm0 0"/>
+				</svg>
+			</div>
 		</header>
 
-		<div id="color-selection">
-			<div class="picker" id="primary_block">
-
-				<div id="block_picker">
-
-					<img src="https://lh3.googleusercontent.com/-8Dm4nhAOssQ/T_IqwyIFXmI/AAAAAAAAACA/4QKmS7s_otE/s256/bgGradient.png" class="bk_img"  alt=""><div class="circle" id="circle"></div>
-
-				</div>
-
-				<div id="line">
-					<div id="arrows">
-						<div class="left_arrow"></div>
-						<div class="right_arrow"></div>
-					</div>
-				</div>
-
+		<div id="settings" v-show="settings.isActive">
+			<div class="color-picker">
+				
 			</div>
-
-			<div id="colors">
-				<ol>
-					<li class="s active" style="background: #fe83b5;" onclick="change(this)">
-						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="9px" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 612 497.4" style="enable-background:new 0 0 612 497.4;" xml:space="preserve"><style type="text/css">.st0{fill:#FFFFFF;}</style><path class="st0" d="M561.5,51.5c15.3,15.5,15.3,40.8,0,56.3c0,0-326.3,332.8-331.5,338c-15.3,15.5-40,15.5-55.3,0c0,0-125.1-127.6-125.5-128c-14.1-15.6-13.7-40,1.2-55.1c15.2-15.6,40-15.6,55.2,0l96.7,98.6L506.3,51.5C521.5,36,546.2,36,561.5,51.5z"/><path d="M589.1,23.3c30.5,31.1,30.5,81.6,0,112.7l-331.4,338c-30.5,31.1-80,31.1-110.5,0L22.9,347.3c-30.5-31.1-30.5-81.6,0-112.7c30.5-31.1,80-31.1,110.5,0l69.1,70.4L478.6,23.3C509.1-7.8,558.6-7.8,589.1,23.3z M561.5,107.9c15.3-15.6,15.3-40.8,0-56.3c-15.3-15.6-40-15.6-55.3,0L202.4,361.4l-96.7-98.6c-15.3-15.6-40-15.6-55.2,0c-14.9,15.2-15.3,39.5-1.2,55.1c0.4,0.4,125.5,128,125.5,128c15.3,15.5,40,15.5,55.3,0C235.2,440.7,561.5,107.9,561.5,107.9z"/></svg>
-					</li>
-
-					<li class="d" style="background: #5ca7e0;" onclick="change(this)">
-						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="9px" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 612 497.4" style="enable-background:new 0 0 612 497.4;" xml:space="preserve"><style type="text/css">.st0{fill:#FFFFFF;}</style><path class="st0" d="M561.5,51.5c15.3,15.5,15.3,40.8,0,56.3c0,0-326.3,332.8-331.5,338c-15.3,15.5-40,15.5-55.3,0c0,0-125.1-127.6-125.5-128c-14.1-15.6-13.7-40,1.2-55.1c15.2-15.6,40-15.6,55.2,0l96.7,98.6L506.3,51.5C521.5,36,546.2,36,561.5,51.5z"/><path d="M589.1,23.3c30.5,31.1,30.5,81.6,0,112.7l-331.4,338c-30.5,31.1-80,31.1-110.5,0L22.9,347.3c-30.5-31.1-30.5-81.6,0-112.7c30.5-31.1,80-31.1,110.5,0l69.1,70.4L478.6,23.3C509.1-7.8,558.6-7.8,589.1,23.3z M561.5,107.9c15.3-15.6,15.3-40.8,0-56.3c-15.3-15.6-40-15.6-55.3,0L202.4,361.4l-96.7-98.6c-15.3-15.6-40-15.6-55.2,0c-14.9,15.2-15.3,39.5-1.2,55.1c0.4,0.4,125.5,128,125.5,128c15.3,15.5,40,15.5,55.3,0C235.2,440.7,561.5,107.9,561.5,107.9z"/></svg>
-					</li>
-
-					<li class="p" style="background: #ffd737;" onclick="change(this)">
-						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="9px" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 612 497.4" style="enable-background:new 0 0 612 497.4;" xml:space="preserve"><style type="text/css">.st0{fill:#FFFFFF;}</style><path class="st0" d="M561.5,51.5c15.3,15.5,15.3,40.8,0,56.3c0,0-326.3,332.8-331.5,338c-15.3,15.5-40,15.5-55.3,0c0,0-125.1-127.6-125.5-128c-14.1-15.6-13.7-40,1.2-55.1c15.2-15.6,40-15.6,55.2,0l96.7,98.6L506.3,51.5C521.5,36,546.2,36,561.5,51.5z"/><path d="M589.1,23.3c30.5,31.1,30.5,81.6,0,112.7l-331.4,338c-30.5,31.1-80,31.1-110.5,0L22.9,347.3c-30.5-31.1-30.5-81.6,0-112.7c30.5-31.1,80-31.1,110.5,0l69.1,70.4L478.6,23.3C509.1-7.8,558.6-7.8,589.1,23.3z M561.5,107.9c15.3-15.6,15.3-40.8,0-56.3c-15.3-15.6-40-15.6-55.3,0L202.4,361.4l-96.7-98.6c-15.3-15.6-40-15.6-55.2,0c-14.9,15.2-15.3,39.5-1.2,55.1c0.4,0.4,125.5,128,125.5,128c15.3,15.5,40,15.5,55.3,0C235.2,440.7,561.5,107.9,561.5,107.9z"/></svg>
-					</li>
-
-					<li style="overflow: hidden;">
-
-						<div class="f-dark" style="background: #78bd62;" onclick="change(this)">
-							<svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="9px" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 612 497.4" style="enable-background:new 0 0 612 497.4;" xml:space="preserve"><style type="text/css">.st0{fill:#FFFFFF;}</style><path class="st0" d="M561.5,51.5c15.3,15.5,15.3,40.8,0,56.3c0,0-326.3,332.8-331.5,338c-15.3,15.5-40,15.5-55.3,0c0,0-125.1-127.6-125.5-128c-14.1-15.6-13.7-40,1.2-55.1c15.2-15.6,40-15.6,55.2,0l96.7,98.6L506.3,51.5C521.5,36,546.2,36,561.5,51.5z"/><path d="M589.1,23.3c30.5,31.1,30.5,81.6,0,112.7l-331.4,338c-30.5,31.1-80,31.1-110.5,0L22.9,347.3c-30.5-31.1-30.5-81.6,0-112.7c30.5-31.1,80-31.1,110.5,0l69.1,70.4L478.6,23.3C509.1-7.8,558.6-7.8,589.1,23.3z M561.5,107.9c15.3-15.6,15.3-40.8,0-56.3c-15.3-15.6-40-15.6-55.3,0L202.4,361.4l-96.7-98.6c-15.3-15.6-40-15.6-55.2,0c-14.9,15.2-15.3,39.5-1.2,55.1c0.4,0.4,125.5,128,125.5,128c15.3,15.5,40,15.5,55.3,0C235.2,440.7,561.5,107.9,561.5,107.9z"/></svg>
-						</div>
-
-						<div class="f-light" style="background: #90cd8e;" onclick="change(this)">
-							<svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="9px" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 612 497.4" style="enable-background:new 0 0 612 497.4;" xml:space="preserve"><style type="text/css">.st0{fill:#FFFFFF;}</style><path class="st0" d="M561.5,51.5c15.3,15.5,15.3,40.8,0,56.3c0,0-326.3,332.8-331.5,338c-15.3,15.5-40,15.5-55.3,0c0,0-125.1-127.6-125.5-128c-14.1-15.6-13.7-40,1.2-55.1c15.2-15.6,40-15.6,55.2,0l96.7,98.6L506.3,51.5C521.5,36,546.2,36,561.5,51.5z"/><path d="M589.1,23.3c30.5,31.1,30.5,81.6,0,112.7l-331.4,338c-30.5,31.1-80,31.1-110.5,0L22.9,347.3c-30.5-31.1-30.5-81.6,0-112.7c30.5-31.1,80-31.1,110.5,0l69.1,70.4L478.6,23.3C509.1-7.8,558.6-7.8,589.1,23.3z M561.5,107.9c15.3-15.6,15.3-40.8,0-56.3c-15.3-15.6-40-15.6-55.3,0L202.4,361.4l-96.7-98.6c-15.3-15.6-40-15.6-55.2,0c-14.9,15.2-15.3,39.5-1.2,55.1c0.4,0.4,125.5,128,125.5,128c15.3,15.5,40,15.5,55.3,0C235.2,440.7,561.5,107.9,561.5,107.9z"/></svg>
-						</div>
-
-					</li>
-				</ol>
+			<div class="settings-checkboxs">
+				<label class="checkbox bounce">
+					<input type="checkbox" checked v-on:click="numActive = !numActive">
+					<svg viewBox="0 0 21 21"><polyline points="5 10.75 8.5 14.25 16 6"></polyline></svg>
+					Порядковый номер
+				</label>
+				<label class="checkbox bounce">
+					<input type="checkbox" checked v-on:click="radActive = !radActive">
+					<svg viewBox="0 0 21 21"><polyline points="5 10.75 8.5 14.25 16 6"></polyline></svg>
+					Радиация
+				</label>
+				<label class="checkbox bounce">
+					<input type="checkbox" checked v-on:click="ArActive = !ArActive">
+					<svg viewBox="0 0 21 21"><polyline points="5 10.75 8.5 14.25 16 6"></polyline></svg>
+					Относительная атомная масса
+				</label>
+				<label class="checkbox bounce">
+					<input type="checkbox" checked v-on:click="oxsActive = !oxsActive">
+					<svg viewBox="0 0 21 21"><polyline points="5 10.75 8.5 14.25 16 6"></polyline></svg>
+					Степени окисления
+				</label>
+				<label class="checkbox bounce">
+					<input type="checkbox" checked v-on:click="ruActive = !ruActive">
+					<svg viewBox="0 0 21 21"><polyline points="5 10.75 8.5 14.25 16 6"></polyline></svg>
+					Название на русском
+				</label>
+				<label class="checkbox bounce">
+					<input type="checkbox" checked v-on:click="laActive = !laActive">
+					<svg viewBox="0 0 21 21"><polyline points="5 10.75 8.5 14.25 16 6"></polyline></svg>
+					Название на латыни
+				</label>
 			</div>
-			<div id="colors-by-default" onclick="changeDefaultColors()">Восстановить по умолчанию</div>
 		</div>
-	</div>
-
-
-
-	<div id="app">
+		
 		<div id="IPTCE">ИПСХЭ<span style="font-size: 1vw">v0.2.6b</span></div>
 
-		<div id="legend">
-			<div id="element-legend" :class="legend.cls" :style="legend.st">
-				<div class="symbol"  data-textAlert="Химический символ - сокращённое буквенное обозначение химических элементов, состоят из первой буквы или первой и одной 
-	            из следующих букв латинского названия элементов" onclick="highlight('symbol')">{{ legend.sym }}</div>
-				<div class="number" onclick="highlight('number')"><span data-textAlert="Атомный (порядковый) номер - номер химического элемента в периодической системе элементов. 
-	            Равен числу протонов и электронов в атоме и определяет положительный заряд ядра">{{ legend.num }}</span></div>
-				<div class="Ar" onclick="highlight('Ar')"><span data-textAlert="Ar - относительная атомная масса — значение массы атома, выраженное в атомных единицах массы (а.е.м)">{{ legend.Ar }}</span></div>
-				<ol class="oxidation" onclick="highlight('oxidation')"><li data-textAlert='Степень окисления - вспомогательная условная величина для записи процессов окисления, восстановления и окислительно-восстановительных реакций (указан самый частый показатель)'>+4</li></ol>
-				<div class="name-ru" onclick="highlight('name-ru')"><span data-textAlert="Название элемента на русском языке">{{ legend.ru }}</span></div>
-				<div class="name-la" onclick="highlight('name-la')"><span data-textAlert="Название элемента на латыни">{{ legend.la }}</span></div>
+		<div id="legend" :class="classTable">
+			<div id="element-legend" :class="legend.el.cls" :style="legend.el.st">
+				<div class="symbol" 
+				data-textAlert="Химический символ - сокращённое буквенное обозначение химических элементов, состоят из первой буквы или первой и одной 
+	            из следующих букв латинского названия элементов" onclick="highlight('symbol')">
+	        		{{ legend.el.sym }}
+	        	</div>
+				<div class="number" onclick="highlight('number')">
+					<span data-textAlert="Атомный (порядковый) номер - номер химического элемента в периодической системе элементов. 
+	            	Равен числу протонов и электронов в атоме и определяет положительный заряд ядра">
+	            		{{ legend.el.num }}
+	            	</span>
+	            </div>
+				<div class="Ar" onclick="highlight('Ar')">
+					<span data-textAlert="Ar - относительная атомная масса — значение массы атома, выраженное в атомных единицах массы (а.е.м)">
+						{{ legend.el.Ar }}
+					</span>
+				</div>
+				<ol class="oxidation" onclick="highlight('oxidation')">
+					<li data-textAlert='Степень окисления - вспомогательная условная величина для записи процессов окисления,
+					 восстановления и окислительно-восстановительных реакций (указан самый частый показатель)'
+					  v-for="(ox, i) in legend.el.oxs":key="'m'+i">
+						{{ ox }}
+					</li>
+				</ol>
+				<div class="name-ru" onclick="highlight('name-ru')">
+					<span data-textAlert="Название элемента на русском языке">
+						{{ legend.el.ru }}
+					</span>
+				</div>
+				<div class="name-la" onclick="highlight('name-la')">
+					<span data-textAlert="Название элемента на латыни">
+						{{ legend.el.la }}
+					</span>
+				</div>
 			</div>
 
 			<div class="legend-inf" v-html="legend.text"></div>
 		</div>
-		<div id="table" style="display: flex; width: 95%;flex-wrap: wrap;" :class="isWideTable ? 'wideTable' : 'shortTable'">
+		<div id="table" style="display: flex; width: 95%;flex-wrap: wrap;" :class="classTable">
 			<ol class="group">
-				<li class="first"><span v-on:mouseover="createAlert($event.target.getBoundingClientRect(), 'period-info')" v-on:mouseout="deleteAlert()">1</span></li>
+				<li class="first"><span v-on:mouseover="toggleAlert($event, 'period-info')" v-on:mouseout="toggleAlert($event)">1</span></li>
 				<li class="tp1"><span>2</span></li>
 				<li class="tp3"><span>3</span></li>
 				<li class="tp3"><span>4</span></li>
@@ -130,11 +172,11 @@
 				<li class="tp1" v-show="isWideTable"><span>15</span></li>
 				<li class="tp1" v-show="isWideTable"><span>16</span></li>
 				<li class="tp1" v-show="isWideTable"><span>17</span></li>
-				<li v-show="isWideTable"><span v-on:mouseover="createAlert($event.target.getBoundingClientRect(), 'period-info')" v-on:mouseout="deleteAlert()">18</span></li>
+				<li v-show="isWideTable"><span v-on:mouseover="toggleAlert($event, 'period-info')" v-on:mouseout="toggleAlert($event)">18</span></li>
 			</ol>
 			<div style="display: flex; width: 100%;">
 				<ol class="period">
-					<li v-for="n in 7":key="'k'+n" class="number-period" v-on:mouseover="createAlert($event.target.getBoundingClientRect(), 'period-info')" v-on:mouseout="deleteAlert()">{{ n }}</li>
+					<li v-for="n in 7":key="'k'+n" class="number-period" v-on:mouseover="toggleAlert($event, '<div>В периодах справа налево:<br><strong>металлические и восстановительные</strong> свойства <strong>ослабевают</strong><br><strong>неметаллические и окислительные</strong> свойства <strong>усиливаются</strong><br><strong>электроотрицательность увеличивается</strong><br><strong>радиус</strong> атомов <strong>уменьшается</strong></div>')" v-on:mouseout="toggleAlert($event)">{{ n }}</li>
 				</ol>
 				<ol>
 					<li is="item-element" v-for="(el, i) in table":key="'c'+i" :data="el"  v-on:element-click="changeLegend"></li>
@@ -142,19 +184,22 @@
 			</div>	
 		</div>
 
-		<div class="alert" v-show="alert.isAlert" :style="alert.coords"><component :is="alert.component"></component></div>
-
 		<div class="modal-window" v-on:mousedown="mousedownModal" v-show="modal.isActive">
-			<div class="close-modal-window" v-on:click="modal.isActive = false"><svg enable-background="new 0 0 413.348 413.348" height="10px" viewBox="0 0 413.348 413.348" width="10px" xmlns="http://www.w3.org/2000/svg"><path d="m413.348 24.354-24.354-24.354-182.32 182.32-182.32-182.32-24.354 24.354 182.32 182.32-182.32 182.32 24.354 24.354 182.32-182.32 182.32 182.32 24.354-24.354-182.32-182.32z"/></svg></div>
+			<div class="close-modal-window" v-on:click="modal.isActive = false">
+				<svg enable-background="new 0 0 413.348 413.348" height="10px" viewBox="0 0 413.348 413.348" width="10px">
+					<path d="m413.348 24.354-24.354-24.354-182.32 182.32-182.32-182.32-24.354
+					 24.354 182.32 182.32-182.32 182.32 24.354 24.354 182.32-182.32 182.32 182.32 24.354-24.354-182.32-182.32z"/>
+				</svg>
+			</div>
 			<div class="content-modal-window"><div v-html="modal.text"></div></div>
 		</div>
 	</div>
-
+	
 	<script src="scripts/elements.js"></script>
-	<script src="scripts/Lib.js"></script>
-	<script src="scripts/picker.js"></script>
+	<script src="scripts/alert.js"></script>
 	<script src="scripts/calculator.js"></script>
 	<script src="scripts/data.js"></script>
+	<script src="scripts/popupWindow.js"></script>
 	<script src="vue/components.js"></script>
 	<script>
 		Vue.component("item-element", {
@@ -174,31 +219,28 @@
 			</li>`
 		});
 
-		Vue.component("period-info", {
-			template: `
-			<div>
-				В периодах справа налево:<br>
-				<strong>металлические и восстановительные</strong> свойства <strong>ослабевают</strong><br>
-				<strong>неметаллические и окислительные</strong> свойства <strong>усиливаются</strong><br>
-				<strong>электроотрицательность увеличивается</strong><br>
-				<strong>радиус</strong> атомов <strong>уменьшается</strong>
-			</div>`
-		});
-		let header = new Vue({
-			el: "#top-head",
-			data: {
-				settings: {
-					isActive: false,
-				}
-			}
-		});
 		let app = new Vue({
 			el: "#app",
 			data: {
 				isWideTable: true,
+				isActive: false,
+				numActive: true,
+				ArActive: true,
+				oxsActive: true,
+				ruActive: true,
+				laActive: true,
+				radActive: true,
 				legend: {
-					sym:"Po", num:"84", Ar:"208,98", oxs:[+4], ru:"Полоний", la:"Polonium",
-					cls:"radioactive p metal ",st: {background: "#ffd737",color: "#000"},
+					el: {
+						sym:"Po",
+						num:"84",
+						Ar:"208,98",
+						oxs:["+4"],
+						ru:"Полоний",
+						la:"Polonium",
+						cls:"radioactive p metal ",
+						st: {background: "#ffd737",color: "#000"},
+					},
 					text: `
 					<div style="font-size: 18px;">
 						<p><h3><big>Правила:</h3></p>
@@ -349,78 +391,37 @@
 				]
 			},
 			methods: {
-				createAlert: function(coords, component) {
-					this.alert.component = component;
-					this.alert.isAlert = true;
-					let windowWidth = document.documentElement.clientWidth;
-					let width = 450;
-					let left = coords.right + width < windowWidth ?  coords.right + "px" : coords.left - width + "px";
-					this.alert.coords = {
-						top: coords.top + "px",
-						left: left
-					}
-				},
-				deleteAlert: function() {
-					this.alert.isAlert = false;
-				},
+				toggleAlert: toggleAlert,
 				changeLegend: function(data) {
 					document.documentElement.scrollIntoView();
-					this.legend.sym = data.sym;
-					this.legend.num = data.num;
-					this.legend.Ar = data.Ar;
-					this.legend.oxs = data.oxs;
-					this.legend.ru = data.ru;
-					this.legend.la = data.la;
-					this.legend.cls = data.cls;
-					this.legend.st = data.st;
-					this.legend.text = elements[data.sym].infoChemistryElement; 
+					this.legend.el = data;
+					getElementData(data.sym).then((result) => {this.legend.text = result.info});
 				},
-				mousedownModal: function(e) {
-					let modal = e.currentTarget;
-					let shiftX = e.clientX - modal.getBoundingClientRect().left;
-					let shiftY = e.clientY - modal.getBoundingClientRect().top;
-
-					moveAt(e.pageX, e.pageY);
-
-					function moveAt(pageX, pageY) {
-						if(pageX - shiftX < 0) {
-							modal.style.left = "0px"}
-						else if (pageX - shiftX + modal.offsetWidth + 30 > document.documentElement.clientWidth) {
-							modal.style.left = document.documentElement.clientWidth - modal.offsetWidth + "px"}
-						else {
-							modal.style.left = pageX - shiftX + "px"}
-
-						if(pageY - shiftY < 0) {
-							modal.style.top = "0px"}
-						else if(pageY - shiftY + modal.offsetHeight > document.documentElement.offsetHeight) {
-							modal.style.top = document.documentElement.offsetHeight - modal.offsetHeight + "px"}
-						else {
-							modal.style.top = pageY - shiftY + "px"}
-						
-					}
-
-					function onMouseMove(e) {
-						moveAt(e.pageX, e.pageY);
-					}
-
-					document.addEventListener('mousemove', onMouseMove);
-
-					modal.onmouseup = function() {
-						document.removeEventListener('mousemove', onMouseMove);
-						modal.onmouseup = null;
-					}
-
+				mousedownModal: mousedownModal,
+			},
+			computed: {
+				classTable: function() {
+					let cls = this.isWideTable ? "wideTable " : "shortTable ";
+					cls += this.numActive ? "" : "num-none ";
+					cls += this.radActive ? "" : "rad-none ";
+					cls += this.oxsActive ? "" : "oxs-none ";
+					cls += this.ArActive ? "" : "Ar-none ";
+					cls += this.ruActive ? "" : "ru-none ";
+					cls += this.laActive ? "" : "la-none ";				
+					return cls
 				}
 			}
 		});
+
+		
+	
 		function getRandomInt(min, max) {
 			return Math.floor(Math.random() * (max - min + 1)) + min;
 		}
 
-		picker.init();
-		document.getElementById("tableMendeleev").onmouseover =
-		 document.getElementById("tableMendeleev").onmouseout = createAlert;
 
+
+/*
 		function change(element) {
 			abcde.classList.toggle("active");
 			abcde = element;
@@ -499,7 +500,7 @@
 			}, 500);
 		}
 
-
+*/
 	</script>
 </body>
 
