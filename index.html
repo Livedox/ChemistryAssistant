@@ -118,33 +118,33 @@
 			<div id="element-legend" :class="legend.el.cls" :style="legend.el.st">
 				<div class="symbol" 
 				data-textAlert="Химический символ - сокращённое буквенное обозначение химических элементов, состоят из первой буквы или первой и одной 
-	            из следующих букв латинского названия элементов" onclick="highlight('symbol')">
+	            из следующих букв латинского названия элементов">
 	        		{{ legend.el.sym }}
 	        	</div>
-				<div class="number" onclick="highlight('number')">
+				<div class="number">
 					<span data-textAlert="Атомный (порядковый) номер - номер химического элемента в периодической системе элементов. 
 	            	Равен числу протонов и электронов в атоме и определяет положительный заряд ядра">
 	            		{{ legend.el.num }}
 	            	</span>
 	            </div>
-				<div class="Ar" onclick="highlight('Ar')">
+				<div class="Ar">
 					<span data-textAlert="Ar - относительная атомная масса — значение массы атома, выраженное в атомных единицах массы (а.е.м)">
 						{{ legend.el.Ar }}
 					</span>
 				</div>
-				<ol class="oxidation" onclick="highlight('oxidation')">
+				<ol class="oxidation" on>
 					<li data-textAlert='Степень окисления - вспомогательная условная величина для записи процессов окисления,
 					 восстановления и окислительно-восстановительных реакций (указан самый частый показатель)'
 					  v-for="(ox, i) in legend.el.oxs":key="'m'+i">
 						{{ ox }}
 					</li>
 				</ol>
-				<div class="name-ru" onclick="highlight('name-ru')">
+				<div class="name-ru" >
 					<span data-textAlert="Название элемента на русском языке">
 						{{ legend.el.ru }}
 					</span>
 				</div>
-				<div class="name-la" onclick="highlight('name-la')">
+				<div class="name-la" >
 					<span data-textAlert="Название элемента на латыни">
 						{{ legend.el.la }}
 					</span>
@@ -172,26 +172,35 @@
 				<li class="tp1" v-show="isWideTable"><span>15</span></li>
 				<li class="tp1" v-show="isWideTable"><span>16</span></li>
 				<li class="tp1" v-show="isWideTable"><span>17</span></li>
-				<li v-show="isWideTable"><span v-on:mouseover="toggleAlert($event, 'period-info')" v-on:mouseout="toggleAlert($event)">18</span></li>
+				<li v-show="isWideTable">
+					<span v-on:mouseover="toggleAlert($event, `В группах с увеличением заряда ядра (сверху вниз):<br>
+						<strong>радиус</strong> атомов <strong>увеличивается</strong><br>
+						<strong>электроотрицательность уменьшается</strong><br>
+						<strong>металлические</strong> свойства <strong>усиливаются</strong><br>
+						<strong>неметаллические</strong> свойства <strong>ослабевают</strong><br>
+						<strong>восстановительные</strong> свойства <strong>усиливаются</strong><br>
+						<strong>окислительные</strong> свойства <strong>ослабевают</strong>`)" v-on:mouseout="toggleAlert($event)">
+					18</span>
+				</li>
 			</ol>
 			<div style="display: flex; width: 100%;">
 				<ol class="period">
-					<li v-for="n in 7":key="'k'+n" class="number-period" v-on:mouseover="toggleAlert($event, '<div>В периодах справа налево:<br><strong>металлические и восстановительные</strong> свойства <strong>ослабевают</strong><br><strong>неметаллические и окислительные</strong> свойства <strong>усиливаются</strong><br><strong>электроотрицательность увеличивается</strong><br><strong>радиус</strong> атомов <strong>уменьшается</strong></div>')" v-on:mouseout="toggleAlert($event)">{{ n }}</li>
+					<li v-for="n in 7":key="'k'+n" class="number-period"
+						v-on:mouseover="toggleAlert($event, `
+							<div>
+								В периодах справа налево:<br>
+								<strong>металлические и восстановительные</strong> свойства <strong>ослабевают</strong><br>
+								<strong>неметаллические и окислительные</strong> свойства <strong>усиливаются</strong><br>
+								<strong>электроотрицательность увеличивается</strong><br>
+								<strong>радиус</strong> атомов <strong>уменьшается</strong>
+							</div>`)"
+						v-on:mouseout="toggleAlert($event)">{{ n }}
+					</li>
 				</ol>
 				<ol>
 					<li is="item-element" v-for="(el, i) in table":key="'c'+i" :data="el"  v-on:element-click="changeLegend"></li>
 				</ol>
 			</div>	
-		</div>
-
-		<div class="modal-window" v-on:mousedown="mousedownModal" v-show="modal.isActive">
-			<div class="close-modal-window" v-on:click="modal.isActive = false">
-				<svg enable-background="new 0 0 413.348 413.348" height="10px" viewBox="0 0 413.348 413.348" width="10px">
-					<path d="m413.348 24.354-24.354-24.354-182.32 182.32-182.32-182.32-24.354
-					 24.354 182.32 182.32-182.32 182.32 24.354 24.354 182.32-182.32 182.32 182.32 24.354-24.354-182.32-182.32z"/>
-				</svg>
-			</div>
-			<div class="content-modal-window"><div v-html="modal.text"></div></div>
 		</div>
 	</div>
 	
@@ -252,19 +261,6 @@
 							<li>Чтобы подробнее узнать о проекте, нажмите на <b>ИПСХЭ</b></big>.</li>
 						</ol>
 					</div>`
-				},
-				alert: {
-					isAlert: false,
-					component: "",
-					coords: {
-						top: "0px",
-						left: "0px"
-					}
-				},
-				modal: {
-					isActive: false,
-					isMouseDown: false,
-					text: "asffgdhfgjhkl,kjhngfvdsadfgbhnjm,kl.jmhngfdsvfbnhmjhngfvdcffgbhjmhngfvd"
 				},
 				settings: {
 					isActive: false,
@@ -397,7 +393,7 @@
 					this.legend.el = data;
 					getElementData(data.sym).then((result) => {this.legend.text = result.info});
 				},
-				mousedownModal: mousedownModal,
+				mousedownModal: moveElement,
 			},
 			computed: {
 				classTable: function() {
@@ -420,7 +416,21 @@
 		}
 
 
+		function initHighlight() {
+			let nodes = document.getElementById("element-legend").childNodes;
+			for (let i = 0; i < nodes.length; i++) {
+				nodes[i].addEventListener("click", function() {
 
+					let els = document.getElementsByClassName(nodes[i].classList[0]);
+					for (let j = 0; j < els.length; j++) {
+						els[j].classList.add("active");
+						setTimeout( function() { els[j].classList.remove("active") }, 500 );
+					}
+
+				});
+			}
+		}
+		initHighlight();
 /*
 		function change(element) {
 			abcde.classList.toggle("active");
@@ -460,19 +470,6 @@
 		}
 
         let active = false;
-
-
-        function highlight(cls) {
-			if(!active) {
-			active = true;	
-				for (let i = 0; i < document.getElementsByClassName(cls).length; i++) {
-					document.getElementsByClassName(cls)[i].classList.toggle('active');
-					setTimeout(() => document.getElementsByClassName(cls)[i].classList.toggle('active'), 500);
-				}
-			setTimeout(() => active = false, 1000);			
-			}
-		}
-
 
 		function a() {
 			let rNum = getRandomInt(0, 117)

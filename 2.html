@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="css/alert.css">	
+	<link rel="stylesheet" type="text/css" href="css/header.css">
+	<link rel="stylesheet" type="text/css" href="css/tableMendeleev.css">
+	<link rel="stylesheet" type="text/css" href="css/legend.css">
+	<link rel="stylesheet" type="text/css" href="css/picker.css">
+	<link rel="stylesheet" type="text/css" href="css/modalWindow.css">
+	<link rel="stylesheet" type="text/css" href="css/calculator.css">
+	<link rel="stylesheet" type="text/css" href="css/settings.css">
+	<link rel="stylesheet" type="text/css" href="css/elements.css">
+	<link rel="stylesheet" type="text/css" href="css/chemicalEditor.css">
+</head>
+<body>
+	<header>
+		<div id="header-toggle" onclick="this.parentElement.classList.toggle('active')">
+			<svg x="0px" y="0px" viewBox="0 0 1000 260" xml:space="preserve">
+				<rect x="0" y="213.333" width="1000" height="42.667"/>
+				<rect x="0" y="106.667" width="1000" height="42.667"/>
+				<rect x="0" y="0" width="1000" height="42.667"/>
+			</svg>
+		</div>
+
+
+		<div id="menu">
+			<svg version="1.1" id="button-menu" x="0px" y="0px" viewBox="0 0 124 124" xml:space="preserve">
+				<g>
+					<path d="M112,6H12C5.4,6,0,11.4,0,18s5.4,12,12,12h100c6.6,0,12-5.4,12-12S118.6,6,112,6z"/>
+					<path d="M112,50H12C5.4,50,0,55.4,0,62c0,6.6,5.4,12,12,12h100c6.6,0,12-5.4,12-12C124,55.4,118.6,50,112,50z"/>
+					<path d="M112,94H12c-6.6,0-12,5.4-12,12s5.4,12,12,12h100c6.6,0,12-5.4,12-12S118.6,94,112,94z"/>
+				</g>
+			</svg>
+
+			<div id="storagege-menu-links">
+				<ol>
+					<li><a href="#">Таблица Менделеева</a></li>
+					<li><a href="tableSolubility.html">Таблица растворимости</a></li>
+				</ol>
+			</div>
+		</div>
+		<a class="name-sait" href="#">ChemistryAssistant.ru</a>
+	</header>
+
+	<div id="chemical-editor">
+		<div id="storage-chemical-element">
+			<div>H</div><div>C</div>
+			<div>N</div><div>O</div>
+
+			<div>CO</div><div>CH</div>
+			<div>CH2</div><div>CH3</div>
+			<div>OH</div>
+
+			<div>F</div><div>Cl</div>
+			<div>Br</div><div>I</div>
+
+			<div>B</div><div>Si</div>
+			<div>P</div><div>S</div>
+
+			<div>Mg</div><div>Al</div>
+			<div>Ag</div><div>Cu</div>
+			<div>Hg</div><div>Ti</div>
+			<div>Cr</div><div>Fe</div>
+		</div>
+		<div id="storage-structure">
+			<canvas class="octagon" style="width: 104px;height: 104px;background: rgba(0,0,0,0.2);position: absolute;bottom: 0;" onclick="chemecalEditor.drawOctagon({create: true});"></canvas>
+		</div>
+		<div id="chemical-editor-storage-canvas-main">
+			<canvas class="main"></canvas>
+		</div>	
+	</div>
+
+	<script>
+		let chemecalEditor = {
+			init: function(selector) {
+				this.storage = document.querySelector(selector);
+			},
+			setCanvas: function(canv, size) {
+				this.canv = canv;
+				this._setSize(1, size);
+				this.ctx = this.canv.getContext("2d");
+				return this;
+			},
+			createCanvas: function(scale, size) {
+				this.canv = document.createElement("canvas");
+				this.canv.addEventListener("mousedown", this._mouseMove());
+				this._setSize(scale, size);
+				this.ctx = this.canv.getContext("2d");
+				this.storage.prepend(this.canv);
+				return this;
+			},
+			_setSize: function(scale, size) {
+				if(size) {
+					this.canv.width = size.x * scale;
+					this.canv.height = size.y * scale;
+				} else {
+					this.canv.width = 100 * scale;
+					this.canv.height = 100 * scale;
+				}
+			},
+			_mouseMove: function() {
+				let storage = this.storage;
+				return function(e) {
+					let element = e.currentTarget;
+					let shiftX = e.clientX - element.getBoundingClientRect().left;
+					let shiftY = e.clientY - element.getBoundingClientRect().top;
+					let stCoords = storage.getBoundingClientRect();
+					moveAt(e.pageX - stCoords.left, e.pageY - stCoords.top);
+
+					function moveAt(pageX, pageY) {
+						if(pageX - shiftX < 0) {
+							element.style.left = "0px";
+						} else if (pageX - shiftX + element.offsetWidth + 30 > storage.clientWidth) {
+							element.style.left = storage.clientWidth - element.offsetWidth + "px";
+						} else {
+							element.style.left = pageX - shiftX + "px";
+						}
+
+						if(pageY - shiftY < 0) {
+							element.style.top = "0px"
+						} else if(pageY - shiftY + element.offsetHeight > storage.offsetHeight) {
+							element.style.top = storage.offsetHeight - element.offsetHeight + "px"
+						} else {
+							element.style.top = pageY - shiftY + "px"
+						}
+						
+					}
+
+					function onMouseMove(e) {
+						moveAt(e.pageX - stCoords.left, e.pageY - stCoords.top);
+					}
+
+					document.addEventListener('mousemove', onMouseMove);
+
+					window.onmouseup = function() {
+						document.removeEventListener('mousemove', onMouseMove);
+						element.onmouseup = null;
+					}
+				}
+			},
+			_setOpt: function(opt) {
+				if(opt !== undefined) {
+					return {
+						create: opt.create !== undefined ? opt.create : false,
+						scale: opt.scale !== undefined ? opt.scale : 1,
+						posX: opt.posX !== undefined ? opt.posX : 0,
+						posY: opt.posY !== undefined ? opt.posY : 0,
+					}
+				} 
+				return {
+					create: false,
+					scale: 1,
+					posX: 0,
+					posY: 0,
+				}
+			},
+			drawOctagon: function (obj) {
+				const opt = this._setOpt(obj);
+				if(opt.create) this.createCanvas(opt.scale, {x: 104, y: 104});				
+				const p = 2*opt.scale;//padding
+				const sL = 41.4214*opt.scale;//sideLength
+				const ind = 29.2893*opt.scale;//indent
+				console.log(this.ctx);
+				this.ctx.save();
+				this.ctx.translate(p + opt.posX, p + opt.posY);
+				this.ctx.beginPath();
+				this.ctx.lineWidth = 2*opt.scale;
+				this.ctx.moveTo(ind - 0.6*opt.scale, 0);
+				this.ctx.lineTo(sL + ind, 0);
+				this.ctx.lineTo(sL + 2*ind, ind);
+				console.log(this.ctx);
+				this.ctx.lineTo(sL + 2*ind, sL + ind);
+				this.ctx.lineTo(sL + ind, sL + 2*ind);
+				this.ctx.lineTo(ind, sL + 2*ind);
+				this.ctx.lineTo(0, sL + ind);
+				this.ctx.lineTo(0, ind);
+				this.ctx.lineTo(ind, 0);
+				this.ctx.stroke();
+				this.ctx.closePath();				
+				this.ctx.restore();
+				
+				return this;
+			}
+		}
+		chemecalEditor.init("#chemical-editor-storage-canvas-main");
+		let canv = document.querySelector(".octagon");
+		chemecalEditor.setCanvas(canv, {x: 104, y: 104}).drawOctagon();
+	</script>
+</body>
+</html>
