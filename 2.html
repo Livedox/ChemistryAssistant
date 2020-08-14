@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="css/alert.css">	
@@ -12,6 +12,39 @@
 	<link rel="stylesheet" type="text/css" href="css/settings.css">
 	<link rel="stylesheet" type="text/css" href="css/elements.css">
 	<link rel="stylesheet" type="text/css" href="css/chemicalEditor.css">
+	<style type="text/css">
+		.slider {
+			position: absolute;
+			top: 0;
+			border-radius: 5px;
+			background: #E0E0E0;
+			background: linear-gradient(left top, #E0E0E0, #EEEEEE);
+			width: 15px;
+			height: 310px;
+			margin: 5px;
+		}
+
+		.thumb {
+			width: 25px;
+			height: 10px;
+			border-radius: 3px;
+			position: relative;
+			left: -5px;
+			top: 10px;
+			background: blue;
+			cursor: pointer;
+		}
+		#storage-structure{
+			position: fixed;
+			bottom: 0;
+		}
+		#storage-structure .polygon{
+			transform-origin: 50% 50%;
+			width: 100px;
+			height: 100px;
+			background: rgba(0,0,0,0.2);
+		}
+	</style>
 </head>
 <body>
 	<header>
@@ -64,21 +97,32 @@
 			<div>Cr</div><div>Fe</div>
 		</div>
 		<div id="storage-structure">
-			<canvas class="octagon" style="width: 104px;height: 104px;background: rgba(0,0,0,0.2);position: absolute;bottom: 0;" onclick="chemecalEditor.drawOctagon({create: true});"></canvas>
+			<canvas class="polygon" data-side="8" width="104" height="104"></canvas>
+			<canvas class="polygon" data-side="7" width="104" height="104"></canvas>
+			<canvas class="polygon" data-side="6" width="104" height="104"></canvas>
+			<canvas class="polygon" data-side="5" width="104" height="104"></canvas>
+			<canvas class="polygon" data-side="4" width="104" height="104"></canvas>
+			<canvas class="polygon" data-side="3" width="104" height="104"></canvas>
 		</div>
 		<div id="chemical-editor-storage-canvas-main">
 			<canvas class="main"></canvas>
 		</div>	
 	</div>
-
+	<div id="slider" class="slider" style="left: 50px;top: 40px">
+		<div class="thumb" id="thumb1"></div>
+	</div>
+	<div id="slid" class="slider" style="left: 100px;top: 40px">
+		<div class="thumb" id="thumb2"></div>
+	</div>
 	<script>
 		let chemecalEditor = {
-			init: function(selector) {
+			init: function(selector, sliderScale, sliderRotate) {
 				this.storage = document.querySelector(selector);
+				this._createSlider(document.querySelector(sliderScale), this._scale);
+				this._createSlider(document.querySelector(sliderRotate), this._rotate);
 			},
 			setCanvas: function(canv, size) {
 				this.canv = canv;
-				this._setSize(1, size);
 				this.ctx = this.canv.getContext("2d");
 				return this;
 			},
@@ -95,19 +139,24 @@
 					this.canv.width = size.x * scale;
 					this.canv.height = size.y * scale;
 				} else {
-					this.canv.width = 100 * scale;
-					this.canv.height = 100 * scale;
+					this.canv.width = 104 * scale;
+					this.canv.height = 104 * scale;
 				}
+				this.canv.setAttribute("data-width", this.canv.width);
+				this.canv.setAttribute("data-height", this.canv.height);
 			},
 			_mouseMove: function() {
 				let storage = this.storage;
 				return function(e) {
 					let element = e.currentTarget;
+					chemecalEditor.customCanvas = element;
+					let transform = element.style.transform;
+					element.style.transform = "";
 					let shiftX = e.clientX - element.getBoundingClientRect().left;
 					let shiftY = e.clientY - element.getBoundingClientRect().top;
 					let stCoords = storage.getBoundingClientRect();
 					moveAt(e.pageX - stCoords.left, e.pageY - stCoords.top);
-
+					element.style.transform = transform;
 					function moveAt(pageX, pageY) {
 						if(pageX - shiftX < 0) {
 							element.style.left = "0px";
@@ -144,48 +193,139 @@
 					return {
 						create: opt.create !== undefined ? opt.create : false,
 						scale: opt.scale !== undefined ? opt.scale : 1,
-						posX: opt.posX !== undefined ? opt.posX : 0,
-						posY: opt.posY !== undefined ? opt.posY : 0,
+						angle: opt.angle !== undefined ? opt.angle : 0,
 					}
 				} 
 				return {
 					create: false,
 					scale: 1,
-					posX: 0,
-					posY: 0,
+					angle: 0
 				}
 			},
-			drawOctagon: function (obj) {
-				const opt = this._setOpt(obj);
-				if(opt.create) this.createCanvas(opt.scale, {x: 104, y: 104});				
-				const p = 2*opt.scale;//padding
-				const sL = 41.4214*opt.scale;//sideLength
-				const ind = 29.2893*opt.scale;//indent
-				console.log(this.ctx);
-				this.ctx.save();
-				this.ctx.translate(p + opt.posX, p + opt.posY);
-				this.ctx.beginPath();
-				this.ctx.lineWidth = 2*opt.scale;
-				this.ctx.moveTo(ind - 0.6*opt.scale, 0);
-				this.ctx.lineTo(sL + ind, 0);
-				this.ctx.lineTo(sL + 2*ind, ind);
-				console.log(this.ctx);
-				this.ctx.lineTo(sL + 2*ind, sL + ind);
-				this.ctx.lineTo(sL + ind, sL + 2*ind);
-				this.ctx.lineTo(ind, sL + 2*ind);
-				this.ctx.lineTo(0, sL + ind);
-				this.ctx.lineTo(0, ind);
-				this.ctx.lineTo(ind, 0);
-				this.ctx.stroke();
-				this.ctx.closePath();				
-				this.ctx.restore();
+			_createSlider: function(element, callback) {
+				let thumb = element;
+				let fun = callback;
+
+				thumb.onmousedown = function(e) {
+					e.preventDefault();
+
+					let shiftY = e.clientY - thumb.getBoundingClientRect().top;
+
+					document.addEventListener('mousemove', onMouseMove);
+					document.addEventListener('mouseup', onMouseUp);
+
+					function onMouseMove(e) {
+						let newTop = e.clientY - shiftY - slider.getBoundingClientRect().top;
+
+						if (newTop < 0) {
+							newTop = 0;
+						}
+						let bottomEdge = slider.offsetHeight - thumb.offsetHeight;
+						if (newTop > bottomEdge) {
+							newTop = bottomEdge;
+						}
+
+						thumb.style.top = newTop + 'px';
+						if(fun) fun( +(newTop/(shiftY + slider.offsetHeight - thumb.offsetHeight)).toFixed(2) );				
+					}
+
+					function onMouseUp() {
+						document.removeEventListener('mouseup', onMouseUp);
+						document.removeEventListener('mousemove', onMouseMove);
+					}
+
+				}
+
+				thumb.ondragstart = function() {
+					return false;
+				}
+			},
+			_scale: function(scale, size) {
+				let custom = chemecalEditor.customCanvas;
+				custom.width = custom.getAttribute("data-width")*(scale*1.5 + 0.5);
+				custom.height = custom.getAttribute("data-height")*(scale*1.5 + 0.5);
+				console.log(custom);
+				if(custom.className === "polygon") {
+					chemecalEditor.setCanvas(custom).drawPolygon({x: 50, y: 50}, +custom.getAttribute("data-side"), 50, {scale: scale*1.5 + 0.5});
+				} else if(custom.className === "text") {
+					console.log(custom);
+					chemecalEditor.setCanvas(custom).drawText(custom.getAttribute("data-text"), {scale: scale*1.5 + 0.5});
+				}
 				
+			},
+			_rotate: function(coof) {
+				chemecalEditor.customCanvas.style.transform = `rotate(${coof*360}deg)`;
+			},
+			_getRegularPolygonPoints: function(center, N, R, opt) {
+				var points = [];
+				var alpha = 2*Math.PI / N;  
+				for (var i = 0; i < N; i++) {
+					points.push({
+						x: (center.x + R*Math.cos(alpha*i))*opt.scale,
+						y: (center.y + R*Math.sin(alpha*i))*opt.scale
+					});
+					
+				}  
+				return points;
+			},
+			drawPolygon: function(center, N, R, obj) {
+				const opt = this._setOpt(obj);
+				if(opt.create) this.createCanvas(opt.scale, {x: 104, y: 104});
+				let points = this._getRegularPolygonPoints(center, N, R, opt);
+				const padding = 2*opt.scale;
+				this.canv.setAttribute("data-side", N);
+				this.canv.classList.add("polygon");
+				
+				this.ctx.save();
+				this.ctx.translate(this.canv.width/2,this.canv.height/2);
+				this.ctx.rotate(opt.angle*Math.PI/180);
+				this.ctx.translate(-this.canv.width/2 + padding, -this.canv.height/2 + padding);
+
+				this.ctx.beginPath();
+				this.ctx.moveTo(points[0].x, points[0].y);
+				for (var i = 1; i < points.length; i++) {
+					this.ctx.lineTo(points[i].x, points[i].y);
+				}
+				this.ctx.lineTo(points[0].x, points[0].y);
+				this.ctx.lineWidth = 2*opt.scale;
+				this.ctx.stroke();
+				this.ctx.closePath();
+
+				this.ctx.restore();
 				return this;
+			},
+			drawText: function(txt, obj) {
+				const opt = this._setOpt(obj);
+				const text = txt;
+				const fontSize = 32*opt.scale;
+				this.ctx.font = `bold ${fontSize}px sans-serif`;
+				const widthText = this.ctx.measureText(text).width;				
+				if(opt.create) this.createCanvas(opt.scale, {x: widthText, y: fontSize*1.4});
+				this.canv.setAttribute("data-text", text);
+				this.canv.classList.add("text");
+				this.ctx.font = `bold ${fontSize}px sans-serif`;
+				this.ctx.fillText(text, 0, fontSize);
+				return this;		
 			}
 		}
-		chemecalEditor.init("#chemical-editor-storage-canvas-main");
-		let canv = document.querySelector(".octagon");
-		chemecalEditor.setCanvas(canv, {x: 104, y: 104}).drawOctagon();
+		chemecalEditor.init("#chemical-editor-storage-canvas-main", "#thumb1", "#thumb2");		
+		for(element of document.getElementById("storage-structure").childNodes) {
+			if(element.className === "polygon") {
+				let side = +element.getAttribute("data-side");
+				chemecalEditor.setCanvas(element).drawPolygon({x: 50, y: 50}, side, 50);
+				element.onclick = function() {
+					chemecalEditor.drawPolygon({x: 50, y: 50}, side, 50, {create: true});
+				}
+			}
+		}
+		let divs = document.getElementById("storage-chemical-element").querySelectorAll("div");
+		for(let i = 0; i < divs.length; i++) {
+			divs[i].onclick = function() {
+				chemecalEditor.drawText(divs[i].innerHTML, {create: true});
+			}
+		}
+
+		
 	</script>
 </body>
 </html>
