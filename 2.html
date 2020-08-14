@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
 	<title></title>
+	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="css/alert.css">	
 	<link rel="stylesheet" type="text/css" href="css/header.css">
 	<link rel="stylesheet" type="text/css" href="css/tableMendeleev.css">
@@ -35,6 +36,7 @@
 			cursor: pointer;
 		}
 		#storage-structure{
+			z-index: 1;
 			position: fixed;
 			bottom: 0;
 		}
@@ -45,6 +47,7 @@
 			background: rgba(0,0,0,0.2);
 		}
 	</style>
+
 </head>
 <body>
 	<header>
@@ -105,7 +108,7 @@
 			<canvas class="polygon" data-side="3" width="104" height="104"></canvas>
 		</div>
 		<div id="chemical-editor-storage-canvas-main">
-			<canvas class="main"></canvas>
+			<canvas class="canvas-main"></canvas>
 		</div>	
 	</div>
 	<div id="slider" class="slider" style="left: 50px;top: 40px">
@@ -114,6 +117,7 @@
 	<div id="slid" class="slider" style="left: 100px;top: 40px">
 		<div class="thumb" id="thumb2"></div>
 	</div>
+	<div id="download" onclick="download()" style="position: fixed;bottom: 0;right: 0;">Скачай меня сука ааааааааааааааааааааааааааааааа</div>
 	<script>
 		let chemecalEditor = {
 			init: function(selector, sliderScale, sliderRotate) {
@@ -308,6 +312,9 @@
 				return this;		
 			}
 		}
+		let canv = document.querySelector(".canvas-main");
+		canv.width = 1920;
+		canv.height = 1080;
 		chemecalEditor.init("#chemical-editor-storage-canvas-main", "#thumb1", "#thumb2");		
 		for(element of document.getElementById("storage-structure").childNodes) {
 			if(element.className === "polygon") {
@@ -325,7 +332,32 @@
 			}
 		}
 
-		
+		function download() {			
+			let canv = document.querySelector(".canvas-main");
+			canv.width = 1920;
+			canv.height = 1080;
+			let ctx = canv.getContext("2d");
+			for(element of document.getElementById("chemical-editor-storage-canvas-main").querySelectorAll("canvas")) {
+				if(element.className !== "canvas-main") {
+					if(element.style.transform === "") {
+						ctx.drawImage(element, parseFloat(element.style.left), parseFloat(element.style.top));
+					} else {
+						ctx.save();
+						ctx.translate((parseFloat(element.style.left) + element.width/2),(parseFloat(element.style.top) + element.height/2));
+						ctx.rotate((+/\d+/.exec(element.style.transform))*Math.PI/180);
+						ctx.translate(-(parseFloat(element.style.left) + element.width/2),-(parseFloat(element.style.top) + element.height/2));
+						ctx.drawImage(element, parseFloat(element.style.left), parseFloat(element.style.top));
+						ctx.restore();
+						
+					}
+					
+				}
+			}
+			let link = document.createElement("a");
+			link.download = "Как я сук зае.png";
+			link.href = canv.toDataURL("image/png");
+			link.click();
+		}
 	</script>
 </body>
 </html>
