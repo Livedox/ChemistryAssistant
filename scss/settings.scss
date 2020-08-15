@@ -3,12 +3,16 @@
 	justify-content: center;
 	align-items: center;
 	margin-right: 15px;
+	transition: 1s;
 	svg{
 		fill: #dfe6e9;
 		cursor: pointer;
 		height: 40px;
 		width: 40px;
 	}
+}
+.toggle-settings.active{
+	transform: rotate(360deg);
 }
 
 #settings{
@@ -17,7 +21,7 @@
 	width: 335px;
 	z-index: 200;
 	display: flex;
-	background: #2f3f3f;
+	background: #2d3436;
 	padding: 10px;
 	flex-wrap: wrap;
 }

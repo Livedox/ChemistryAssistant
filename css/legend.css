@@ -34,10 +34,35 @@
 	width: 70%;
 	height: 15.86vw;
 	border: 0.22vw solid #2d3436;
+	background: #edf3f1;
 	border-radius: 12px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 	padding: 4px;
 	box-sizing: border-box;
 	overflow-y: auto;
+	scrollbar-width: thin;
+}
+.legend-inf::-webkit-scrollbar {
+	width: 5px;
+}
+.legend-inf::-webkit-scrollbar-thumb {
+	border-radius: 5px;
+	background: #00181f;
+}
+.legend-inf::-webkit-scrollbar-track {
+	margin: 10px 0;
+}
+.legend-inf .help {
+	font-size: 18px;
+	font-family: Roboto;
+}
+.legend-inf .help h2 {
+	font-family: Lora;
+	font-size: 28px;
+	text-align: center;
+}
+.legend-inf .help ol {
+	list-style: decimal;
 }
 
 .legend-inf p {
@@ -61,4 +86,31 @@
 	#element-legend {
 		font-size: 1.144px;
 	}
+}
+.menu-icon-dash {
+	fill: #dfe6e9;
+	transform-origin: 50% 50%;
+	opacity: 100;
+	transition: transform 0.3s, opacity 0.3s;
+}
+
+#menu-icon {
+	margin: 0 10px;
+	width: 40px;
+	height: 40px;
+}
+
+#menu-icon:hover {
+	cursor: pointer;
+}
+
+.menuexpanded #dash-top {
+	transform: translateY(16.75%) translateX(-16.9%) rotate(45deg);
+}
+.menuexpanded #dash-bottom {
+	transform: translateY(16.75%) translateX(16.9%) rotate(135deg);
+}
+.menuexpanded #dash-middle {
+	transform: rotate(135deg);
+	opacity: 0;
 }

@@ -33,3 +33,18 @@
 		border-bottom: 17px solid transparent
 	}
 }
+.period-text, .group-text{
+	font-family: Roboto;
+	font-weight: 500;
+	font-size: 16px;
+	h2{
+		margin: 0 0 10px 0;
+		font-family: Lora;
+		font-weight: bold;
+		font-size: 22px;
+	}
+	ol{
+		list-style: decimal;
+		list-style-position: inside;
+	}
+}

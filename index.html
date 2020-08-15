@@ -4,9 +4,9 @@
 <head>
 	<meta charset="utf-8">
 	<meta content="width=device-width" name="viewport">
+	<link href="https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Roboto:wght@500&display=swap" rel="stylesheet"> 
 	<title>Интерактивная периодическая система элементов</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<link rel="stylesheet" type="text/css" href="css/alert.css">	
+	<link rel="stylesheet" type="text/css" href="style.css">	
 	<link rel="stylesheet" type="text/css" href="css/header.css">
 	<link rel="stylesheet" type="text/css" href="css/tableMendeleev.css">
 	<link rel="stylesheet" type="text/css" href="css/legend.css">
@@ -15,6 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="css/calculator.css">
 	<link rel="stylesheet" type="text/css" href="css/settings.css">
 	<link rel="stylesheet" type="text/css" href="css/elements.css">
+	<link rel="stylesheet" type="text/css" href="css/alert.css">
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<style type="text/css">
 		.sticker{
@@ -50,15 +51,15 @@
 
 
 			<div id="menu">
-				<svg version="1.1" id="button-menu" x="0px" y="0px" viewBox="0 0 124 124" xml:space="preserve">
-					<g>
-						<path d="M112,6H12C5.4,6,0,11.4,0,18s5.4,12,12,12h100c6.6,0,12-5.4,12-12S118.6,6,112,6z"/>
-						<path d="M112,50H12C5.4,50,0,55.4,0,62c0,6.6,5.4,12,12,12h100c6.6,0,12-5.4,12-12C124,55.4,118.6,50,112,50z"/>
-						<path d="M112,94H12c-6.6,0-12,5.4-12,12s5.4,12,12,12h100c6.6,0,12-5.4,12-12S118.6,94,112,94z"/>
+				<svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" v-on:click="isActiveLinks = !isActiveLinks">
+					<g id="dashes">
+						<path class="menu-icon-dash" id="dash-bottom" d="M145 609l609 0c74,0 74,111 0,111l-609 0c-74,0 -74,-111 0,-111z"></path>
+						<path class="menu-icon-dash" id="dash-middle" d="M146 394c203,0 406,0 609,0 74,0 74,111 0,111 -203,0 -406,0 -609,0 -74,0 -74,-111 0,-111z"></path>
+						<path class="menu-icon-dash" id="dash-top" d="M146 179l609 0c74,0 74,111 0,111l-609 0c-74,0 -74,-111 0,-111z"></path>
 					</g>
 				</svg>
 
-				<div id="storege-menu-links">
+				<div id="storege-menu-links" v-show="isActiveLinks">
 					<ol>
 						<li><a href="#">Таблица Менделеева</a></li>
 						<li><a href="tableSolubility.html">Таблица растворимости</a></li>
@@ -67,11 +68,13 @@
 			</div>
 			<a class="name-sait" href="#">ChemistryAssistant.ru</a>
 			<p id="open-calculator" title="Открыть на этой странице" onclick="createCalculator()">Калькулятор</p>
-			<div v-on:click="settings.isActive = !settings.isActive" class="toggle-settings">
+
+			<div v-on:click="settings.isActive = !settings.isActive" class="toggle-settings" :class="settings.isActive ? 'active' : ''">
 				<svg height="512pt" viewBox="0 0 512 512" width="512pt">
 					<path d="m499.953125 197.703125-39.351563-8.554687c-3.421874-10.476563-7.660156-20.695313-12.664062-30.539063l21.785156-33.886719c3.890625-6.054687 3.035156-14.003906-2.050781-19.089844l-61.304687-61.304687c-5.085938-5.085937-13.035157-5.941406-19.089844-2.050781l-33.886719 21.785156c-9.84375-5.003906-20.0625-9.242188-30.539063-12.664062l-8.554687-39.351563c-1.527344-7.03125-7.753906-12.046875-14.949219-12.046875h-86.695312c-7.195313 0-13.421875 5.015625-14.949219 12.046875l-8.554687 39.351563c-10.476563 3.421874-20.695313 7.660156-30.539063 12.664062l-33.886719-21.785156c-6.054687-3.890625-14.003906-3.035156-19.089844 2.050781l-61.304687 61.304687c-5.085937 5.085938-5.941406 13.035157-2.050781 19.089844l21.785156 33.886719c-5.003906 9.84375-9.242188 20.0625-12.664062 30.539063l-39.351563 8.554687c-7.03125 1.53125-12.046875 7.753906-12.046875 14.949219v86.695312c0 7.195313 5.015625 13.417969 12.046875 14.949219l39.351563 8.554687c3.421874 10.476563 7.660156 20.695313 12.664062 30.539063l-21.785156 33.886719c-3.890625 6.054687-3.035156 14.003906 2.050781 19.089844l61.304687 61.304687c5.085938 5.085937 13.035157 5.941406 19.089844 2.050781l33.886719-21.785156c9.84375 5.003906 20.0625 9.242188 30.539063 12.664062l8.554687 39.351563c1.527344 7.03125 7.753906 12.046875 14.949219 12.046875h86.695312c7.195313 0 13.421875-5.015625 14.949219-12.046875l8.554687-39.351563c10.476563-3.421874 20.695313-7.660156 30.539063-12.664062l33.886719 21.785156c6.054687 3.890625 14.003906 3.039063 19.089844-2.050781l61.304687-61.304687c5.085937-5.085938 5.941406-13.035157 2.050781-19.089844l-21.785156-33.886719c5.003906-9.84375 9.242188-20.0625 12.664062-30.539063l39.351563-8.554687c7.03125-1.53125 12.046875-7.753906 12.046875-14.949219v-86.695312c0-7.195313-5.015625-13.417969-12.046875-14.949219zm-152.160156 58.296875c0 50.613281-41.179688 91.792969-91.792969 91.792969s-91.792969-41.179688-91.792969-91.792969 41.179688-91.792969 91.792969-91.792969 91.792969 41.179688 91.792969 91.792969zm0 0"/>
 				</svg>
 			</div>
+
 		</header>
 
 		<div id="settings" v-show="settings.isActive">
@@ -151,7 +154,10 @@
 				</div>
 			</div>
 
-			<div class="legend-inf" v-html="legend.text"></div>
+			<div class="legend-inf">
+				<div v-html="legend.text"></div>
+				<div id="scrollbar"></div>
+			</div>
 		</div>
 		<div id="table" style="display: flex; width: 95%;flex-wrap: wrap;" :class="classTable">
 			<ol class="group">
@@ -173,27 +179,15 @@
 				<li class="tp1" v-show="isWideTable"><span>16</span></li>
 				<li class="tp1" v-show="isWideTable"><span>17</span></li>
 				<li v-show="isWideTable">
-					<span v-on:mouseover="toggleAlert($event, `В группах с увеличением заряда ядра (сверху вниз):<br>
-						<strong>радиус</strong> атомов <strong>увеличивается</strong><br>
-						<strong>электроотрицательность уменьшается</strong><br>
-						<strong>металлические</strong> свойства <strong>усиливаются</strong><br>
-						<strong>неметаллические</strong> свойства <strong>ослабевают</strong><br>
-						<strong>восстановительные</strong> свойства <strong>усиливаются</strong><br>
-						<strong>окислительные</strong> свойства <strong>ослабевают</strong>`)" v-on:mouseout="toggleAlert($event)">
-					18</span>
+					<span v-on:mouseover="toggleAlert($event, groupText)" v-on:mouseout="toggleAlert($event)">
+						18
+					</span>
 				</li>
 			</ol>
 			<div style="display: flex; width: 100%;">
 				<ol class="period">
 					<li v-for="n in 7":key="'k'+n" class="number-period"
-						v-on:mouseover="toggleAlert($event, `
-							<div>
-								В периодах справа налево:<br>
-								<strong>металлические и восстановительные</strong> свойства <strong>ослабевают</strong><br>
-								<strong>неметаллические и окислительные</strong> свойства <strong>усиливаются</strong><br>
-								<strong>электроотрицательность увеличивается</strong><br>
-								<strong>радиус</strong> атомов <strong>уменьшается</strong>
-							</div>`)"
+						v-on:mouseover="toggleAlert($event, periodText)"
 						v-on:mouseout="toggleAlert($event)">{{ n }}
 					</li>
 				</ol>
@@ -231,6 +225,7 @@
 		let app = new Vue({
 			el: "#app",
 			data: {
+				isActiveLinks: false,
 				isWideTable: true,
 				isActive: false,
 				numActive: true,
@@ -239,6 +234,28 @@
 				ruActive: true,
 				laActive: true,
 				radActive: true,
+				periodText:`
+					<div class="period-text">
+						<h2>В периодах справа налево</h2>
+						<ol>
+							<li>металлические и восстановительные свойства ослабевают</li>
+							<li>неметаллические и окислительные свойства усиливаются</li>
+							<li>электроотрицательность увеличивается</li>
+							<li>радиус атомов уменьшается</li>
+						</ol>
+					</div>`,
+				groupText: `
+					<div class="group-text">
+						<h2>В группах с увеличением заряда ядра (сверху вниз)</h2>
+						<ol>
+							<li>радиус атомов увеличивается</li>
+							<li>электроотрицательность уменьшается</li>
+							<li>металлические свойства усиливаются</li>
+							<li>неметаллические свойства ослабевают</li>
+							<li>восстановительные свойства усиливаются</li>
+							<li>окислительные свойства ослабевают</li>
+						</ol>
+					</div>`,
 				legend: {
 					el: {
 						sym:"Po",
@@ -251,8 +268,8 @@
 						st: {background: "#ffd737",color: "#000"},
 					},
 					text: `
-					<div style="font-size: 18px;">
-						<p><h3><big>Правила:</h3></p>
+					<div class="help">
+						<h2>Правила</h2>
 						<ol style="list-style-position: inside;">
 							<li>Всю информацию о составляющих <b onclick="a()" style="cursor: pointer;">ячейки</b> таблицы можно найти <a href="https://google.com" style="color: black;text-decoration: none;font-weight: 1000;">здесь</a>.</li>
 							<li>Чтобы подробнее узнать о закономерностях в периодах и группах, наведите на их <b onclick="b()">номера</b>.</li>
@@ -393,7 +410,6 @@
 					this.legend.el = data;
 					getElementData(data.sym).then((result) => {this.legend.text = result.info});
 				},
-				mousedownModal: moveElement,
 			},
 			computed: {
 				classTable: function() {
@@ -431,6 +447,10 @@
 			}
 		}
 		initHighlight();
+		function toggleMenu() {
+			document.getElementById("menu-icon").classList.toggle("menuexpanded");
+		}
+		document.getElementById("menu-icon").addEventListener("click", toggleMenu);
 /*
 		function change(element) {
 			abcde.classList.toggle("active");
