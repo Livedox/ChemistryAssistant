@@ -131,16 +131,18 @@ ol {
 	text-align: center;
 	padding-bottom: 2px;
 	transition: 1s ease-in;
+	font-size: 1.5vw;
+	font-family: Robot;
 }
 .group .first {
 	margin-left: 2%;
 	padding-left: 3px;
 }
 .group .tp1 {
-	top: 6vw;
+	top: 5vw;
 }
 .group .tp3 {
-	top: 18vw;
+	top: 15vw;
 }
 
 .period {
@@ -149,9 +151,15 @@ ol {
 	margin-right: 3px;
 }
 .period li {
-	height: 6vw;
-	line-height: 6vw;
+	height: 5vw;
+	line-height: 5vw;
 	margin-top: -1px;
+	font-size: 1.5vw;
+	font-family: Robot;
+}
+.period li.high {
+	height: 10vw;
+	line-height: 10vw;
 }
 
 .shortTable .element {
@@ -195,10 +203,10 @@ ol {
 	margin-top: 20px;
 }
 .wideTable #Lu {
-	margin-right: 11%;
+	margin-right: 12%;
 }
 .wideTable #Th, .wideTable #Ce {
-	margin-left: 11%;
+	margin-left: 10.6%;
 }
 
 .num-none .number {

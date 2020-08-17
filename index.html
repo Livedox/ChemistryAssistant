@@ -113,10 +113,15 @@
 					<svg viewBox="0 0 21 21"><polyline points="5 10.75 8.5 14.25 16 6"></polyline></svg>
 					Название на латыни
 				</label>
+				<label class="checkbox bounce">
+					<input type="checkbox" checked v-on:click="isWideTable = !isWideTable">
+					<svg viewBox="0 0 21 21"><polyline points="5 10.75 8.5 14.25 16 6"></polyline></svg>
+					Длиннопериодная таблица
+				</label>
 			</div>
 		</div>
 		
-		<div id="IPTCE">ИПСХЭ<span style="font-size: 1vw">v0.2.6b</span></div>
+		<div id="IPTCE" :class="classTable">ИПСХЭ<span style="font-size: 1vw">v0.2.6b</span></div>
 
 		<div id="legend" :class="classTable">
 			<div id="element-legend" :class="legend.el.cls" :style="legend.el.st">
@@ -192,7 +197,7 @@
 			</ol>
 			<div style="display: flex; width: 100%;">
 				<ol class="period">
-					<li v-for="n in 7":key="'k'+n" class="number-period">
+					<li v-for="n in 7":key="'k'+n" :class="(!isWideTable && n > 3) ? 'high' : ''">
 						<span v-on:mouseover="toggleAlert($event, periodText)" v-on:mouseout="toggleAlert($event)">
 							{{ n }}
 						</span>
@@ -457,7 +462,7 @@
 						}
 
 					}, 0);
-						
+
 				});
 			}
 		}

@@ -4,21 +4,34 @@
 	justify-content: center;
 }
 #legend{
-	top: 2vw;
-	left: 15%;
+	top: 1vw;
+	left: 14.5%;
 	position: absolute;
 	width: 49%;
 	padding: 0 3px 0 3px;
 	box-sizing: border-box;
 	display: flex;
 	justify-content: space-around;
+	transition: left 1s ease-in;
 	z-index: 40;
+	&.shortTable{
+		top: 2vw;
+		width: 13%;
+		left: 80%;
+		.legend-inf{
+			display: none;
+		}
+		#element-legend{
+			width: 100%;
+		}
+	}
+
 }
 
 #element-legend{
 	width: 25%;
 	box-sizing: border-box;
-	height: 15.86vw;
+	height: 14vw;
 	border: 0.22vw solid #2d3436;
 	border-radius: 12px;
 	box-sizing: border-box;
@@ -30,7 +43,7 @@
 }
 .legend-inf{
 	width: 70%;
-	height: 15.86vw;
+	height: 14vw;
 	border: 0.22vw solid #2d3436;
 	background: #edf3f1;
 	border-radius: 12px;
@@ -70,9 +83,15 @@
 	position: absolute;
 	font-size: 5vw;
 	left: 66%;
-	top: 2%;
+	top: 2px;
 	color: #2d3436;
 	font-family: Georgia;
+	transition: 1s ease-in;
+	&.shortTable{
+		left: 30%;
+		top: 12px;
+		border: 1px 0 solid black;
+	}
 }
 
 @media screen and (max-width: 880px) {
