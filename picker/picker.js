@@ -28,7 +28,7 @@ var picker = {
 		id - id блока выбора цвета (основной блок)
 		c - круг для перемещения по основнoму блоку(для выбора цвета)
 		*/
-		Block.init(b); // привязка событий к блоку и кругу для управления
+		Block.init(callback); // привязка событий к блоку и кругу для управления
 
 	}
 }
@@ -138,7 +138,7 @@ var Line = {
 
 var Block = {
 
-	init: function(elem) {
+	init: function(callback) {
 
 		var circle = document.getElementById("circle"),
 			block = document.getElementById("block-picker"),
@@ -184,6 +184,7 @@ var Block = {
 			picker.S = S;
 
 			picker.V = V;
+			callback("rgb("+convert.hsv_rgb(t,100,100)+")");
 		}
 
 		block.onclick = function(e) {
