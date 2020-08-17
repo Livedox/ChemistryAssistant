@@ -1,0 +1,132 @@
+#color-selection{
+	position: fixed;
+	top: 50px;right: 0;
+	width: 335px;
+	z-index: 200;
+	background: #2f3f3f;
+	padding: 10px;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+.picker{
+	position: relative;
+	display: flex;
+	justify-content: space-between;	
+	-moz-user-select: none;
+	  -webkit-user-select: none; 
+	  width:215px;
+}
+#block-picker{
+	background-color:red;
+	height:180px;
+	width:180px;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	user-select: none; 
+	  -webkit-user-select: none;
+}
+#block-picker img {
+	width:180px;
+}
+#line {
+	position: relative;
+	cursor: pointer;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	user-select: none; 
+	  -webkit-user-select: none;	
+}
+#colors ol{
+	list-style: none;
+}
+#colors ol li{
+	position: relative;
+	cursor: pointer;
+	width: 80px;
+	height: 40px;
+	margin: 0 5px 7px 15px;
+	border: 2px solid #2d3436;
+	box-sizing: border-box;
+	padding: 1px;
+}
+#colors ol li .f-dark {
+	position: absolute;
+	top: 0;bottom: 0;left: 0;right: 0;
+}
+#colors ol li .f-light {
+	position: relative;
+	width: 90px;
+	height: 40px;
+	transform: rotate(-25deg);
+	top: -21px;left: -16px;
+	border: 1px solid black;
+}
+#colors ol li .f-light svg{
+	transform: rotate(25deg);
+	position: absolute;
+	right: 64px;bottom: 22px;
+}
+#colors ol li .f-dark svg{
+	position: absolute;
+	right: 1px;bottom: 1px;
+}
+#colors-by-default{
+	font-family: Arial;
+	font-size: 20px;
+	color: #b2bec3;
+	cursor: pointer;
+}
+#colors svg{
+	display: none;
+}
+#colors .active svg{
+	display: block;
+}
+
+.right_arrow {
+	width:0;
+	height:0;
+	left:23px;
+	position:absolute;
+	border-bottom:6px solid transparent;
+	border-left:10px solid transparent;
+	border-top:6px solid transparent;
+	border-right:10px solid black;
+}
+.left_arrow {
+	width:0;
+	height:0;
+	position:absolute;
+	border-bottom:6px solid transparent;
+	border-left:10px solid black;
+	border-top:6px solid transparent;
+	border-right:8px solid transparent;
+	
+}
+#arrows {
+	position:absolute;
+	top:0;
+	margin-top:-4px;
+	left:-11px;
+	width:40px;
+	cursor: pointer;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	user-select: none; 
+	  -webkit-user-select: none;        
+	
+}
+#circle {
+	width:8px;
+	height:8px;
+	border:1px solid black;
+	border-radius:50%;
+	position:absolute;
+	left:0;
+	top:0;
+	cursor: pointer;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	user-select: none; 
+	  -webkit-user-select: none;   
+}
