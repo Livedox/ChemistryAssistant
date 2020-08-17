@@ -33,6 +33,11 @@
 	border-left: 17px solid #2d3436;
 	border-bottom: 17px solid transparent;
 }
+.alert p {
+	font-family: Roboto;
+	font-weight: 500;
+	font-size: 16px;
+}
 
 .period-text, .group-text {
 	font-family: Roboto;
@@ -40,7 +45,7 @@
 	font-size: 16px;
 }
 .period-text h2, .group-text h2 {
-	margin: 0 0 10px 0;
+	margin: 0 0 0px 0;
 	font-family: Lora;
 	font-weight: bold;
 	font-size: 22px;

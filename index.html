@@ -25,6 +25,8 @@
 </head>
 
 <body>
+	
+	
 	<script type="text/javascript">
 		async function getElementData(symbol) {
 			let response = await fetch('php/server.php', {
@@ -75,8 +77,7 @@
 				</svg>
 			</div>
 
-		</header>
-
+		</header>		
 		<div id="settings" v-show="settings.isActive">
 			<div class="color-picker">
 				
@@ -119,36 +120,42 @@
 
 		<div id="legend" :class="classTable">
 			<div id="element-legend" :class="legend.el.cls" :style="legend.el.st">
-				<div class="symbol" 
-				data-textAlert="Химический символ - сокращённое буквенное обозначение химических элементов, состоят из первой буквы или первой и одной 
-	            из следующих букв латинского названия элементов">
+				<div class="symbol highlight" v-on:mouseover="toggleAlert($event, `<p>Химический символ - сокращённое буквенное обозначение химических элементов,
+				состоят из первой буквы или первой и одной из следующих букв латинского названия элементов</p>`)" v-on:mouseout="toggleAlert($event)">
 	        		{{ legend.el.sym }}
 	        	</div>
-				<div class="number">
-					<span data-textAlert="Атомный (порядковый) номер - номер химического элемента в периодической системе элементов. 
-	            	Равен числу протонов и электронов в атоме и определяет положительный заряд ядра">
-	            		{{ legend.el.num }}
-	            	</span>
-	            </div>
-				<div class="Ar">
-					<span data-textAlert="Ar - относительная атомная масса — значение массы атома, выраженное в атомных единицах массы (а.е.м)">
+	        	<div class="num-and-rad-storage">
+	        		<div class="number highlight">
+						<span v-on:mouseover="toggleAlert($event, `<p>Атомный (порядковый) номер - номер химического элемента в периодической системе элементов. 
+						Равен числу протонов и электронов в атоме и определяет положительный заряд ядра</p>`)" v-on:mouseout="toggleAlert($event)">
+							{{ legend.el.num }}
+						</span>
+	           		</div>
+	           		<div class="radioactive highlight" v-show="legend.el.rad">
+	           			<img src="./img/radiation.svg" alt=""  v-on:mouseover="toggleAlert($event, `<p>Радиация</p>`)" v-on:mouseout="toggleAlert($event)">
+	           		</div>
+	        	</div>
+				
+				<div class="Ar highlight">
+					<span v-on:mouseover="toggleAlert($event, `<p>Ar - относительная атомная масса — значение массы атома, выраженное в атомных единицах массы (а.е.м)</p>`)"
+					 v-on:mouseout="toggleAlert($event)">
 						{{ legend.el.Ar }}
 					</span>
 				</div>
-				<ol class="oxidation" on>
-					<li data-textAlert='Степень окисления - вспомогательная условная величина для записи процессов окисления,
-					 восстановления и окислительно-восстановительных реакций (указан самый частый показатель)'
-					  v-for="(ox, i) in legend.el.oxs":key="'m'+i">
+				<ol class="oxidation highlight">
+					<li v-on:mouseover="toggleAlert($event, `<p>Степень окисления - вспомогательная условная величина для записи процессов окисления,
+					 восстановления и окислительно-восстановительных реакций (указан самый частый показатель)</p>`)" v-on:mouseout="toggleAlert($event)"
+					 v-for="(ox, i) in legend.el.oxs":key="'m'+i">
 						{{ ox }}
 					</li>
 				</ol>
-				<div class="name-ru" >
-					<span data-textAlert="Название элемента на русском языке">
+				<div class="name-ru highlight" >
+					<span v-on:mouseover="toggleAlert($event, `<p>Название элемента на русском языке</p>`)" v-on:mouseout="toggleAlert($event)">
 						{{ legend.el.ru }}
 					</span>
 				</div>
-				<div class="name-la" >
-					<span data-textAlert="Название элемента на латыни">
+				<div class="name-la highlight" >
+					<span v-on:mouseover="toggleAlert($event, `<p>Название элемента на латыни</p>`)" v-on:mouseout="toggleAlert($event)">
 						{{ legend.el.la }}
 					</span>
 				</div>
@@ -156,13 +163,12 @@
 
 			<div class="legend-inf">
 				<div v-html="legend.text"></div>
-				<div id="scrollbar"></div>
 			</div>
 		</div>
 		<div id="table" style="display: flex; width: 95%;flex-wrap: wrap;" :class="classTable">
 			<ol class="group">
-				<li class="first"><span v-on:mouseover="toggleAlert($event, 'period-info')" v-on:mouseout="toggleAlert($event)">1</span></li>
-				<li class="tp1"><span>2</span></li>
+				<li class="first"><span v-on:mouseover="toggleAlert($event, groupText)" v-on:mouseout="toggleAlert($event)">1</span></li>
+				<li class="tp1"><span v-on:mouseover="toggleAlert($event, groupText)" v-on:mouseout="toggleAlert($event)">2</span></li>
 				<li class="tp3"><span>3</span></li>
 				<li class="tp3"><span>4</span></li>
 				<li class="tp3"><span>5</span></li>
@@ -171,13 +177,13 @@
 				<li class="tp3"><span>8</span></li>
 				<li class="tp3"><span>9</span></li>
 				<li class="tp3"><span>10</span></li>
-				<li class="tp3" v-show="isWideTable"><span>11</span></li>
-				<li class="tp3" v-show="isWideTable"><span>12</span></li>
-				<li class="tp1" v-show="isWideTable"><span>13</span></li>
-				<li class="tp1" v-show="isWideTable"><span>14</span></li>
-				<li class="tp1" v-show="isWideTable"><span>15</span></li>
-				<li class="tp1" v-show="isWideTable"><span>16</span></li>
-				<li class="tp1" v-show="isWideTable"><span>17</span></li>
+				<li class="tp3" v-show="isWideTable"><span v-on:mouseover="toggleAlert($event, groupText)" v-on:mouseout="toggleAlert($event)">11</span></li>
+				<li class="tp3" v-show="isWideTable"><span v-on:mouseover="toggleAlert($event, groupText)" v-on:mouseout="toggleAlert($event)">12</span></li>
+				<li class="tp1" v-show="isWideTable"><span v-on:mouseover="toggleAlert($event, groupText)" v-on:mouseout="toggleAlert($event)">13</span></li>
+				<li class="tp1" v-show="isWideTable"><span v-on:mouseover="toggleAlert($event, groupText)" v-on:mouseout="toggleAlert($event)">14</span></li>
+				<li class="tp1" v-show="isWideTable"><span v-on:mouseover="toggleAlert($event, groupText)" v-on:mouseout="toggleAlert($event)">15</span></li>
+				<li class="tp1" v-show="isWideTable"><span v-on:mouseover="toggleAlert($event, groupText)" v-on:mouseout="toggleAlert($event)">16</span></li>
+				<li class="tp1" v-show="isWideTable"><span v-on:mouseover="toggleAlert($event, groupText)" v-on:mouseout="toggleAlert($event)">17</span></li>
 				<li v-show="isWideTable">
 					<span v-on:mouseover="toggleAlert($event, groupText)" v-on:mouseout="toggleAlert($event)">
 						18
@@ -186,9 +192,10 @@
 			</ol>
 			<div style="display: flex; width: 100%;">
 				<ol class="period">
-					<li v-for="n in 7":key="'k'+n" class="number-period"
-						v-on:mouseover="toggleAlert($event, periodText)"
-						v-on:mouseout="toggleAlert($event)">{{ n }}
+					<li v-for="n in 7":key="'k'+n" class="number-period">
+						<span v-on:mouseover="toggleAlert($event, periodText)" v-on:mouseout="toggleAlert($event)">
+							{{ n }}
+						</span>
 					</li>
 				</ol>
 				<ol>
@@ -205,13 +212,17 @@
 	<script src="scripts/popupWindow.js"></script>
 	<script src="vue/components.js"></script>
 	<script>
+	
 		Vue.component("item-element", {
 			props: ["data"],
 			template: `
 			<li class="element-storage" :id="data.sym">
 				<div class="element" :class="data.cls" :style="data.st" v-on:click="$emit('element-click', data)">
 					<div class="symbol">{{ data.sym }}</div>
-					<div class="number">{{ data.num }}</div>
+					<div class="num-and-rad-storage" style="">
+						<div class="number">{{ data.num }}</div>
+						<div class="radioactive" v-if="data.rad"><img src="./img/radiation.svg" alt=""></div>
+					</div>				
 					<div class="Ar">{{ data.Ar }}</div>
 					<ol class="oxidation">
 						<li v-for="i in data.oxs">{{ i }}</li>
@@ -264,7 +275,7 @@
 						oxs:["+4"],
 						ru:"Полоний",
 						la:"Polonium",
-						cls:"radioactive p metal ",
+						cls:"p metal ",
 						st: {background: "#ffd737",color: "#000"},
 					},
 					text: `
@@ -325,12 +336,12 @@
 					{ sym:"Zr", num:"40", Ar:"91,224", oxs:[+4], ru:"Цирконий", la:"Zirconium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
 					{ sym:"Nb", num:"41", Ar:"92,9064", oxs:[+5], ru:"Ниобий", la:"Niobium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
 					{ sym:"Mo", num:"42", Ar:"95,96", oxs:[+6], ru:"Молибден", la:"Molybdaenum", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
-					{ sym:"Tc", num:"43", Ar:"97,907", oxs:[+7], ru:"Технеций", la:"Technetium", cls:"radioactive d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Tc", num:"43", Ar:"97,907", oxs:[+7], ru:"Технеций", la:"Technetium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
 					{ sym:"Ru", num:"44", Ar:"101,07", oxs:[+4], ru:"Рутений", la:"Ruthenium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
 					{ sym:"Rh", num:"45", Ar:"102,9055", oxs:[+3], ru:"Родий", la:"Rhodium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
 					{ sym:"Pd", num:"46", Ar:"106,42", oxs:[+2], ru:"Палладий", la:"Palladium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
 					{ sym:"Ag", num:"47", Ar:"107,8682", oxs:[+1], ru:"Серебро", la:"Argentum", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
-					{ sym:"Cd", num:"48", Ar:"112,411", oxs:[+2], ru:"Кадмий", la:"Cadmium", cls:"d metal, ", st: {background: "#5ca7e0",color: "#000"}, st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Cd", num:"48", Ar:"112,411", oxs:[+2], ru:"Кадмий", la:"Cadmium", cls:"d metal, ", st: {background: "#5ca7e0",color: "#000"}},
 					{ sym:"In", num:"49", Ar:"114,818", oxs:[+3], ru:"Индий", la:"Indium", cls:"p metal ", st: {background: "#ffd737",color: "#000"}},
 					{ sym:"Sn", num:"50", Ar:"118,71", oxs:[+4], ru:"Олово", la:"Stannum", cls:"p metal ", st: {background: "#ffd737",color: "#000"}},
 					{ sym:"Sb", num:"51", Ar:"121,76", oxs:[+3], ru:"Сурьма", la:"Stibium", cls:"p metal ", st: {background: "#ffd737",color: "#000"}},
@@ -351,32 +362,32 @@
 					{ sym:"Hg", num:"80", Ar:"200,59", oxs:[+2], ru:"Ртуть", la:"Hydrargyrum", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
 					{ sym:"Tl", num:"81", Ar:"204,3833", oxs:[+1], ru:"Таллий", la:"Thallium", cls:"p metal ", st: {background: "#ffd737",color: "#000"}},
 					{ sym:"Pb", num:"82", Ar:"207,2", oxs:[+2], ru:"Свинец", la:"Plumbum", cls:"p metal ", st: {background: "#ffd737",color: "#000"}},
-					{ sym:"Bi", num:"83", Ar:"208,9804", oxs:[+3], ru:"Висмут", la:"Bismuthum", cls:"radioactive p metal ", st: {background: "#ffd737",color: "#000"}},
-					{ sym:"Po", num:"84", Ar:"208,98", oxs:[+4], ru:"Полоний", la:"Polonium", cls:"radioactive p metal ", st: {background: "#ffd737",color: "#000"}},
-					{ sym:"At", num:"85", Ar:"[210]", oxs:[+4], ru:"Астат", la:"Astatium", cls:"radioactive p nmetal ", st: {background: "#ffd737",color: "#000"}},
-					{ sym:"Rn", num:"86", Ar:"[222]", oxs:[+2], ru:"Радон", la:"Radon", cls:"radioactive p nmetal ", st: {background: "#ffd737",color: "#000"}},
-					{ sym:"Fr", num:"87", Ar:"[223]", oxs:[+1], ru:"Франций", la:"Francium", cls:"radioactive s metal ", st: {background: "#fe83b5",color: "#000"}},
-					{ sym:"Ra", num:"88", Ar:"226,025", oxs:[+2], ru:"Радий", la:"Radium", cls:"radioactive s metal ", st: {background: "#fe83b5",color: "#000"}},
-					{ sym:"Ac", num:"89", Ar:"227,0278", oxs:[+3], ru:"Актиний", la:"Actinium", cls:"radioactive d metal actinoid ", st: {background: "#5ca7e0",color: "#000"}},
-					{ sym:"Rf", num:"104", Ar:"[261]", oxs:[], ru:"Резерфордий", la:"Rutherfordium", cls:"radioactive d metal ", st: {background: "#5ca7e0",color: "#000"}},
-					{ sym:"Db", num:"105", Ar:"[262]", oxs:[], ru:"Дубний", la:"Dubnium", cls:"radioactive d metal ", st: {background: "#5ca7e0",color: "#000"}},
-					{ sym:"Sg", num:"106", Ar:"[263]", oxs:[], ru:"Сиборгий", la:"Seaborgium", cls:"radioactive d metal ", st: {background: "#5ca7e0",color: "#000"}},
-					{ sym:"Bh", num:"107", Ar:"[267]", oxs:[], ru:"Борий", la:"Bohrium", cls:"radioactive d metal ", st: {background: "#5ca7e0",color: "#000"}},
-					{ sym:"Hs", num:"108", Ar:"[269]", oxs:[], ru:"Хассий", la:"Hassium", cls:"radioactive d metal ", st: {background: "#5ca7e0",color: "#000"}},
-					{ sym:"Mt", num:"109", Ar:"[278]", oxs:[], ru:"Мейтнерий", la:"Meitnerium", cls:"radioactive d metal ", st: {background: "#5ca7e0",color: "#000"}},
-					{ sym:"Ds", num:"110", Ar:"[281]", oxs:[], ru:"Дармштадтий", la:"Darmstadtium", cls:"radioactive d metal ", st: {background: "#5ca7e0",color: "#000"}},
-					{ sym:"Rg", num:"111", Ar:"[281]", oxs:[], ru:"Рентгений", la:"Roentgenium", cls:"radioactive d metal ", st: {background: "#5ca7e0",color: "#000"}},
-					{ sym:"Cn", num:"112", Ar:"[262]", oxs:[], ru:"Коперниций", la:"Copernicium", cls:"radioactive d metal ", st: {background: "#5ca7e0",color: "#000"}},
-					{ sym:"Nh", num:"113", Ar:"[283]", oxs:[], ru:"Нихоний", la:"Nihonium", cls:"radioactive p metal ", st: {background: "#ffd737",color: "#000"}},
-					{ sym:"Fl", num:"114", Ar:"[289]", oxs:[], ru:"Флеровий", la:"Flerovium", cls:"radioactive p metal ", st: {background: "#ffd737",color: "#000"}},
-					{ sym:"Mc", num:"115", Ar:"[289]", oxs:[], ru:"Московий", la:"Moscovium", cls:"radioactive p metal ", st: {background: "#ffd737",color: "#000"}},
-					{ sym:"Lv", num:"116", Ar:"[293]", oxs:[], ru:"Ливерморий", la:"Livermorium", cls:"radioactive p metal ", st: {background: "#ffd737",color: "#000"}},
-					{ sym:"Ts", num:"117", Ar:"[294]", oxs:[], ru:"Теннессин", la:"Tennessine", cls:"radioactive p metal ", st: {background: "#ffd737",color: "#000"}},
-					{ sym:"Og", num:"118", Ar:"[294]", oxs:[0], ru:"Оганесон", la:"Oganesson", cls:"radioactive p nmetal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Bi", num:"83", Ar:"208,9804", oxs:[+3], ru:"Висмут", la:"Bismuthum", cls:"p metal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Po", num:"84", Ar:"208,98", oxs:[+4], ru:"Полоний", la:"Polonium", cls:"p metal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"At", num:"85", Ar:"[210]", oxs:[+4], ru:"Астат", la:"Astatium", cls:"p nmetal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Rn", num:"86", Ar:"[222]", oxs:[+2], ru:"Радон", la:"Radon", cls:"p nmetal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Fr", num:"87", Ar:"[223]", oxs:[+1], ru:"Франций", la:"Francium", cls:"s metal ", st: {background: "#fe83b5",color: "#000"}},
+					{ sym:"Ra", num:"88", Ar:"226,025", oxs:[+2], ru:"Радий", la:"Radium", cls:"s metal ", st: {background: "#fe83b5",color: "#000"}},
+					{ sym:"Ac", num:"89", Ar:"227,0278", oxs:[+3], ru:"Актиний", la:"Actinium", cls:"d metal actinoid ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Rf", num:"104", Ar:"[261]", oxs:[], ru:"Резерфордий", la:"Rutherfordium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Db", num:"105", Ar:"[262]", oxs:[], ru:"Дубний", la:"Dubnium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Sg", num:"106", Ar:"[263]", oxs:[], ru:"Сиборгий", la:"Seaborgium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Bh", num:"107", Ar:"[267]", oxs:[], ru:"Борий", la:"Bohrium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Hs", num:"108", Ar:"[269]", oxs:[], ru:"Хассий", la:"Hassium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Mt", num:"109", Ar:"[278]", oxs:[], ru:"Мейтнерий", la:"Meitnerium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Ds", num:"110", Ar:"[281]", oxs:[], ru:"Дармштадтий", la:"Darmstadtium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Rg", num:"111", Ar:"[281]", oxs:[], ru:"Рентгений", la:"Roentgenium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Cn", num:"112", Ar:"[262]", oxs:[], ru:"Коперниций", la:"Copernicium", cls:"d metal ", st: {background: "#5ca7e0",color: "#000"}},
+					{ sym:"Nh", num:"113", Ar:"[283]", oxs:[], ru:"Нихоний", la:"Nihonium", cls:"p metal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Fl", num:"114", Ar:"[289]", oxs:[], ru:"Флеровий", la:"Flerovium", cls:"p metal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Mc", num:"115", Ar:"[289]", oxs:[], ru:"Московий", la:"Moscovium", cls:"p metal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Lv", num:"116", Ar:"[293]", oxs:[], ru:"Ливерморий", la:"Livermorium", cls:"p metal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Ts", num:"117", Ar:"[294]", oxs:[], ru:"Теннессин", la:"Tennessine", cls:"p metal ", st: {background: "#ffd737",color: "#000"}},
+					{ sym:"Og", num:"118", Ar:"[294]", oxs:[0], ru:"Оганесон", la:"Oganesson", cls:"p nmetal ", st: {background: "#ffd737",color: "#000"}},
 					{ sym:"Ce", num:"58", Ar:"140,116", oxs:[+3], ru:"Церий", la:"Cerium", cls:"f-light metal ", st: {background: "#90cd8e",color: "#000"}},
 					{ sym:"Pr", num:"59", Ar:"140,9077", oxs:[+3], ru:"Празеодим", la:"Praseodymium", cls:"f-light metal ", st: {background: "#90cd8e",color: "#000"}},
 					{ sym:"Nd", num:"60", Ar:"144,24", oxs:[+3], ru:"Неодим", la:"Neodymium", cls:"f-light metal ", st: {background: "#90cd8e",color: "#000"}},
-					{ sym:"Pm", num:"61", Ar:"[145]", oxs:[+3], ru:"Прометий", la:"Promethium", cls:"radioactive f-light metal ", st: {background: "#90cd8e",color: "#000"}},
+					{ sym:"Pm", num:"61", Ar:"[145]", oxs:[+3], ru:"Прометий", la:"Promethium", cls:"f-light metal ", st: {background: "#90cd8e",color: "#000"}},
 					{ sym:"Sm", num:"62", Ar:"150,36", oxs:[+3], ru:"Самарий", la:"Samarium", cls:"f-light metal ", st: {background: "#90cd8e",color: "#000"}},
 					{ sym:"Eu", num:"63", Ar:"151,964", oxs:[+3], ru:"Европий", la:"Europium", cls:"f-light metal ", st: {background: "#90cd8e",color: "#000"}},
 					{ sym:"Gd", num:"64", Ar:"157,25", oxs:[+3], ru:"Гадолиний", la:"Gadolinium", cls:"f-light metal ", st: {background: "#90cd8e",color: "#000"}},
@@ -387,20 +398,20 @@
 					{ sym:"Tm", num:"69", Ar:"168,9342", oxs:[+3], ru:"Тулий", la:"Thulium", cls:"f-light metal ", st: {background: "#90cd8e",color: "#000"}},
 					{ sym:"Yb", num:"70", Ar:"173,045", oxs:[+3], ru:"Иттербий", la:"Ytterbium", cls:"f-light metal ", st: {background: "#90cd8e",color: "#000"}},
 					{ sym:"Lu", num:"71", Ar:"174,967", oxs:[+3], ru:"Лютеций", la:"Lutetium", cls:"f-light metal ", st: {background: "#90cd8e",color: "#000"}},
-					{ sym:"Th", num:"90", Ar:"232,038", oxs:[+4], ru:"Торий", la:"Thorium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}},
-					{ sym:"Pa", num:"91", Ar:"231,036", oxs:[+5], ru:"Протактиний", la:"Protactinium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}},
-					{ sym:"U", num:"92", Ar:"238,029", oxs:[+6], ru:"Уран", la:"Uranium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}},
-					{ sym:"Np", num:"93", Ar:"237,048", oxs:[+5], ru:"Нептуний", la:"Neptunium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}},
-					{ sym:"Pu", num:"94", Ar:"[244]", oxs:[+3,+4], ru:"Плутоний", la:"Plutonium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}},
-					{ sym:"Am", num:"95", Ar:"[243]", oxs:[+3], ru:"Америций", la:"Americium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}},
-					{ sym:"Cm", num:"96", Ar:"[247]", oxs:[+3], ru:"Кюрий", la:"Curium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}},
-					{ sym:"Bk", num:"97", Ar:"[247]", oxs:[+3], ru:"Берклий", la:"Berkelium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}},
-					{ sym:"Cf", num:"98", Ar:"[251]", oxs:[+3], ru:"Калифорний", la:"Californium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}},
-					{ sym:"Es", num:"99", Ar:"[252]", oxs:[+3], ru:"Эйнштейний", la:"Einsteinium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}},
-					{ sym:"Fm", num:"100", Ar:"[257]", oxs:[+3], ru:"Фермий", la:"Fermium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}},
-					{ sym:"Md", num:"101", Ar:"[258]", oxs:[+3], ru:"Менделевий", la:"Mendelevium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}},
-					{ sym:"No", num:"102", Ar:"[259]", oxs:[+2], ru:"Нобелий", la:"Nobelium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}},
-					{ sym:"Lr", num:"103", Ar:"[260]", oxs:[+3], ru:"Лоуренсий", la:"Lawrencium", cls:"radioactive f-dark metal ", st: {background: "#78bd62",color: "#000"}}
+					{ sym:"Th", num:"90", Ar:"232,038", oxs:[+4], ru:"Торий", la:"Thorium", cls:"f-dark metal ", st: {background: "#78bd62",color: "#000"}},
+					{ sym:"Pa", num:"91", Ar:"231,036", oxs:[+5], ru:"Протактиний", la:"Protactinium", cls:"f-dark metal ", st: {background: "#78bd62",color: "#000"}},
+					{ sym:"U", num:"92", Ar:"238,029", oxs:[+6], ru:"Уран", la:"Uranium", cls:"f-dark metal ", st: {background: "#78bd62",color: "#000"}},
+					{ sym:"Np", num:"93", Ar:"237,048", oxs:[+5], ru:"Нептуний", la:"Neptunium", cls:"f-dark metal ", st: {background: "#78bd62",color: "#000"}},
+					{ sym:"Pu", num:"94", Ar:"[244]", oxs:[+3,+4], ru:"Плутоний", la:"Plutonium", cls:"f-dark metal ", st: {background: "#78bd62",color: "#000"}},
+					{ sym:"Am", num:"95", Ar:"[243]", oxs:[+3], ru:"Америций", la:"Americium", cls:"f-dark metal ", st: {background: "#78bd62",color: "#000"}},
+					{ sym:"Cm", num:"96", Ar:"[247]", oxs:[+3], ru:"Кюрий", la:"Curium", cls:"f-dark metal ", st: {background: "#78bd62",color: "#000"}},
+					{ sym:"Bk", num:"97", Ar:"[247]", oxs:[+3], ru:"Берклий", la:"Berkelium", cls:"f-dark metal ", st: {background: "#78bd62",color: "#000"}},
+					{ sym:"Cf", num:"98", Ar:"[251]", oxs:[+3], ru:"Калифорний", la:"Californium", cls:"f-dark metal ", st: {background: "#78bd62",color: "#000"}},
+					{ sym:"Es", num:"99", Ar:"[252]", oxs:[+3], ru:"Эйнштейний", la:"Einsteinium", cls:"f-dark metal ", st: {background: "#78bd62",color: "#000"}},
+					{ sym:"Fm", num:"100", Ar:"[257]", oxs:[+3], ru:"Фермий", la:"Fermium", cls:"f-dark metal ", st: {background: "#78bd62",color: "#000"}},
+					{ sym:"Md", num:"101", Ar:"[258]", oxs:[+3], ru:"Менделевий", la:"Mendelevium", cls:"f-dark metal ", st: {background: "#78bd62",color: "#000"}},
+					{ sym:"No", num:"102", Ar:"[259]", oxs:[+2], ru:"Нобелий", la:"Nobelium", cls:"f-dark metal ", st: {background: "#78bd62",color: "#000"}},
+					{ sym:"Lr", num:"103", Ar:"[260]", oxs:[+3], ru:"Лоуренсий", la:"Lawrencium", cls:"f-dark metal ", st: {background: "#78bd62",color: "#000"}, rad: true}
 				]
 			},
 			methods: {
@@ -433,20 +444,26 @@
 
 
 		function initHighlight() {
-			let nodes = document.getElementById("element-legend").childNodes;
+			let nodes = document.getElementById("element-legend").querySelectorAll(".highlight");
 			for (let i = 0; i < nodes.length; i++) {
 				nodes[i].addEventListener("click", function() {
 
-					let els = document.getElementsByClassName(nodes[i].classList[0]);
-					for (let j = 0; j < els.length; j++) {
-						els[j].classList.add("active");
-						setTimeout( function() { els[j].classList.remove("active") }, 500 );
-					}
+					setTimeout(function() {
+						let els = document.getElementsByClassName(nodes[i].classList[0]);
 
+						for (let j = 0; j < els.length; j++) {
+							els[j].classList.add("active");
+							setTimeout( function() { els[j].classList.remove("active") }, 500 );
+						}
+
+					}, 0);
+						
 				});
 			}
 		}
 		initHighlight();
+
+
 		function toggleMenu() {
 			document.getElementById("menu-icon").classList.toggle("menuexpanded");
 		}
