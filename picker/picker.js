@@ -61,7 +61,7 @@ var Line = {
 			Line.Hue = t;
 
 			blockPicker.style.backgroundColor = "rgb("+convert.hsv_rgb(t,100,100)+")";
-			callback("rgb("+convert.hsv_rgb(t,100,100)+")");
+			callback("rgb(" + convert.hsv_rgb(t, 100, 100) + ")");
 		}
 		// события перемещения по линии
 		arrows.onmousedown = function() {
@@ -184,7 +184,7 @@ var Block = {
 			picker.S = S;
 
 			picker.V = V;
-			callback("rgb("+convert.hsv_rgb(t,100,100)+")");
+			callback("rgb(" + convert.hsv_rgb(Line.Hue, S, V) + ")");
 		}
 
 		block.onclick = function(e) {
