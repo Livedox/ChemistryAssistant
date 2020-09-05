@@ -1,4 +1,4 @@
-function toggleAlert(e, text) {
+/*function toggleAlert(e, text) {
 	if(e.type === "mouseover") {
 		let element = document.createElement("div");
 		let coords = e.target.getBoundingClientRect();
@@ -22,4 +22,4 @@ function toggleAlert(e, text) {
 	}
 	
 
-}
+}*/
