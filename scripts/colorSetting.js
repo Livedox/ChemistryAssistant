@@ -3,7 +3,6 @@ let colorSetting = {
 	classes: [],
 	class: "soluble",
 	property: "background",
-	element: document.querySelector(".soluble.color-li-background"),
 	setActiveProperty: function(cls, property) {
 		this.element.classList.toggle("active");
 		this.class = cls ? cls : "s";
@@ -45,7 +44,7 @@ let colorSetting = {
 			this.type = type.toLowerCase();
 			if(this.type === "m") {
 				this.classes = ["s", "p", "d", "f-top", "f-bottom"];
-				this.class = "p";
+				this.class = "s";
 			} else {
 				this.classes = ["soluble", "insoluble", "slightlySoluble", "decomposes"];
 				this.class = "soluble";

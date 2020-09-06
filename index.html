@@ -39,8 +39,8 @@
 		}
 	</script>
 	<div id="app">
-		<header>
-			<div id="header-toggle" onclick="this.parentElement.classList.toggle('active')">
+		<header :class="isMenuActive ? 'active' : ''">
+			<div id="header-toggle" v-on:click="toggleMenu">
 				<svg x="0px" y="0px" viewBox="0 0 1000 260" xml:space="preserve">
 					<rect x="0" y="213.333" width="1000" height="42.667"/>
 					<rect x="0" y="106.667" width="1000" height="42.667"/>
@@ -49,8 +49,8 @@
 			</div>
 
 
-			<div id="menu">
-				<svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" v-on:click="isActiveLinks = !isActiveLinks">
+			<div id="menu" :class="isSubMenuActive ? 'menuexpanded' : ''">
+				<svg id="menu-icon" viewBox="0 0 900 900" v-on:click="isSubMenuActive = !isSubMenuActive">
 					<g id="dashes">
 						<path class="menu-icon-dash" id="dash-bottom" d="M145 609l609 0c74,0 74,111 0,111l-609 0c-74,0 -74,-111 0,-111z"></path>
 						<path class="menu-icon-dash" id="dash-middle" d="M146 394c203,0 406,0 609,0 74,0 74,111 0,111 -203,0 -406,0 -609,0 -74,0 -74,-111 0,-111z"></path>
@@ -58,9 +58,9 @@
 					</g>
 				</svg>
 
-				<div id="storege-menu-links" v-show="isActiveLinks">
+				<div id="storege-menu-links">
 					<ol>
-						<li><a href="#">Таблица Менделеева</a></li>
+						<li><a href="index.html">Таблица Менделеева</a></li>
 						<li><a href="tableSolubility.html">Таблица растворимости</a></li>
 					</ol>
 				</div>
@@ -174,42 +174,41 @@
 
 		<div id="legend" :class="classTable">
 			<div id="element-legend" :class="legend.el.cls" :style="legend.el.st">
-				<div class="symbol highlight" v-on:mouseover="toggleAlert($event, 'alert-text', `<p>Химический символ - сокращённое буквенное обозначение химических элементов,
-				состоят из первой буквы или первой и одной из следующих букв латинского названия элементов</p>`)" v-on:mouseout="toggleAlert($event)">
+				<div class="symbol highlight" v-on:mouseover="showAlert($event, 'alert-text', `<p>Химический символ - сокращённое буквенное обозначение химических элементов,
+				состоят из первой буквы или первой и одной из следующих букв латинского названия элементов</p>`)">
 	        		{{ legend.el.sym }}
 	        	</div>
 	        	<div class="num-and-rad-storage">
 	        		<div class="number highlight">
-						<span v-on:mouseover="toggleAlert($event, 'alert-text', `<p>Атомный (порядковый) номер - номер химического элемента в периодической системе элементов. 
-						Равен числу протонов и электронов в атоме и определяет положительный заряд ядра</p>`)" v-on:mouseout="toggleAlert($event)">
+						<span v-on:mouseover="showAlert($event, 'alert-text', `<p>Атомный (порядковый) номер - номер химического элемента в периодической системе элементов. 
+						Равен числу протонов и электронов в атоме и определяет положительный заряд ядра</p>`)">
 							{{ legend.el.num }}
 						</span>
 	           		</div>
 	           		<div class="radioactive highlight" v-show="legend.el.rad">
-	           			<img src="./img/radiation.svg" alt=""  v-on:mouseover="toggleAlert($event, 'alert-text', `<p>Радиация</p>`)" v-on:mouseout="toggleAlert($event)">
+	           			<img src="./img/radiation.svg" alt=""  v-on:mouseover="showAlert($event, 'alert-text', `<p>Радиация</p>`)">
 	           		</div>
 	        	</div>
 				
 				<div class="Ar highlight">
-					<span v-on:mouseover="toggleAlert($event, 'alert-text', `<p>Ar - относительная атомная масса — значение массы атома, выраженное в атомных единицах массы (а.е.м)</p>`)"
-					 v-on:mouseout="toggleAlert($event)">
+					<span v-on:mouseover="showAlert($event, 'alert-text', `<p>Ar - относительная атомная масса — значение массы атома, выраженное в атомных единицах массы (а.е.м)</p>`)">
 						{{ legend.el.Ar }}
 					</span>
 				</div>
 				<ol class="oxidation highlight">
-					<li v-on:mouseover="toggleAlert($event, 'alert-text', `<p>Степень окисления - вспомогательная условная величина для записи процессов окисления,
-					 восстановления и окислительно-восстановительных реакций (указан самый частый показатель)</p>`)" v-on:mouseout="toggleAlert($event)"
+					<li v-on:mouseover="showAlert($event, 'alert-text', `<p>Степень окисления - вспомогательная условная величина для записи процессов окисления,
+					 восстановления и окислительно-восстановительных реакций (указан самый частый показатель)</p>`)"
 					 v-for="(ox, i) in legend.el.oxs":key="'m'+i">
 						{{ ox }}
 					</li>
 				</ol>
 				<div class="name-ru highlight" >
-					<span v-on:mouseover="toggleAlert($event, 'alert-text', `<p>Название элемента на русском языке</p>`)" v-on:mouseout="toggleAlert($event)">
+					<span v-on:mouseover="showAlert($event, 'alert-text', `<p>Название элемента на русском языке</p>`)">
 						{{ legend.el.ru }}
 					</span>
 				</div>
 				<div class="name-la highlight" >
-					<span v-on:mouseover="toggleAlert($event, 'alert-text', `<p>Название элемента на латыни</p>`)" v-on:mouseout="toggleAlert($event)">
+					<span v-on:mouseover="showAlert($event, 'alert-text', `<p>Название элемента на латыни</p>`)">
 						{{ legend.el.la }}
 					</span>
 				</div>
@@ -221,8 +220,8 @@
 		</div>
 		<div id="table" style="display: flex; width: 95%;flex-wrap: wrap;" :class="classTable">
 			<ol class="group">
-				<li class="first"><span v-on:mouseover="toggleAlert($event, 'alert-group')" v-on:mouseout="toggleAlert($event)">1</span></li>
-				<li class="tp1"><span v-on:mouseover="toggleAlert($event, 'alert-group')" v-on:mouseout="toggleAlert($event)">2</span></li>
+				<li class="first"><span v-on:mouseover="showAlert($event, 'alert-group')">1</span></li>
+				<li class="tp1"><span v-on:mouseover="showAlert($event, 'alert-group')">2</span></li>
 				<li class="tp3"><span>3</span></li>
 				<li class="tp3"><span>4</span></li>
 				<li class="tp3"><span>5</span></li>
@@ -231,15 +230,15 @@
 				<li class="tp3"><span>8</span></li>
 				<li class="tp3"><span>9</span></li>
 				<li class="tp3"><span>10</span></li>
-				<li class="tp3" v-show="isWideTable"><span v-on:mouseover="toggleAlert($event, 'alert-group')" v-on:mouseout="toggleAlert($event)">11</span></li>
-				<li class="tp3" v-show="isWideTable"><span v-on:mouseover="toggleAlert($event, 'alert-group')" v-on:mouseout="toggleAlert($event)">12</span></li>
-				<li class="tp1" v-show="isWideTable"><span v-on:mouseover="toggleAlert($event, 'alert-group')" v-on:mouseout="toggleAlert($event)">13</span></li>
-				<li class="tp1" v-show="isWideTable"><span v-on:mouseover="toggleAlert($event, 'alert-group')" v-on:mouseout="toggleAlert($event)">14</span></li>
-				<li class="tp1" v-show="isWideTable"><span v-on:mouseover="toggleAlert($event, 'alert-group')" v-on:mouseout="toggleAlert($event)">15</span></li>
-				<li class="tp1" v-show="isWideTable"><span v-on:mouseover="toggleAlert($event, 'alert-group')" v-on:mouseout="toggleAlert($event)">16</span></li>
-				<li class="tp1" v-show="isWideTable"><span v-on:mouseover="toggleAlert($event, 'alert-group')" v-on:mouseout="toggleAlert($event)">17</span></li>
+				<li class="tp3" v-show="isWideTable"><span v-on:mouseover="showAlert($event, 'alert-group')">11</span></li>
+				<li class="tp3" v-show="isWideTable"><span v-on:mouseover="showAlert($event, 'alert-group')">12</span></li>
+				<li class="tp1" v-show="isWideTable"><span v-on:mouseover="showAlert($event, 'alert-group')">13</span></li>
+				<li class="tp1" v-show="isWideTable"><span v-on:mouseover="showAlert($event, 'alert-group')">14</span></li>
+				<li class="tp1" v-show="isWideTable"><span v-on:mouseover="showAlert($event, 'alert-group')">15</span></li>
+				<li class="tp1" v-show="isWideTable"><span v-on:mouseover="showAlert($event, 'alert-group')">16</span></li>
+				<li class="tp1" v-show="isWideTable"><span v-on:mouseover="showAlert($event, 'alert-group')">17</span></li>
 				<li v-show="isWideTable">
-					<span v-on:mouseover="toggleAlert($event, 'alert-group')" v-on:mouseout="toggleAlert($event)">
+					<span v-on:mouseover="showAlert($event, 'alert-group')">
 						18
 					</span>
 				</li>
@@ -247,7 +246,7 @@
 			<div style="display: flex; width: 100%;">
 				<ol class="period">
 					<li v-for="n in 7":key="'k'+n" :class="(!isWideTable && n > 3) ? 'high' : ''">
-						<span v-on:mouseover="toggleAlert($event, 'alert-period')" v-on:mouseout="toggleAlert($event)">
+						<span v-on:mouseover="showAlert($event, 'alert-period')">
 							{{ n }}
 						</span>
 					</li>
@@ -275,7 +274,8 @@
 			mixins: [mixin],
 			el: "#app",
 			data: {
-				isActiveLinks: false,
+				isMenuActive: false,
+				isSubMenuActive: false,
 				isWideTable: true,
 				isActive: false,
 				numActive: true,
@@ -318,6 +318,11 @@
 					this.legend.el = data;
 					getElementData(data.sym).then((result) => {this.legend.text = result.info});
 				},
+				toggleMenu: function() {
+					this.isMenuActive = !this.isMenuActive;
+					this.settings.isActive = false;
+					this.isSubMenuActive = false;
+				}
 			},
 			computed: {
 				classTable: function() {
@@ -364,7 +369,7 @@
 			document.getElementById("menu-icon").classList.toggle("menuexpanded");
 		}
 		document.getElementById("menu-icon").addEventListener("click", toggleMenu);
-		
+
 		colorSetting.init("M");
 		document.body.onload = function() {
 			picker.init(function(color) {colorSetting.changeColorsElements(color) });

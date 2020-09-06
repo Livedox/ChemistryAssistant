@@ -35,7 +35,7 @@ header.picker-active {
 }
 
 #storege-menu-links {
-	display: block;
+	display: none;
 	top: 50px;
 	background-color: #2d3436;
 	position: absolute;
@@ -139,13 +139,17 @@ header.picker-active {
 	cursor: pointer;
 }
 
-.menuexpanded #dash-top {
+#menu.menuexpanded #storege-menu-links {
+	display: block;
+}
+
+.menuexpanded #menu-icon #dash-top {
 	transform: translateY(16.75%) translateX(-16.9%) rotate(45deg);
 }
-.menuexpanded #dash-bottom {
+.menuexpanded #menu-icon #dash-bottom {
 	transform: translateY(16.75%) translateX(16.9%) rotate(135deg);
 }
-.menuexpanded #dash-middle {
+.menuexpanded #menu-icon #dash-middle {
 	transform: rotate(135deg);
 	opacity: 0;
 }

@@ -40,6 +40,10 @@ body{
 	position: relative;
 	overflow: hidden;
 }
+#solubilityTable td{
+	text-shadow: #000000 0 0 1px, #ffffff 0 0 1px;
+}
+
 #solubilityTable th{
 	background: #2d3436;
 	color: #dfe6e9;
@@ -54,7 +58,6 @@ body{
 	background: rgba(255, 255, 255, 0.4);
 }
 #solubilityTable td.active{
-	text-shadow: #000000 0 0 1px;
 	color: #fff !important;
 	font-size: 1.1em;
 	border: 2px solid red;
