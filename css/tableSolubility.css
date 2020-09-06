@@ -36,6 +36,7 @@ body{
 #solubilityTable td, #solubilityTable th{
 	border: 1px solid black;
 	font-size: 1em;
+	line-height: 1em;
 	position: relative;
 	overflow: hidden;
 }
@@ -53,7 +54,11 @@ body{
 	background: rgba(255, 255, 255, 0.4);
 }
 #solubilityTable td.active{
-	color: #fff;
+	text-shadow: #000000 0 0 1px;
+	color: #fff !important;
 	font-size: 1.1em;
 	border: 2px solid red;
+}
+ol{
+	list-style: none;
 }
