@@ -2,7 +2,7 @@ Vue.component("item-element", {
 	props: ["data"],
 	template: `
 	<li class="element-storage" :id="data.sym">
-		<div class="element" :class="data.cls" :style="data.st" v-on:click="$emit('element-click', data)">
+		<div class="element" :class="data.cls" :style="data.st" v-on:click="$emit('element-click', $event.currentTarget, data)">
 			<div class="symbol">{{ data.sym }}</div>
 			<div class="num-and-rad-storage" style="">
 				<div class="number">{{ data.num }}</div>

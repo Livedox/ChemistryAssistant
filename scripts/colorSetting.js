@@ -82,7 +82,7 @@ let colorSetting = {
 	},
 	_setColorMenTable: function(cls, property, color) {
 		if(app.legend.el.cls.split(" ").indexOf(cls) + 1) {
-			app.legend.el.st[property] = color;
+			app.legend.el.st[property] = color;			
 		}
 		app.table.forEach(function(item, i) {
 			if(app.table[i].cls === cls) {

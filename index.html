@@ -313,9 +313,11 @@
 				table: table,
 			},
 			methods: {
-				changeLegend: function(data) {
+				changeLegend: function(el, data) {
 					document.documentElement.scrollIntoView();
 					this.legend.el = data;
+					this.legend.el.st.background = el.style.background;
+					this.legend.el.st.color = el.style.color;
 					getElementData(data.sym).then((result) => {this.legend.text = result.info});
 				},
 				toggleMenu: function() {

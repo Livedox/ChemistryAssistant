@@ -50,34 +50,43 @@
 
 </head>
 <body>
-	<header>
-		<div id="header-toggle" onclick="this.parentElement.classList.toggle('active')">
-			<svg x="0px" y="0px" viewBox="0 0 1000 260" xml:space="preserve">
-				<rect x="0" y="213.333" width="1000" height="42.667"/>
-				<rect x="0" y="106.667" width="1000" height="42.667"/>
-				<rect x="0" y="0" width="1000" height="42.667"/>
-			</svg>
-		</div>
-
-
-		<div id="menu">
-			<svg version="1.1" id="button-menu" x="0px" y="0px" viewBox="0 0 124 124" xml:space="preserve">
-				<g>
-					<path d="M112,6H12C5.4,6,0,11.4,0,18s5.4,12,12,12h100c6.6,0,12-5.4,12-12S118.6,6,112,6z"/>
-					<path d="M112,50H12C5.4,50,0,55.4,0,62c0,6.6,5.4,12,12,12h100c6.6,0,12-5.4,12-12C124,55.4,118.6,50,112,50z"/>
-					<path d="M112,94H12c-6.6,0-12,5.4-12,12s5.4,12,12,12h100c6.6,0,12-5.4,12-12S118.6,94,112,94z"/>
-				</g>
-			</svg>
-
-			<div id="storagege-menu-links">
-				<ol>
-					<li><a href="#">Таблица Менделеева</a></li>
-					<li><a href="tableSolubility.html">Таблица растворимости</a></li>
-				</ol>
+	<div id="app">
+		<header :class="isMenuActive ? 'active' : ''">
+			<div id="header-toggle" v-on:click="toggleMenu">
+				<svg x="0px" y="0px" viewBox="0 0 1000 260" xml:space="preserve">
+					<rect x="0" y="213.333" width="1000" height="42.667"/>
+					<rect x="0" y="106.667" width="1000" height="42.667"/>
+					<rect x="0" y="0" width="1000" height="42.667"/>
+				</svg>
 			</div>
-		</div>
-		<a class="name-sait" href="#">ChemistryAssistant.ru</a>
-	</header>
+
+
+			<div id="menu" :class="isSubMenuActive ? 'menuexpanded' : ''">
+				<svg id="menu-icon" viewBox="0 0 900 900" v-on:click="isSubMenuActive = !isSubMenuActive">
+					<g id="dashes">
+						<path class="menu-icon-dash" id="dash-bottom" d="M145 609l609 0c74,0 74,111 0,111l-609 0c-74,0 -74,-111 0,-111z"></path>
+						<path class="menu-icon-dash" id="dash-middle" d="M146 394c203,0 406,0 609,0 74,0 74,111 0,111 -203,0 -406,0 -609,0 -74,0 -74,-111 0,-111z"></path>
+						<path class="menu-icon-dash" id="dash-top" d="M146 179l609 0c74,0 74,111 0,111l-609 0c-74,0 -74,-111 0,-111z"></path>
+					</g>
+				</svg>
+
+				<div id="storege-menu-links">
+					<ol>
+						<li><a href="index.html">Таблица Менделеева</a></li>
+						<li><a href="tableSolubility.html">Таблица растворимости</a></li>
+					</ol>
+				</div>
+			</div>
+			<a class="name-sait" href="#">ChemistryAssistant.ru</a>
+			<p id="open-calculator" title="Открыть на этой странице" onclick="createCalculator()">Калькулятор</p>
+
+			<div v-on:click="settings.isActive = !settings.isActive" class="toggle-settings" :class="settings.isActive ? 'active' : ''">
+				<svg height="512pt" viewBox="0 0 512 512" width="512pt">
+					<path d="m499.953125 197.703125-39.351563-8.554687c-3.421874-10.476563-7.660156-20.695313-12.664062-30.539063l21.785156-33.886719c3.890625-6.054687 3.035156-14.003906-2.050781-19.089844l-61.304687-61.304687c-5.085938-5.085937-13.035157-5.941406-19.089844-2.050781l-33.886719 21.785156c-9.84375-5.003906-20.0625-9.242188-30.539063-12.664062l-8.554687-39.351563c-1.527344-7.03125-7.753906-12.046875-14.949219-12.046875h-86.695312c-7.195313 0-13.421875 5.015625-14.949219 12.046875l-8.554687 39.351563c-10.476563 3.421874-20.695313 7.660156-30.539063 12.664062l-33.886719-21.785156c-6.054687-3.890625-14.003906-3.035156-19.089844 2.050781l-61.304687 61.304687c-5.085937 5.085938-5.941406 13.035157-2.050781 19.089844l21.785156 33.886719c-5.003906 9.84375-9.242188 20.0625-12.664062 30.539063l-39.351563 8.554687c-7.03125 1.53125-12.046875 7.753906-12.046875 14.949219v86.695312c0 7.195313 5.015625 13.417969 12.046875 14.949219l39.351563 8.554687c3.421874 10.476563 7.660156 20.695313 12.664062 30.539063l-21.785156 33.886719c-3.890625 6.054687-3.035156 14.003906 2.050781 19.089844l61.304687 61.304687c5.085938 5.085937 13.035157 5.941406 19.089844 2.050781l33.886719-21.785156c9.84375 5.003906 20.0625 9.242188 30.539063 12.664062l8.554687 39.351563c1.527344 7.03125 7.753906 12.046875 14.949219 12.046875h86.695312c7.195313 0 13.421875-5.015625 14.949219-12.046875l8.554687-39.351563c10.476563-3.421874 20.695313-7.660156 30.539063-12.664062l33.886719 21.785156c6.054687 3.890625 14.003906 3.039063 19.089844-2.050781l61.304687-61.304687c5.085937-5.085938 5.941406-13.035157 2.050781-19.089844l-21.785156-33.886719c5.003906-9.84375 9.242188-20.0625 12.664062-30.539063l39.351563-8.554687c7.03125-1.53125 12.046875-7.753906 12.046875-14.949219v-86.695312c0-7.195313-5.015625-13.417969-12.046875-14.949219zm-152.160156 58.296875c0 50.613281-41.179688 91.792969-91.792969 91.792969s-91.792969-41.179688-91.792969-91.792969 41.179688-91.792969 91.792969-91.792969 91.792969 41.179688 91.792969 91.792969zm0 0"/>
+				</svg>
+			</div>
+
+		</header>
 
 	<div id="chemical-editor">
 		<div id="storage-chemical-element">
@@ -230,7 +239,7 @@
 						}
 
 						thumb.style.top = newTop + 'px';
-						if(fun) fun( +(newTop/(shiftY + slider.offsetHeight - thumb.offsetHeight)).toFixed(2) );				
+						if(fun) fun( +(newTop/(shiftY + slider.offsetHeight - thumb.offsetHeight)).toFixed(4) );				
 					}
 
 					function onMouseUp() {
@@ -248,12 +257,12 @@
 				let custom = chemecalEditor.customCanvas;
 				custom.width = custom.getAttribute("data-width")*(scale*1.5 + 0.5);
 				custom.height = custom.getAttribute("data-height")*(scale*1.5 + 0.5);
-				console.log(custom);
 				if(custom.className === "polygon") {
 					chemecalEditor.setCanvas(custom).drawPolygon({x: 50, y: 50}, +custom.getAttribute("data-side"), 50, {scale: scale*1.5 + 0.5});
 				} else if(custom.className === "text") {
-					console.log(custom);
 					chemecalEditor.setCanvas(custom).drawText(custom.getAttribute("data-text"), {scale: scale*1.5 + 0.5});
+				} else if(custom.className === "line") {
+					chemecalEditor.setCanvas(custom).drawLine(custom.getAttribute("data-coord"), {scale: scale*1.5 + 0.5});
 				}
 				
 			},
@@ -310,6 +319,15 @@
 				this.ctx.font = `bold ${fontSize}px sans-serif`;
 				this.ctx.fillText(text, 0, fontSize);
 				return this;		
+			},
+			drawLine: function(x, y, obj) {
+				const opt = this._setOpt(obj);
+				if(opt.create) this.createCanvas(opt.scale, {x: x + 1, y: y + 1});
+				this.ctx.beginPath();
+				this.ctx.moveTo(0, 0);
+				this.ctx.lineTo(x, y);
+				this.ctx.lineWidth = 2*opt.scale;
+				this.ctx.stroke();
 			}
 		}
 		let canv = document.querySelector(".canvas-main");
@@ -358,6 +376,8 @@
 			link.href = canv.toDataURL("image/png");
 			link.click();
 		}
+
+		chemecalEditor.drawLine(50, 50, {create: true});
 	</script>
 </body>
 </html>
