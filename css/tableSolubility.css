@@ -40,13 +40,27 @@ body{
 	position: relative;
 	overflow: hidden;
 }
-#solubilityTable td{
+#solubilityTable td, #solubilityTable th{
 	text-shadow: #000000 0 0 1px, #ffffff 0 0 1px;
 }
-
-#solubilityTable th{
+.header-cell{
 	background: #2d3436;
 	color: #dfe6e9;
+}
+.soluble{
+	background: #fe83b5;
+}
+.insoluble{
+	background: #90cd8e;
+}
+.slightlySoluble{
+	background: #5ca7e0;
+}
+.decomposes{
+	background: #ffd737;
+}
+.color-li-color{
+	background: none;
 }
 #solubilityTable th:first-child{
 	width: 8%;

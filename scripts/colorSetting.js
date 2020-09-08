@@ -32,9 +32,10 @@ let colorSetting = {
 			localStorage.setItem("f-bottom", "{\"background\":\"#78bd62\",\"color\":\"#000\"}");
 		} else {
 			localStorage.setItem("soluble", "{\"background\":\"#fe83b5\",\"color\":\"#000\"}");
-			localStorage.setItem("insoluble", "{\"background\":\"#ffd737\",\"color\":\"#000\"}");
+			localStorage.setItem("insoluble", "{\"background\":\"#90cd8e\",\"color\":\"#000\"}");
 			localStorage.setItem("slightlySoluble", "{\"background\":\"#5ca7e0\",\"color\":\"#000\"}");
 			localStorage.setItem("decomposes", "{\"background\":\"#90cd8e\",\"color\":\"#000\"}");
+			localStorage.setItem("header-cell", "{\"background\":\"#2d3436\",\"color\":\"#dfe6e9\"}");
 		}
 		
 		this.init();
@@ -46,7 +47,7 @@ let colorSetting = {
 				this.classes = ["s", "p", "d", "f-top", "f-bottom"];
 				this.class = "s";
 			} else {
-				this.classes = ["soluble", "insoluble", "slightlySoluble", "decomposes"];
+				this.classes = ["soluble", "insoluble", "slightlySoluble", "decomposes", "header-cell"];
 				this.class = "soluble";
 			}
 			this.element = document.querySelector("."+this.class+".color-li-"+this.property);

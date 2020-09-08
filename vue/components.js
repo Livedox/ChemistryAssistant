@@ -54,3 +54,21 @@ Vue.component("alert-group", {
 Vue.component("alert-text", {
 	template: "<div><slot></slot></div>"
 });
+
+Vue.component("modal-window", {
+	props: ["data"],
+	template: `
+		<div class="modal-window" :style="data.coords"  v-on:mousedown="$emit('element-down', $event)" v-show="data.active">
+			<div class="close-modal-window" v-on:click="modal.active = false">
+				<svg enable-background="new 0 0 413.348 413.348" height="10px" viewBox="0 0 413.348 413.348" width="10px">
+					<path d="m413.348 24.354-24.354-24.354-182.32 182.32-182.32-182.32-24.354
+					24.354 182.32 182.32-182.32 182.32 24.354 24.354 182.32-182.32 182.32 182.32 24.354-24.354-182.32-182.32z"/>
+				</svg>
+			</div>
+			<div class="content-modal-window">
+				<component :is="data.component"></component>
+				<div v-html="data.text"></div>
+			</div>
+		</div>
+	`
+});

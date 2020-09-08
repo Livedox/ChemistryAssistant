@@ -1,7 +1,6 @@
 #color-selection{
 	width: 335px;
 	z-index: 200;
-	background: #2f3f3f;
 	padding: 10px;
 	display: flex;
 	justify-content: center;
@@ -41,7 +40,7 @@
 	width: 31px;
 	height: 31px;
 	margin: 0 5px 7px 15px;
-	border: 2px solid #2d3436;
+	border: 1px solid #dfe6e9;
 	box-sizing: border-box;
 	padding: 1px;
 }

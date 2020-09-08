@@ -5,8 +5,7 @@
 	<meta charset="utf-8">
 	<meta content="width=device-width" name="viewport">
 	<link href="https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Roboto:wght@500&display=swap" rel="stylesheet"> 
-	<title>Интерактивная периодическая система элементов</title>
-	<link rel="stylesheet" type="text/css" href="style.css">	
+	<title>Интерактивная периодическая система элементов</title>	
 	<link rel="stylesheet" type="text/css" href="css/header.css">
 	<link rel="stylesheet" type="text/css" href="css/tableMendeleev.css">
 	<link rel="stylesheet" type="text/css" href="css/legend.css">
@@ -259,6 +258,7 @@
 		<div class="alert" :class="alert.class" :style="alert.coords" v-show="alert.active">
 			<component :is="alert.component"><div v-html="alert.text"></div></component>
 		</div>
+		<modal-window :data="modal" v-on:element-down="moveModal"></modal-window>
 	</div>
 	
 	<script src="scripts/alert.js"></script>
@@ -271,7 +271,7 @@
 	<script src="scripts/table.js"></script>
 	<script>
 		let app = new Vue({
-			mixins: [mixin],
+			mixins: [mixinAlert, mixinModal],
 			el: "#app",
 			data: {
 				isMenuActive: false,
