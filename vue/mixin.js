@@ -42,8 +42,8 @@ const mixinModal = {
 		return {
 			modal: {
 				active: true,
-				component: "",
-				text: "<p>123456</p>",
+				component: "modal-alkaline-earth",
+				text: "",
 				coords: {
 					top: 0,
 					left: 0

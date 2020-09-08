@@ -258,7 +258,7 @@
 		<div class="alert" :class="alert.class" :style="alert.coords" v-show="alert.active">
 			<component :is="alert.component"><div v-html="alert.text"></div></component>
 		</div>
-		<modal-window :data="modal" v-on:element-down="moveModal"></modal-window>
+		<modal-window :data="modal" v-on:element-down="moveModal" v-on:close="modal.active = false"></modal-window>
 	</div>
 	
 	<script src="scripts/alert.js"></script>
