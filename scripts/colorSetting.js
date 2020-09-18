@@ -68,7 +68,7 @@ var colorSetting = {
           if (color) {
             document.querySelector("." + cls + ".color-li-" + property).style[property] = color;
 
-            if (this.type === "m") {
+            if (colorSetting.type === "m") {
               colorSetting._setColorMenTable(cls, property, color);
             } else {
               colorSetting._setColorSolTable(cls, property, color);
