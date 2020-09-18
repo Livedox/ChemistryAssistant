@@ -11,15 +11,12 @@ header {
 	top: -50px;
 	box-shadow: 0 0 5px grey;
 }
-
 header.active {
 	top: 0;
 }
-
 header.picker-active {
 	top: 0;
 }
-
 #header-toggle {
 	position: absolute;
 	left: 50%;
@@ -28,12 +25,11 @@ header.picker-active {
 	background: #00181f;
 	padding: 2px;
 	cursor: pointer;
+	svg {
+		width: 72px;
+		fill: #dfe6e9;
+	}
 }
-#header-toggle svg {
-	width: 72px;
-	fill: #dfe6e9;
-}
-
 #storege-menu-links {
 	display: none;
 	top: 50px;
@@ -42,46 +38,44 @@ header.picker-active {
 	transition: 1s;
 	z-index: 99;
 	width: 300px;
+	ol {
+		list-style: none;
+	}
+	a {
+		text-align: center;
+		padding: 15px 0 15px 0;
+		text-decoration: none;
+		display: block;
+		width: 100%;
+		color: #b2bec3;
+		border-bottom: 1px solid #636e72;
+		border-top: 1px solid #636e72;
+		transition: 0.2s;
+		&:hover {
+			background-color: #636e72;
+			color: white;
+		}
+	}
 }
-#storege-menu-links ol {
-	list-style: none;
-}
-#storege-menu-links a {
-	text-align: center;
-	padding: 15px 0 15px 0;
-	text-decoration: none;
-	display: block;
-	width: 100%;
-	color: #b2bec3;
-	border-bottom: 1px solid #636e72;
-	border-top: 1px solid #636e72;
-	transition: 0.2s;
-}
-#storege-menu-links a:hover {
-	background-color: #636e72;
-	color: white;
-}
-
 .name-sait {
 	font-size: 20px;
 	color: #dfe6e9;
 	text-decoration: none;
 	position: relative;
+	&::before {
+		content: "";
+		bottom: 0;
+		left: 0;
+		position: absolute;
+		width: 0;
+		height: 2px;
+		background-color: #dfe6e9;
+		transition: 0.2s;
+	}
+	&:hover::before {
+		width: 100%;
+	}
 }
-.name-sait::before {
-	content: "";
-	bottom: 0;
-	left: 0;
-	position: absolute;
-	width: 0;
-	height: 2px;
-	background-color: #dfe6e9;
-	transition: 0.2s;
-}
-.name-sait:hover::before {
-	width: 100%;
-}
-
 #open-calculator {
 	position: relative;
 	margin-left: auto;
@@ -89,21 +83,20 @@ header.picker-active {
 	font-size: 20px;
 	color: #dfe6e9;
 	cursor: pointer;
+	&::before {
+		content: "";
+		bottom: 0;
+		left: 0;
+		position: absolute;
+		width: 0;
+		height: 2px;
+		background-color: #dfe6e9;
+		transition: 0.2s;
+	}
+	&:hover::before {
+		width: 100%;
+	}
 }
-#open-calculator::before {
-	content: "";
-	bottom: 0;
-	left: 0;
-	position: absolute;
-	width: 0;
-	height: 2px;
-	background-color: #dfe6e9;
-	transition: 0.2s;
-}
-#open-calculator:hover::before {
-	width: 100%;
-}
-
 #button-color-picker {
 	background: #fe83b5;
 	width: 80px;
@@ -117,8 +110,7 @@ header.picker-active {
 	font-family: Arial;
 	color: #fff;
 	text-shadow: 1px 1px #000, 1px -1px #000, -1px 1px #000, -1px -1px #000;
-	-webkit-user-select: none;
-	        user-select: none;
+	user-select: none;
 	cursor: pointer;
 }
 
@@ -126,7 +118,7 @@ header.picker-active {
 	fill: #dfe6e9;
 	transform-origin: 50% 50%;
 	opacity: 100;
-	transition: transform 0.3s, opacity 0.3s;
+	transition: transform .3s, opacity .3s;
 }
 
 #menu-icon {
@@ -139,17 +131,21 @@ header.picker-active {
 	cursor: pointer;
 }
 
-#menu.menuexpanded #storege-menu-links {
-	display: block;
+#menu.menuexpanded{
+	#storege-menu-links{
+		display: block;
+	}
 }
 
-.menuexpanded #menu-icon #dash-top {
-	transform: translateY(16.75%) translateX(-16.9%) rotate(45deg);
-}
-.menuexpanded #menu-icon #dash-bottom {
-	transform: translateY(16.75%) translateX(16.9%) rotate(135deg);
-}
-.menuexpanded #menu-icon #dash-middle {
-	transform: rotate(135deg);
-	opacity: 0;
+.menuexpanded #menu-icon{
+	#dash-top {
+		transform: translateY(16.75%) translateX(-16.9%) rotate(45deg);
+	}
+	#dash-bottom {
+		transform: translateY(16.75%) translateX(16.9%) rotate(135deg);
+	}
+	#dash-middle {
+		transform: rotate(135deg);
+		opacity: 0;
+	}
 }

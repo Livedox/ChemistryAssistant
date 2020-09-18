@@ -1,33 +1,23 @@
-var abcde = document.getElementById("colors").querySelector(".s");
 var picker = {
 	V: 100,
 	S: 100,
 	status: false,
 
-	init: function() {
+	init: function(callback) {
 		var id_elements = {
 			primary: "primary_block",
-			arrows: "arrows",
-			block: "block_picker",
 			circle: "circle",
 			line: "line"
 		}
 
-		var s = {
-			h: 180,
-			w: 20,
-			th: id_elements.arrows,
-			bk: id_elements.block,
-			line: id_elements.line
-		}
 		/*
 		Параметры передаваемые через обьект "s" обьекту "Line"
 		h - высота линни Hue
 		w- ширина линни Hue
 		th  - id для елмента в котором находяться стрелки || ползунок для управление шкалой Hue
-		bk - id блока главного блока с изображение и изменяемым фоном
+		blockPicker - id блока главного блока с изображение и изменяемым фоном
 		*/
-		Line.init(s); //отрисовка линий hue и привязка событий
+		Line.init(callback); //отрисовка линий hue и привязка событий
 
 		var b = {
 			block: id_elements.block,
@@ -38,9 +28,7 @@ var picker = {
 		id - id блока выбора цвета (основной блок)
 		c - круг для перемещения по основнoму блоку(для выбора цвета)
 		*/
-		Block.init(b); // привязка событий к блоку и кругу для управления
-
-		picker.out_color = document.getElementById("out_color");
+		Block.init(callback); // привязка событий к блоку и кругу для управления
 
 	}
 }
@@ -49,38 +37,34 @@ var Line = {
 
 	Hue: 0,
 
-	init: function(elem) {
+	init: function(callback) {
 
-		var canvaLine, cAr, pst, bk, t = 0;;
+		var canvaLine, arrows, pst, blockPicker, t = 0;;
 
-		canvaLine = Line.create(elem.h, elem.w, elem.line, "cLine");
+		canvaLine = Line.create(180, 20, "line", "cLine");
 
-		cAr = document.getElementById(elem.th);
-		bk = document.getElementById(elem.bk);
+		arrows = document.getElementById("arrows");
+		blockPicker = document.getElementById("block-picker");
 
 		Line.posit = function(e) {
 			var top, rgb;
 
 			top = mouse.pageY(e) - pst;
 			top = (top < 0) ? 0 : top;
-			top = (top > elem.h) ? elem.h : top;
+			top = (top > 180) ? 180 : top;
 
-			cAr.style.top = top - 2 + "px";
-			t = Math.round(top / (elem.h / 360));
+			arrows.style.top = top - 2 + "px";
+			t = Math.round(top / (180 / 360));
 			t = Math.abs(t - 360);
 			t = (t == 360) ? 0 : t;
 
 			Line.Hue = t;
 
-			bk.style.backgroundColor = "rgb("+convert.hsv_rgb(t,100,100)+")";
-			localStorage.setItem(abcde.classList[0], "rgb(" + convert.hsv_rgb(t, 100, 100) + ")");
-			for (let i = 0; i < document.getElementsByClassName(abcde.classList[0]).length; i++) {
-				document.getElementsByClassName(abcde.classList[0])[i].style.backgroundColor = "rgb(" + convert.hsv_rgb(t, 100, 100) + ")";
-			}
+			blockPicker.style.backgroundColor = "rgb("+convert.hsv_rgb(t,100,100)+")";
+			callback("rgb(" + convert.hsv_rgb(t, 100, 100) + ")");
 		}
 		// события перемещения по линии
-		cAr.onmousedown = function() {
-
+		arrows.onmousedown = function() {
 			pst = Obj.positY(canvaLine);
 
 			document.onmousemove = function(e) {
@@ -88,7 +72,7 @@ var Line = {
 			}
 		}
 
-		cAr.onclick = Line.posit;
+		arrows.onclick = Line.posit;
 
 		canvaLine.onclick = function(e) {
 			Line.posit(e)
@@ -104,7 +88,7 @@ var Line = {
 		}
 		document.onmouseup = function() {
 			document.onmousemove = null;
-			cAr.onmousemove = null;
+			arrows.onmousemove = null;
 
 		}
 	},
@@ -154,18 +138,16 @@ var Line = {
 
 var Block = {
 
-	init: function(elem) {
+	init: function(callback) {
 
-		var circle, block, colorO, bPstX, bPstY, bWi, bHe, cW, cH, pxY, pxX;
-
-		circle = document.getElementById(elem.circle);
-		block = document.getElementById(elem.block);
-		cW = circle.offsetWidth;
-		cH = circle.offsetHeight;
-		bWi = block.offsetWidth - cW;
-		bHe = block.offsetHeight - cH;
-		pxY = bHe / 100;
-		pxX = bWi / 100;
+		var circle = document.getElementById("circle"),
+			block = document.getElementById("block-picker"),
+			cW = circle.offsetWidth,
+			cH = circle.offsetHeight,
+			bWi = block.offsetWidth - cW,
+			bHe = block.offsetHeight - cH,
+			pxY = bHe / 100,
+			pxX = bWi / 100;
 
 		Block.cPos = function(e) {
 
@@ -202,11 +184,7 @@ var Block = {
 			picker.S = S;
 
 			picker.V = V;
-
-			localStorage.setItem(abcde.classList[0], "rgb(" + convert.hsv_rgb(Line.Hue, S, V) + ")");
-			for (let i = 0; i < document.getElementsByClassName(abcde.classList[0]).length; i++) {
-				document.getElementsByClassName(abcde.classList[0])[i].style.backgroundColor = "rgb(" + convert.hsv_rgb(Line.Hue, S, V) + ")";
-			}
+			callback("rgb(" + convert.hsv_rgb(Line.Hue, S, V) + ")");
 		}
 
 		block.onclick = function(e) {

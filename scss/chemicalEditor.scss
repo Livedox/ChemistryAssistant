@@ -1,0 +1,41 @@
+#chemical-editor{
+	width: 100vw;
+	height: 100vh;
+}
+#storage-chemical-element{
+	display: flex;
+	padding: 10px;
+	min-width: 150px;
+	width: 8vw;
+	background: rgba(45, 52, 54, 0.1);
+	position: fixed;
+	left: 0;top: 5%;
+	flex-direction: row;
+	flex-wrap: wrap;
+	border-radius: 0 25px 25px 0;
+	div{
+		margin: 5px;
+		width: 40%;
+		text-align: center;
+		font-family: Arial;
+		font-size: 24px;
+	}
+}
+#chemical-editor-storage-canvas-main{
+	position: fixed;
+	top: 5%;right: 5%;
+	width: 80vw;
+	height: 65vh;
+	canvas{
+		cursor: move;
+		position: absolute;
+		z-index: 1;
+	}
+	.canvas-main{
+		cursor: auto;
+		top: 0;left: 0;
+		width: 1920px;height: 1080px;
+		background: rgba(0,0,0, 0.1);
+		z-index: 0;
+	}
+}

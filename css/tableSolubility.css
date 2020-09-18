@@ -36,12 +36,31 @@ body{
 #solubilityTable td, #solubilityTable th{
 	border: 1px solid black;
 	font-size: 1em;
+	line-height: 1em;
 	position: relative;
 	overflow: hidden;
 }
-#solubilityTable th{
+#solubilityTable td, #solubilityTable th{
+	text-shadow: #000000 0 0 1px, #ffffff 0 0 1px;
+}
+.header-cell{
 	background: #2d3436;
 	color: #dfe6e9;
+}
+.soluble{
+	background: #fe83b5;
+}
+.insoluble{
+	background: #90cd8e;
+}
+.slightlySoluble{
+	background: #5ca7e0;
+}
+.decomposes{
+	background: #ffd737;
+}
+.color-li-color{
+	background: none;
 }
 #solubilityTable th:first-child{
 	width: 8%;
@@ -53,7 +72,10 @@ body{
 	background: rgba(255, 255, 255, 0.4);
 }
 #solubilityTable td.active{
-	color: #fff;
+	color: #fff !important;
 	font-size: 1.1em;
 	border: 2px solid red;
+}
+ol{
+	list-style: none;
 }

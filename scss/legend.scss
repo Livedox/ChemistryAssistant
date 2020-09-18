@@ -3,8 +3,7 @@
 	display: flex;
 	justify-content: center;
 }
-
-#legend {
+#legend{
 	top: 1vw;
 	left: 14.5%;
 	position: absolute;
@@ -15,20 +14,21 @@
 	justify-content: space-around;
 	transition: left 1s ease-in;
 	z-index: 40;
-}
-#legend.shortTable {
-	top: 2vw;
-	width: 13%;
-	left: 80%;
-}
-#legend.shortTable .legend-inf {
-	display: none;
-}
-#legend.shortTable #element-legend {
-	width: 100%;
+	&.shortTable{
+		top: 2vw;
+		width: 13%;
+		left: 80%;
+		.legend-inf{
+			display: none;
+		}
+		#element-legend{
+			width: 100%;
+		}
+	}
+
 }
 
-#element-legend {
+#element-legend{
 	width: 25%;
 	box-sizing: border-box;
 	height: 14vw;
@@ -41,8 +41,7 @@
 	flex-wrap: wrap;
 	position: relative;
 }
-
-.legend-inf {
+.legend-inf{
 	width: 70%;
 	height: 14vw;
 	border: 0.22vw solid #2d3436;
@@ -53,35 +52,34 @@
 	box-sizing: border-box;
 	overflow-y: auto;
 	scrollbar-width: thin;
+	&::-webkit-scrollbar{
+		width: 5px;
+	}
+	&::-webkit-scrollbar-thumb {
+		border-radius: 5px;
+		background: #00181f; 
+	}
+	&::-webkit-scrollbar-track{
+		margin: 10px 0;
+	}
+	.help{
+		font-size: 18px;
+		font-family: Roboto;
+		h2{
+			font-family: Lora;
+			font-size: 28px;
+			text-align: center;
+		}
+		ol{
+			list-style: decimal;
+		}
+	}
 }
-.legend-inf::-webkit-scrollbar {
-	width: 5px;
-}
-.legend-inf::-webkit-scrollbar-thumb {
-	border-radius: 5px;
-	background: #00181f;
-}
-.legend-inf::-webkit-scrollbar-track {
-	margin: 10px 0;
-}
-.legend-inf .help {
-	font-size: 18px;
-	font-family: Roboto;
-}
-.legend-inf .help h2 {
-	font-family: Lora;
-	font-size: 28px;
-	text-align: center;
-}
-.legend-inf .help ol {
-	list-style: decimal;
-}
-
 .legend-inf p {
 	margin: 3px 0 3px 0;
 }
 
-#IPTCE {
+#IPTCE{
 	position: absolute;
 	font-size: 5vw;
 	left: 66%;
@@ -89,19 +87,18 @@
 	color: #2d3436;
 	font-family: Georgia;
 	transition: 1s ease-in;
-}
-#IPTCE.shortTable {
-	left: 30%;
-	top: 12px;
-	border: 1px 0 solid black;
+	&.shortTable{
+		left: 30%;
+		top: 12px;
+		border: 1px 0 solid black;
+	}
 }
 
 @media screen and (max-width: 880px) {
 	#element-legend, .legend-inf {
 		height: 140px;
 	}
-
-	#element-legend {
+	#element-legend{
 		font-size: 1.144px;
 	}
 }

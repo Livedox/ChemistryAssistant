@@ -1,16 +1,10 @@
 #color-selection{
-	position: fixed;
-	top: 50px;right: 0;
 	width: 335px;
 	z-index: 200;
-	display: none;
-	background: #2f3f3f;
 	padding: 10px;
+	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
-}
-#color-selection.active{
-	display: flex;
 }
 .picker{
 	position: relative;
@@ -20,16 +14,16 @@
 	  -webkit-user-select: none; 
 	  width:215px;
 }
-#block_picker{
+#block-picker{
 	background-color:red;
 	height:180px;
 	width:180px;
 	-moz-user-select: none;
 	-khtml-user-select: none;
 	user-select: none; 
-	  -webkit-user-select: none;   
+	  -webkit-user-select: none;
 }
-#block_picker img {
+#block-picker img {
 	width:180px;
 }
 #line {
@@ -40,45 +34,38 @@
 	user-select: none; 
 	  -webkit-user-select: none;	
 }
-#colors ol{
-	list-style: none;
-}
-#colors ol li{
+.color-li-background{
 	position: relative;
 	cursor: pointer;
-	width: 80px;
-	height: 40px;
+	width: 31px;
+	height: 31px;
 	margin: 0 5px 7px 15px;
-	border: 2px solid #2d3436;
+	border: 1px solid #dfe6e9;
 	box-sizing: border-box;
 	padding: 1px;
 }
-#colors ol li .f-dark {
-	position: absolute;
-	top: 0;bottom: 0;left: 0;right: 0;
+.color-li-color{
+	height: 31px;
+	margin: 0 0 7px 5px;
+	line-height: 31px;
+	font-size: 31px;
+	color: #000000;
+	text-shadow: #ffffff 0 0 1px;
+	user-select: none;
+	cursor: pointer;
 }
-#colors ol li .f-light {
-	position: relative;
-	width: 90px;
-	height: 40px;
-	transform: rotate(-25deg);
-	top: -21px;left: -16px;
-	border: 1px solid black;
-}
-#colors ol li .f-light svg{
-	transform: rotate(25deg);
-	position: absolute;
-	right: 64px;bottom: 22px;
-}
-#colors ol li .f-dark svg{
-	position: absolute;
-	right: 1px;bottom: 1px;
+.color-li-color.active{
+	text-shadow: gold 0 0 2px;
+	text-shadow: #000000 0 0 2px;
 }
 #colors-by-default{
 	font-family: Arial;
 	font-size: 20px;
 	color: #b2bec3;
 	cursor: pointer;
+}
+#colors{
+	display: flex;
 }
 #colors svg{
 	display: none;
