@@ -22,11 +22,13 @@ ol {
 	height: 5vw;
 	display: inline-block;
 	padding: 0;
-	transition: 1s ease-in;
+	transition: 0s ease-in;
 	margin: -1px 0 0 -1px;
 }
 
 .element {
+	-webkit-user-select: none;
+	        user-select: none;
 	width: 5vw;
 	cursor: pointer;
 	position: relative;
@@ -40,7 +42,7 @@ ol {
 	border: 1px solid #000;
 	transform-style: flat;
 	font-size: 0.05vw;
-	transition: transform 0.2s, border 0.2s, box-shadow 0.2s, width 1s ease-in;
+	transition: transform 0.2s, border 0.2s, box-shadow 0.2s, width 0s ease-in, margin 0s;
 }
 .element:hover, .element.active {
 	z-index: 5;

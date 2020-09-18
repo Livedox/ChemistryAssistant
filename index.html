@@ -21,22 +21,6 @@
 </head>
 
 <body>
-	
-	
-	<script type="text/javascript">
-		async function getElementData(symbol) {
-			let response = await fetch('php/server.php', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json;charset=utf-8'
-				},
-				body: JSON.stringify({ symbol: symbol })
-			});
-
-			let result = await response.json();
-			return result;
-		}
-	</script>
 	<div id="app">
 		<header :class="isMenuActive ? 'active' : ''">
 			<div id="header-toggle" v-on:click="toggleMenu">
@@ -46,7 +30,6 @@
 					<rect x="0" y="0" width="1000" height="42.667"/>
 				</svg>
 			</div>
-
 
 			<div id="menu" :class="isSubMenuActive ? 'menuexpanded' : ''">
 				<svg id="menu-icon" viewBox="0 0 900 900" v-on:click="isSubMenuActive = !isSubMenuActive">
@@ -64,7 +47,7 @@
 					</ol>
 				</div>
 			</div>
-			<a class="name-sait" href="#">ChemistryAssistant.ru</a>
+			<a class="name-sait" href="index.html">ChemistryAssistant.ru</a>
 			<p id="open-calculator" title="Открыть на этой странице" onclick="createCalculator()">Калькулятор</p>
 
 			<div v-on:click="settings.isActive = !settings.isActive" class="toggle-settings" :class="settings.isActive ? 'active' : ''">
@@ -185,7 +168,7 @@
 						</span>
 	           		</div>
 	           		<div class="radioactive highlight" v-show="legend.el.rad">
-	           			<img src="./img/radiation.svg" alt=""  v-on:mouseover="showAlert($event, 'alert-text', `<p>Радиация</p>`)">
+	           			<img src="./img/radiation.svg" alt=""  v-on:mouseover="showAlert($event, 'alert-text', `<p>Радиоактивен</p>`)">
 	           		</div>
 	        	</div>
 				
@@ -219,8 +202,8 @@
 		</div>
 		<div id="table" style="display: flex; width: 95%;flex-wrap: wrap;" :class="classTable">
 			<ol class="group">
-				<li class="first"><span v-on:mouseover="showAlert($event, 'alert-group')">1</span></li>
-				<li class="tp1"><span v-on:mouseover="showAlert($event, 'alert-group')">2</span></li>
+				<li class="first"><span v-on:mouseover="showAlert($event, 'alert-group')" v-on:click="setModalData('modal-alkali')">1</span></li>
+				<li class="tp1"><span v-on:mouseover="showAlert($event, 'alert-group')" v-on:click="setModalData('modal-alkaline-earth')">2</span></li>
 				<li class="tp3"><span>3</span></li>
 				<li class="tp3"><span>4</span></li>
 				<li class="tp3"><span>5</span></li>
@@ -234,8 +217,12 @@
 				<li class="tp1" v-show="isWideTable"><span v-on:mouseover="showAlert($event, 'alert-group')">13</span></li>
 				<li class="tp1" v-show="isWideTable"><span v-on:mouseover="showAlert($event, 'alert-group')">14</span></li>
 				<li class="tp1" v-show="isWideTable"><span v-on:mouseover="showAlert($event, 'alert-group')">15</span></li>
-				<li class="tp1" v-show="isWideTable"><span v-on:mouseover="showAlert($event, 'alert-group')">16</span></li>
-				<li class="tp1" v-show="isWideTable"><span v-on:mouseover="showAlert($event, 'alert-group')">17</span></li>
+				<li class="tp1" v-show="isWideTable">
+					<span v-on:mouseover="showAlert($event, 'alert-group')" v-on:click="setModalData('modal-chalcogenes')">16</span>
+				</li>
+				<li class="tp1" v-show="isWideTable">
+					<span v-on:mouseover="showAlert($event, 'alert-group')" v-on:click="setModalData('modal-halogens')">17</span>
+				</li>
 				<li v-show="isWideTable">
 					<span v-on:mouseover="showAlert($event, 'alert-group')">
 						18
@@ -255,16 +242,14 @@
 				</ol>
 			</div>	
 		</div>
-		<div class="alert" :class="alert.class" :style="alert.coords" v-show="alert.active">
+		<div class="alert" :class="alertClass" :style="alert.coords">
 			<component :is="alert.component"><div v-html="alert.text"></div></component>
 		</div>
-		<modal-window :data="modal" v-on:element-down="moveModal" v-on:close="modal.active = false"></modal-window>
+		<modal-window :data="modal" v-on:element-down="moveModal" v-on:close="modal.active = false" v-on:get="setModalData"></modal-window>
 	</div>
 	
-	<script src="scripts/alert.js"></script>
 	<script src="scripts/calculator.js"></script>
-	<script src="scripts/data.js"></script>
-	<script src="scripts/popupWindow.js"></script>
+	<script src="scripts/chemicalData.js"></script>
 	<script src="scripts/colorSetting.js"></script>
 	<script src="vue/components.js"></script>
 	<script src="vue/mixin.js"></script>
@@ -294,6 +279,7 @@
 						la:"Polonium",
 						cls:"p",
 						st: {background: "#ffd737",color: "#000"},
+						rad: true
 					},
 					text: `
 					<div class="help">
@@ -318,7 +304,10 @@
 					this.legend.el = data;
 					this.legend.el.st.background = el.style.background;
 					this.legend.el.st.color = el.style.color;
-					getElementData(data.sym).then((result) => {this.legend.text = result.info});
+					this.legend.text = chemicalData[data.sym].info;
+					if(chemicalData[data.sym].basic) {
+						this.legend.text += "<div onclick=\"app.setModalData('', '"+chemicalData[data.sym].basic+"')\">Основные свойства</div>"
+					}
 				},
 				toggleMenu: function() {
 					this.isMenuActive = !this.isMenuActive;
@@ -367,46 +356,11 @@
 		}
 		initHighlight();
 
-		function toggleMenu() {
-			document.getElementById("menu-icon").classList.toggle("menuexpanded");
-		}
-		document.getElementById("menu-icon").addEventListener("click", toggleMenu);
-
 		colorSetting.init("M");
 		document.body.onload = function() {
 			picker.init(function(color) {colorSetting.changeColorsElements(color) });
 		}
-/*
 
-        let active = false;
-
-		function a() {
-			let rNum = getRandomInt(0, 117)
-			document.getElementsByClassName("element")[rNum].classList.toggle('active');
-			setTimeout(() => document.getElementsByClassName("element")[rNum].classList.toggle('active'), 500);
-		}
-
-
-		function b() {
-			for (item of document.getElementsByClassName("number-group")) {
-				item.classList.toggle('active');
-			}
-			setTimeout(() => {
-				for (item of document.getElementsByClassName("number-group")) {
-					item.classList.toggle('active');
-				}
-			}, 500);
-			for (item of document.getElementsByClassName("number-period")) {
-				item.classList.toggle('active');
-			}
-			setTimeout(() => {
-				for (item of document.getElementsByClassName("number-period")) {
-					item.classList.toggle('active');
-				}
-			}, 500);
-		}
-
-*/
 	</script>
 </body>
 

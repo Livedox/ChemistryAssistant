@@ -43,7 +43,7 @@
 					</ol>
 				</div>
 			</div>
-			<a class="name-sait" href="#">ChemistryAssistant.ru</a>
+			<a class="name-sait" href="index.html">ChemistryAssistant.ru</a>
 			<p id="open-calculator" title="Открыть на этой странице" onclick="createCalculator()">Калькулятор</p>
 
 			<div v-on:click="settings.isActive = !settings.isActive" class="toggle-settings" :class="settings.isActive ? 'active' : ''">
@@ -112,7 +112,7 @@
 		</div>
 		<div id="name-solubility-table">Таблица растворимости</div>
 	
-		<table id="solubilityTable" style="padding-right: 2px;">
+		<table id="solubilityTable" style="padding-right: 2px;min-width: 1000px">
 			<tr>
 				<th class="header-cell">A/K</th>
 				<th class="header-cell">H<sup>+</sup></th>
@@ -140,441 +140,441 @@
 				<th class="header-cell">OH<sup>-</sup></th>
 				<td class="row1 cell1"></td>
 				<td class="row1 cell2 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'LiOH<br>Гидроксид лития')">Р</td>
-				<td class="row1 cell3" data-textAlert="KOH<br>Едкое кали">Р</td>
-				<td class="row1 cell4" data-textAlert="NaOH<br>Гидроксид натрия">Р</td>
-				<td bgcolor="#fe83b5" class="row1 cell5" data-textAlert="NH<sub>4</sub>OH<br>Гидроксид аммония">Р</td>
-				<td bgcolor="#fe83b5" class="row1 cell6" data-textAlert="Ba(OH)<sub>2</sub><br>Баритовая вода">Р</td>
-				<td bgcolor="#5ca7e0" class="row1 cell7" data-textAlert="Ca(OH)<sub>2</sub><br>Гашеная известь<br>Известковая вода/молоко">М</td>
-				<td bgcolor="#90cd8e" class="row1 cell8" data-textAlert="Mg(OH)<sub>2</sub><br>Гидроксид магния">Н</td>
-				<td bgcolor="#5ca7e0" class="row1 cell9" data-textAlert="Sr(OH)<sub>2</sub><br>Гидроксид стронция">М</td>
-				<td bgcolor="#90cd8e" class="row1 cell10" data-textAlert="Al(OH)<sub>3</sub><br>Гидроксид алюминия">Н</td>
-				<td bgcolor="#90cd8e" class="row1 cell11" data-textAlert="Cr(OH)<sub>3</sub><br>Гидроксид хрома">Н</td>
-				<td bgcolor="#90cd8e" class="row1 cell12" data-textAlert="Fe(OH)<sub>2</sub><br>Гидроксид железа (II)">Н</td>
-				<td bgcolor="#90cd8e" class="row1 cell13" data-textAlert="Fe(OH)<sub>3</sub><br>Гидроксид железа (III)">Н</td>
-				<td bgcolor="#90cd8e" class="row1 cell14" data-textAlert="Mn(OH)<sub>2</sub><br>Гидроксид марганца">Н</td>
-				<td bgcolor="#90cd8e" class="row1 cell15" data-textAlert="Zn(OH)<sub>2</sub><br>Гидроксид цинка">Н</td>
-				<td bgcolor="#ffd737" class="row1 cell16" data-textAlert="AgOH<br>Гидроксид серебра">-</td>
-				<td bgcolor="#ffd737" class="row1 cell17" data-textAlert="Hg(OH)<sub>2</sub><br>Гидроксид ртути">-</td>
-				<td bgcolor="#90cd8e" class="row1 cell18" data-textAlert="Pb(OH)<sub>2</sub><br>Гидроксид свинца">Н</td>
-				<td bgcolor="#90cd8e" class="row1 cell19" data-textAlert="Sn(OH)<sub>2</sub><br>Гидроксид олова">Н</td>
-				<td bgcolor="#90cd8e" class="row1 cell20" data-textAlert="Cu(OH)<sub>2</sub><br>Гидроксид меди">Н</td>
+				<td class="row1 cell3 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'KOH<br>Едкое кали')">Р</td>
+				<td class="row1 cell4 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'NaOH<br>Гидроксид натрия')">Р</td>
+				<td class="row1 cell5 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'NH<sub>4</sub>OH<br>Гидроксид аммония')">Р</td>
+				<td class="row1 cell6 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Ba(OH)<sub>2</sub><br>Баритовая вода')">Р</td>
+				<td class="row1 cell7 slightlySoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Ca(OH)<sub>2</sub><br>Гашеная известь<br>Известковая вода/молоко')">М</td>
+				<td class="row1 cell8 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Mg(OH)<sub>2</sub><br>Гидроксид магния')">Н</td>
+				<td class="row1 cell9 slightlySoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Sr(OH)<sub>2</sub><br>Гидроксид стронция')">М</td>
+				<td class="row1 cell10 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Al(OH)<sub>3</sub><br>Гидроксид алюминия')">Н</td>
+				<td class="row1 cell11 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Cr(OH)<sub>3</sub><br>Гидроксид хрома')">Н</td>
+				<td class="row1 cell12 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Fe(OH)<sub>2</sub><br>Гидроксид железа (II)')">Н</td>
+				<td class="row1 cell13 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Fe(OH)<sub>3</sub><br>Гидроксид железа (III)')">Н</td>
+				<td class="row1 cell14 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Mn(OH)<sub>2</sub><br>Гидроксид марганца')">Н</td>
+				<td class="row1 cell15 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Zn(OH)<sub>2</sub><br>Гидроксид цинка')">Н</td>
+				<td class="row1 cell16 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'AgOH<br>Гидроксид серебра')">-</td>
+				<td class="row1 cell17 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Hg(OH)<sub>2</sub><br>Гидроксид ртути')">-</td>
+				<td class="row1 cell18 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Pb(OH)<sub>2</sub><br>Гидроксид свинца')">Н</td>
+				<td class="row1 cell19 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Sn(OH)<sub>2</sub><br>Гидроксид олова')">Н</td>
+				<td class="row1 cell20 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Cu(OH)<sub>2</sub><br>Гидроксид меди')">Н</td>
 			</tr>
 			<tr>
 				<th class="header-cell">F<sup>-</sup></th>
-				<td bgcolor="#fe83b5" class="row2 cell1" data-textAlert="HF<br>Фтороводород<br>Плавиковая кислота">Р</td>
-				<td bgcolor="#5ca7e0" class="row2 cell2" data-textAlert="LiF<br>Фторид лития">М</td>
-				<td bgcolor="#fe83b5" class="row2 cell3" data-textAlert="KF<br>Фторид калия">Р</td>
-				<td bgcolor="#fe83b5" class="row2 cell4" data-textAlert="NaF<br>Фторид натрия">Р</td>
-				<td bgcolor="#fe83b5" class="row2 cell5" data-textAlert="NH<sub>4</sub>F<br>Фторид аммония">Р</td>
-				<td bgcolor="#5ca7e0" class="row2 cell6" data-textAlert="BaF<sub>2</sub><br>Фторид бария">М</td>
-				<td bgcolor="#90cd8e" class="row2 cell7" data-textAlert="CaF<sub>2</sub><br>Фторид кальция">Н</td>
-				<td bgcolor="#90cd8e" class="row2 cell8" data-textAlert="MgF<sub>2</sub><br>Фторид магния">Н</td>
-				<td bgcolor="#90cd8e" class="row2 cell9" data-textAlert="SrF<sub>2</sub><br>Фторид стронция">Н</td>
-				<td bgcolor="#5ca7e0" class="row2 cell10" data-textAlert="AlF<sub>3</sub><br>Фторид алюминия">М</td>
-				<td bgcolor="#90cd8e" class="row2 cell11" data-textAlert="CrF<sub>3</sub><br>Фторид хрома">Н</td>
-				<td bgcolor="#90cd8e" class="row2 cell12" data-textAlert="FeF<sub>2</sub><br>Фторид железа (II)">Н</td>
-				<td bgcolor="#90cd8e" class="row2 cell13" data-textAlert="Fe<sub>3</sub><br>Фторид железа (III)">Н</td>
-				<td bgcolor="#fe83b5" class="row2 cell14" data-textAlert="MnF<sub>2</sub><br>Фторид марганца">Р</td>
-				<td bgcolor="#fe83b5" class="row2 cell15" data-textAlert="ZnF<sub>2</sub><br>Фторид цинка">Р</td>
-				<td bgcolor="#fe83b5" class="row2 cell16" data-textAlert="AgF<br>Фторид серебра">Р</td>
-				<td bgcolor="#ffd737" class="row2 cell17" data-textAlert="HgF<sub>2</sub><br>Фторид ртути">-</td>
-				<td bgcolor="#90cd8e" class="row2 cell18" data-textAlert="PbF<sub>2</sub><br>Фторид свинца">Н</td>
-				<td bgcolor="#fe83b5" class="row2 cell19" data-textAlert="SnF<sub>2</sub><br>Фторид олова">Р</td>
-				<td bgcolor="#fe83b5" class="row2 cell20" data-textAlert="CuF<sub>2</sub><br>Фторид меди">Р</td>
+				<td class="row2 cell1 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'HF<br>Фтороводород<br>Плавиковая кислота')">Р</td>
+				<td class="row2 cell2 slightlySoluble" v-on:mouseover="showAlert($event, 'alert-text', 'LiF<br>Фторид лития')">М</td>
+				<td class="row2 cell3 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'KF<br>Фторид калия')">Р</td>
+				<td class="row2 cell4 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'NaF<br>Фторид натрия')">Р</td>
+				<td class="row2 cell5 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'NH<sub>4</sub>F<br>Фторид аммония')">Р</td>
+				<td class="row2 cell6 slightlySoluble" v-on:mouseover="showAlert($event, 'alert-text', 'BaF<sub>2</sub><br>Фторид бария')">М</td>
+				<td class="row2 cell7 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'CaF<sub>2</sub><br>Фторид кальция')">Н</td>
+				<td class="row2 cell8 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'MgF<sub>2</sub><br>Фторид магния')">Н</td>
+				<td class="row2 cell9 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'SrF<sub>2</sub><br>Фторид стронция')">Н</td>
+				<td class="row2 cell10 slightlySoluble" v-on:mouseover="showAlert($event, 'alert-text', 'AlF<sub>3</sub><br>Фторид алюминия')">М</td>
+				<td class="row2 cell11 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'CrF<sub>3</sub><br>Фторид хрома')">Н</td>
+				<td class="row2 cell12 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'FeF<sub>2</sub><br>Фторид железа (II)')">Н</td>
+				<td class="row2 cell13 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Fe<sub>3</sub><br>Фторид железа (III)')">Н</td>
+				<td class="row2 cell14 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'MnF<sub>2</sub><br>Фторид марганца')">Р</td>
+				<td class="row2 cell15 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'ZnF<sub>2</sub><br>Фторид цинка')">Р</td>
+				<td class="row2 cell16 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'AgF<br>Фторид серебра')">Р</td>
+				<td class="row2 cell17 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'HgF<sub>2</sub><br>Фторид ртути')">-</td>
+				<td class="row2 cell18 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'PbF<sub>2</sub><br>Фторид свинца')">Н</td>
+				<td class="row2 cell19 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'SnF<sub>2</sub><br>Фторид олова')">Р</td>
+				<td class="row2 cell20 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'CuF<sub>2</sub><br>Фторид меди')">Р</td>
 			</tr>
 			<tr>
 				<th class="header-cell">Cl<sup>-</sup></th>
-				<td bgcolor="#fe83b5" class="row3 cell1" data-textAlert="HCl<br>Хлороводород<br>Соляная кислота">Р</td>
-				<td bgcolor="#fe83b5" class="row3 cell2" data-textAlert="LiCl<br>Хлорид лития">Р</td>
-				<td bgcolor="#fe83b5" class="row3 cell3" data-textAlert="KCl<br>Хлорид калия">Р</td>
-				<td bgcolor="#fe83b5" class="row3 cell4" data-textAlert="NaCl<br>Хлорид натрия<br>Каменная/поваренная соль">Р</td>
-				<td bgcolor="#fe83b5" class="row3 cell5" data-textAlert="NH<sub>4</sub>Cl<br>Нашатырь">Р</td>
-				<td bgcolor="#fe83b5" class="row3 cell6" data-textAlert="BaCl<sub>2</sub><br>Хлорид бария">Р</td>
-				<td bgcolor="#fe83b5" class="row3 cell7" data-textAlert="СaCl<sub>2</sub><br>Хлорид кальция">Р</td>
-				<td bgcolor="#fe83b5" class="row3 cell8" data-textAlert="MgCl<sub>2</sub><br>Хлорид магния">Р</td>
-				<td bgcolor="#fe83b5" class="row3 cell9" data-textAlert="SrCl<sub>2</sub><br>Хлорид стронция">Р</td>
-				<td bgcolor="#fe83b5" class="row3 cell10" data-textAlert="AlCl<sub>3</sub><br>Хлорид алюминия">Р</td>
-				<td bgcolor="#fe83b5" class="row3 cell11" data-textAlert="CrCl<sub>3</sub><br>Хлорид хрома">Р</td>
-				<td bgcolor="#fe83b5" class="row3 cell12" data-textAlert="FeCl<sub>2</sub><br>Хлорид железа (II)">Р</td>
-				<td bgcolor="#fe83b5" class="row3 cell13" data-textAlert="FeCl<sub>3</sub><br>Хлорид железа (III)">Р</td>
-				<td bgcolor="#fe83b5" class="row3 cell14" data-textAlert="MnCl<sub>2</sub><br>Хлорид марганца">Р</td>
-				<td bgcolor="#fe83b5" class="row3 cell15" data-textAlert="ZnCl<sub>2</sub><br>Хлорид цинка">Р</td>
-				<td bgcolor="#90cd8e" class="row3 cell16" data-textAlert="AgCl<br>Хлорид серебра">Н</td>
-				<td bgcolor="#fe83b5" class="row3 cell17" data-textAlert="HgCl<sub>2</sub><br>Хлорид ртути">Р</td>
-				<td bgcolor="#5ca7e0" class="row3 cell18" data-textAlert="PbCl<sub>2</sub><br>Хлорид свинца">М</td>
-				<td bgcolor="#fe83b5" class="row3 cell19" data-textAlert="SnCl<sub>2</sub><br>Хлорид олова">Р</td>
-				<td bgcolor="#fe83b5" class="row3 cell20" data-textAlert="CuCl<sub>2</sub><br>Хлорид меди">Р</td>
+				<td class="row3 cell1 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'HCl<br>Хлороводород<br>Соляная кислота')">Р</td>
+				<td class="row3 cell2 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'LiCl<br>Хлорид лития')">Р</td>
+				<td class="row3 cell3 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'KCl<br>Хлорид калия')">Р</td>
+				<td class="row3 cell4 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'NaCl<br>Хлорид натрия<br>Каменная/поваренная соль')">Р</td>
+				<td class="row3 cell5 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'NH<sub>4</sub>Cl<br>Нашатырь')">Р</td>
+				<td class="row3 cell6 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'BaCl<sub>2</sub><br>Хлорид бария')">Р</td>
+				<td class="row3 cell7 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'СaCl<sub>2</sub><br>Хлорид кальция')">Р</td>
+				<td class="row3 cell8 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'MgCl<sub>2</sub><br>Хлорид магния')">Р</td>
+				<td class="row3 cell9 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'SrCl<sub>2</sub><br>Хлорид стронция')">Р</td>
+				<td class="row3 cell10 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'AlCl<sub>3</sub><br>Хлорид алюминия')">Р</td>
+				<td class="row3 cell11 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'CrCl<sub>3</sub><br>Хлорид хрома')">Р</td>
+				<td class="row3 cell12 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'FeCl<sub>2</sub><br>Хлорид железа (II)')">Р</td>
+				<td class="row3 cell13 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'FeCl<sub>3</sub><br>Хлорид железа (III)')">Р</td>
+				<td class="row3 cell14 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'MnCl<sub>2</sub><br>Хлорид марганца')">Р</td>
+				<td class="row3 cell15 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'ZnCl<sub>2</sub><br>Хлорид цинка')">Р</td>
+				<td class="row3 cell16 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'AgCl<br>Хлорид серебра')">Н</td>
+				<td class="row3 cell17 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'HgCl<sub>2</sub><br>Хлорид ртути')">Р</td>
+				<td class="row3 cell18 slightlySoluble" v-on:mouseover="showAlert($event, 'alert-text', 'PbCl<sub>2</sub><br>Хлорид свинца')">М</td>
+				<td class="row3 cell19 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'SnCl<sub>2</sub><br>Хлорид олова')">Р</td>
+				<td class="row3 cell20 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'CuCl<sub>2</sub><br>Хлорид меди')">Р</td>
 			</tr>
 			<tr>
 				<th class="header-cell">Br<sup>-</sup></th>
-				<td bgcolor="#fe83b5" class="row4 cell1" data-textAlert="HBr<br>Бромоводород">Р</td>
-				<td bgcolor="#fe83b5" class="row4 cell2" data-textAlert="LiBr<br>Бромид лития">Р</td>
-				<td bgcolor="#fe83b5" class="row4 cell3" data-textAlert="KBr<br>Бромид калия">Р</td>
-				<td bgcolor="#fe83b5" class="row4 cell4" data-textAlert="NaBr<br>Бромид натрия">Р</td>
-				<td bgcolor="#fe83b5" class="row4 cell5" data-textAlert="NH<sub>4</sub>Br<br>Бромид аммония">Р</td>
-				<td bgcolor="#fe83b5" class="row4 cell6" data-textAlert="BaBr<sub>2</sub><br>Бромид бария">Р</td>
-				<td bgcolor="#fe83b5" class="row4 cell7" data-textAlert="СaBr<sub>2</sub><br>Бромид кальция">Р</td>
-				<td bgcolor="#fe83b5" class="row4 cell8" data-textAlert="MgBr<sub>2</sub><br>Бромид магния">Р</td>
-				<td bgcolor="#fe83b5" class="row4 cell9" data-textAlert="SrBr<sub>2</sub><br>Бромид стронция">Р</td>
-				<td bgcolor="#fe83b5" class="row4 cell10" data-textAlert="AlBr<sub>3</sub><br>Бромид алюминия">Р</td>
-				<td bgcolor="#fe83b5" class="row4 cell11" data-textAlert="CrBr<sub>3</sub><br>Бромид хрома">Р</td>
-				<td bgcolor="#fe83b5" class="row4 cell12" data-textAlert="FeBr<sub>2</sub><br>Бромид железа (II)">Р</td>
-				<td bgcolor="#fe83b5" class="row4 cell13" data-textAlert="FeBr<sub>3</sub><br>Бромид железа (III)">Р</td>
-				<td bgcolor="#fe83b5" class="row4 cell14" data-textAlert="MnBr<sub>2</sub><br>Бромид марганца">Р</td>
-				<td bgcolor="#fe83b5" class="row4 cell15" data-textAlert="ZnBr<sub>2</sub><br>Бромид цинка">Р</td>
-				<td bgcolor="#90cd8e" class="row4 cell16" data-textAlert="AgBr<br>Бромид серебра">Н</td>
-				<td bgcolor="#5ca7e0" class="row4 cell17" data-textAlert="HgBr<sub>2</sub><br>Бромид ртути">М</td>
-				<td bgcolor="#5ca7e0" class="row4 cell18" data-textAlert="PbBr<sub>2</sub><br>Бромид свинца">М</td>
-				<td bgcolor="#fe83b5" class="row4 cell19" data-textAlert="SnBr<sub>2</sub><br>Бромид олова">Р</td>
-				<td bgcolor="#fe83b5" class="row4 cell20" data-textAlert="СuBr<sub>2</sub><br>Бромид меди">Р</td>
+				<td class="row4 cell1 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'HBr<br>Бромоводород')">Р</td>
+				<td class="row4 cell2 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'LiBr<br>Бромид лития')">Р</td>
+				<td class="row4 cell3 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'KBr<br>Бромид калия')">Р</td>
+				<td class="row4 cell4 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'NaBr<br>Бромид натрия')">Р</td>
+				<td class="row4 cell5 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'NH<sub>4</sub>Br<br>Бромид аммония')">Р</td>
+				<td class="row4 cell6 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'BaBr<sub>2</sub><br>Бромид бария')">Р</td>
+				<td class="row4 cell7 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'СaBr<sub>2</sub><br>Бромид кальция')">Р</td>
+				<td class="row4 cell8 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'MgBr<sub>2</sub><br>Бромид магния')">Р</td>
+				<td class="row4 cell9 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'SrBr<sub>2</sub><br>Бромид стронция')">Р</td>
+				<td class="row4 cell10 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'AlBr<sub>3</sub><br>Бромид алюминия')">Р</td>
+				<td class="row4 cell11 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'CrBr<sub>3</sub><br>Бромид хрома')">Р</td>
+				<td class="row4 cell12 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'FeBr<sub>2</sub><br>Бромид железа (II)')">Р</td>
+				<td class="row4 cell13 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'FeBr<sub>3</sub><br>Бромид железа (III)')">Р</td>
+				<td class="row4 cell14 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'MnBr<sub>2</sub><br>Бромид марганца')">Р</td>
+				<td class="row4 cell15 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'ZnBr<sub>2</sub><br>Бромид цинка')">Р</td>
+				<td class="row4 cell16 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'AgBr<br>Бромид серебра')">Н</td>
+				<td class="row4 cell17 slightlySoluble" v-on:mouseover="showAlert($event, 'alert-text', 'HgBr<sub>2</sub><br>Бромид ртути')">М</td>
+				<td class="row4 cell18 slightlySoluble" v-on:mouseover="showAlert($event, 'alert-text', 'PbBr<sub>2</sub><br>Бромид свинца')">М</td>
+				<td class="row4 cell19 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'SnBr<sub>2</sub><br>Бромид олова')">Р</td>
+				<td class="row4 cell20 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'СuBr<sub>2</sub><br>Бромид меди')">Р</td>
 			</tr>
 			<tr>
 				<th class="header-cell">I<sup>-</sup></th>
-				<td bgcolor="#fe83b5" class="row5 cell1" data-textAlert="HI<br>Иодоводород">Р</td>
-				<td bgcolor="#fe83b5" class="row5 cell2" data-textAlert="LiI<br>Иодид лития">Р</td>
-				<td bgcolor="#fe83b5" class="row5 cell3" data-textAlert="KI<br>Иодид калия">Р</td>
-				<td bgcolor="#fe83b5" class="row5 cell4" data-textAlert="NaI<br>Иодид натрия">Р</td>
-				<td bgcolor="#fe83b5" class="row5 cell5" data-textAlert="NH<sub>4</sub>I<br>Иодид аммония">Р</td>
-				<td bgcolor="#fe83b5" class="row5 cell6" data-textAlert="BaI<sub>2</sub><br>Иодид бария">Р</td>
-				<td bgcolor="#fe83b5" class="row5 cell7" data-textAlert="CaI<sub>2</sub><br>Иодид кальция">Р</td>
-				<td bgcolor="#fe83b5" class="row5 cell8" data-textAlert="MgI<sub>2</sub><br>Иодид магния">Р</td>
-				<td bgcolor="#fe83b5" class="row5 cell9" data-textAlert="SrI<sub>2</sub><br>Иодид стронция">Р</td>
-				<td bgcolor="#fe83b5" class="row5 cell10" data-textAlert="AlI<sub>3</sub><br>Иодид алюминия">Р</td>
-				<td bgcolor="#ffd737" class="row5 cell11" data-textAlert="CrI<sub>3</sub><br>Иодид хрома">?</td>
-				<td bgcolor="#fe83b5" class="row5 cell12" data-textAlert="FeI<sub>2</sub><br>Иодид железа (II)">Р</td>
-				<td bgcolor="#ffd737" class="row5 cell13" data-textAlert="FrI<sub>3</sub><br>Иодид железа (III)">?</td>
-				<td bgcolor="#fe83b5" class="row5 cell14" data-textAlert="MnI<sub>2</sub><br>Иодид марганца">Р</td>
-				<td bgcolor="#fe83b5" class="row5 cell15" data-textAlert="ZnI<sub>2</sub><br>Иодид цинка">Р</td>
-				<td bgcolor="#90cd8e" class="row5 cell16" data-textAlert="AgI<br>Иодид серебра">Н</td>
-				<td bgcolor="#90cd8e" class="row5 cell17" data-textAlert="HgI<sub>2</sub><br>Иодид ртути">Н</td>
-				<td bgcolor="#90cd8e" class="row5 cell18" data-textAlert="PbI<sub>2</sub><br>Иодид свинца">Н</td>
-				<td bgcolor="#5ca7e0" class="row5 cell19" data-textAlert="SnI<sub>2</sub><br>Иодид олова">М</td>
-				<td bgcolor="#ffd737" class="row5 cell20" data-textAlert="CuI<sub>2</sub><br>Иодид меди">?</td>
+				<td class="row5 cell1 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'HI<br>Иодоводород')">Р</td>
+				<td class="row5 cell2 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'LiI<br>Иодид лития')">Р</td>
+				<td class="row5 cell3 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'KI<br>Иодид калия')">Р</td>
+				<td class="row5 cell4 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'NaI<br>Иодид натрия')">Р</td>
+				<td class="row5 cell5 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'NH<sub>4</sub>I<br>Иодид аммония')">Р</td>
+				<td class="row5 cell6 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'BaI<sub>2</sub><br>Иодид бария')">Р</td>
+				<td class="row5 cell7 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'CaI<sub>2</sub><br>Иодид кальция')">Р</td>
+				<td class="row5 cell8 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'MgI<sub>2</sub><br>Иодид магния')">Р</td>
+				<td class="row5 cell9 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'SrI<sub>2</sub><br>Иодид стронция')">Р</td>
+				<td class="row5 cell10 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'AlI<sub>3</sub><br>Иодид алюминия')">Р</td>
+				<td class="row5 cell11 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'CrI<sub>3</sub><br>Иодид хрома')">?</td>
+				<td class="row5 cell12 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'FeI<sub>2</sub><br>Иодид железа (II)')">Р</td>
+				<td class="row5 cell13 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'FrI<sub>3</sub><br>Иодид железа (III)')">?</td>
+				<td class="row5 cell14 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'MnI<sub>2</sub><br>Иодид марганца')">Р</td>
+				<td class="row5 cell15 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'ZnI<sub>2</sub><br>Иодид цинка')">Р</td>
+				<td class="row5 cell16 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'AgI<br>Иодид серебра')">Н</td>
+				<td class="row5 cell17 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'HgI<sub>2</sub><br>Иодид ртути')">Н</td>
+				<td class="row5 cell18 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'PbI<sub>2</sub><br>Иодид свинца')">Н</td>
+				<td class="row5 cell19 slightlySoluble" v-on:mouseover="showAlert($event, 'alert-text', 'SnI<sub>2</sub><br>Иодид олова')">М</td>
+				<td class="row5 cell20 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'CuI<sub>2</sub><br>Иодид меди')">?</td>
 			</tr>
 			<tr>
 				<th class="header-cell">S<sup>2-</sup></th>
-				<td bgcolor="#fe83b5" class="row6 cell1" data-textAlert="H<sub>2</sub>S<br>Сероводород">Р</td>
-				<td bgcolor="#fe83b5" class="row6 cell2" data-textAlert="Li<sub>2</sub>S<br>Сульфид лития">Р</td>
-				<td bgcolor="#fe83b5" class="row6 cell3" data-textAlert="K<sub>2</sub>S<br>Сульфид калия">Р</td>
-				<td bgcolor="#fe83b5" class="row6 cell4" data-textAlert="Na<sub>2</sub>S<br>Сульфид натрия">Р</td>
-				<td bgcolor="#fe83b5" class="row6 cell5" data-textAlert="(NH<sub>4</sub>)<sub>2</sub>S<br>Сульфид аммония">Р</td>
-				<td bgcolor="#ffd737" class="row6 cell6" data-textAlert="BaS<br>Сульфид бария">-</td>
-				<td bgcolor="#ffd737" class="row6 cell7" data-textAlert="CaS<br>Сульфид кальция">-</td>
-				<td bgcolor="#ffd737" class="row6 cell8" data-textAlert="MgS<br>Сульфид магния">-</td>
-				<td bgcolor="#90cd8e" class="row6 cell9" data-textAlert="SrS<br>Сульфид стронция">Н</td>
-				<td bgcolor="#ffd737" class="row6 cell10" data-textAlert="Al<sub>2</sub>S<sub>3</sub><br>Сульфид алюминия">-</td>
-				<td bgcolor="#ffd737" class="row6 cell11" data-textAlert="Cr<sub>2</sub>S<sub>3</sub><br>Сульфид хрома">-</td>
-				<td bgcolor="#90cd8e" class="row6 cell12" data-textAlert="FeS<br>Сульфид железа (II)">Н</td>
-				<td bgcolor="#ffd737" class="row6 cell13" data-textAlert="Fe<sub>2</sub>S<sub>3</sub><br>Сульфид железа (III)">-</td>
-				<td bgcolor="#90cd8e" class="row6 cell14" data-textAlert="MnS<br>Сульфид марганца">Н</td>
-				<td bgcolor="#90cd8e" class="row6 cell15" data-textAlert="ZnS<br>Сульфид цинка">Н</td>
-				<td bgcolor="#90cd8e" class="row6 cell16" data-textAlert="Ag<sub>2</sub>S<br>Сульфид серебра">Н</td>
-				<td bgcolor="#90cd8e" class="row6 cell17" data-textAlert="HgS<br>Сульфид ртути">Н</td>
-				<td bgcolor="#90cd8e" class="row6 cell18" data-textAlert="PbS<br>Сульфид свинца">Н</td>
-				<td bgcolor="#90cd8e" class="row6 cell19" data-textAlert="SnS<br>Сульфид олова">Н</td>
-				<td bgcolor="#90cd8e" class="row6 cell20" data-textAlert="CuS<br>Сульфид меди">Н</td>
+				<td class="row6 cell1 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'H<sub>2</sub>S<br>Сероводород')">Р</td>
+				<td class="row6 cell2 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Li<sub>2</sub>S<br>Сульфид лития')">Р</td>
+				<td class="row6 cell3 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'K<sub>2</sub>S<br>Сульфид калия')">Р</td>
+				<td class="row6 cell4 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Na<sub>2</sub>S<br>Сульфид натрия')">Р</td>
+				<td class="row6 cell5 soluble" v-on:mouseover="showAlert($event, 'alert-text', '(NH<sub>4</sub>)<sub>2</sub>S<br>Сульфид аммония')">Р</td>
+				<td class="row6 cell6 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'BaS<br>Сульфид бария')">-</td>
+				<td class="row6 cell7 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'CaS<br>Сульфид кальция')">-</td>
+				<td class="row6 cell8 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'MgS<br>Сульфид магния')">-</td>
+				<td class="row6 cell9 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'SrS<br>Сульфид стронция')">Н</td>
+				<td class="row6 cell10 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Al<sub>2</sub>S<sub>3</sub><br>Сульфид алюминия')">-</td>
+				<td class="row6 cell11 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Cr<sub>2</sub>S<sub>3</sub><br>Сульфид хрома')">-</td>
+				<td class="row6 cell12 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'FeS<br>Сульфид железа (II)')">Н</td>
+				<td class="row6 cell13 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Fe<sub>2</sub>S<sub>3</sub><br>Сульфид железа (III)')">-</td>
+				<td class="row6 cell14 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'MnS<br>Сульфид марганца')">Н</td>
+				<td class="row6 cell15 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'ZnS<br>Сульфид цинка')">Н</td>
+				<td class="row6 cell16 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Ag<sub>2</sub>S<br>Сульфид серебра')">Н</td>
+				<td class="row6 cell17 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'HgS<br>Сульфид ртути')">Н</td>
+				<td class="row6 cell18 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'PbS<br>Сульфид свинца')">Н</td>
+				<td class="row6 cell19 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'SnS<br>Сульфид олова')">Н</td>
+				<td class="row6 cell20 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'CuS<br>Сульфид меди')">Н</td>
 			</tr>
 			<tr>
 				<th class="header-cell">HS<sup>-</sup></th>
-				<td bgcolor="#fe83b5" class="row7 cell1">Р</td>
-				<td bgcolor="#fe83b5" class="row7 cell2" data-textAlert="LiHS<br>Гидросульфид лития">Р</td>
-				<td bgcolor="#fe83b5" class="row7 cell3" data-textAlert="KHS<br>Гидросульфид калия">Р</td>
-				<td bgcolor="#fe83b5" class="row7 cell4" data-textAlert="NaHS<br>Гидросульфид натрия">Р</td>
-				<td bgcolor="#fe83b5" class="row7 cell5" data-textAlert="NH<sub>4</sub>HS<br>Гидросульфид аммония">Р</td>
-				<td bgcolor="#fe83b5" class="row7 cell6" data-textAlert="Ba(HS)<sub>2</sub><br>Гидросульфид бария">Р</td>
-				<td bgcolor="#fe83b5" class="row7 cell7" data-textAlert="Ca(HS)<sub>2</sub><br>Гидросульфид кальция">Р</td>
-				<td bgcolor="#fe83b5" class="row7 cell8" data-textAlert="Mg(HS)<sub>2</sub><br>Гидросульфид магния">Р</td>
-				<td bgcolor="#fe83b5" class="row7 cell9" data-textAlert="Sr(HS)<sub>2</sub><br>Гидросульфид стронция">Р</td>
-				<td bgcolor="#ffd737" class="row7 cell10" data-textAlert="Al(HS)<sub>3</sub><br>Гидросульфид алюминия">?</td>
-				<td bgcolor="#ffd737" class="row7 cell11" data-textAlert="Cr(HS)<sub>3</sub><br>Гидросульфид хрома">?</td>
-				<td bgcolor="#ffd737" class="row7 cell12" data-textAlert="Fe(HS)<sub>2</sub><br>Гидросульфид железа (II)">?</td>
-				<td bgcolor="#ffd737" class="row7 cell13" data-textAlert="Fe(HS)<sub>3</sub><br>Гидросульфид железа (III)">?</td>
-				<td bgcolor="#ffd737" class="row7 cell14" data-textAlert="Mn(HS)<sub>2</sub><br>Гидросульфид марганца">?</td>
-				<td bgcolor="#ffd737" class="row7 cell15" data-textAlert="Zn(HS)<sub>2</sub><br>Гидросульфид цинка">?</td>
-				<td bgcolor="#ffd737" class="row7 cell16" data-textAlert="AgHS<br>Гидросульфид серебра">?</td>
-				<td bgcolor="#ffd737" class="row7 cell17" data-textAlert="Hg(HS)<sub>2</sub><br>Гидросульфид ртути">?</td>
-				<td bgcolor="#ffd737" class="row7 cell18" data-textAlert="Pb(HS)<sub>2</sub><br>Гидросульфид свинца">?</td>
-				<td bgcolor="#ffd737" class="row7 cell19" data-textAlert="Sn(HS)<sub>2</sub><br>Гидросульфид олова">?</td>
-				<td bgcolor="#ffd737" class="row7 cell20" data-textAlert="Cu(HS)<sub>2</sub><br>Гидросульфид меди">?</td>
+				<td class="row7 cell1 soluble">Р</td>
+				<td class="row7 cell2 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'LiHS<br>Гидросульфид лития')">Р</td>
+				<td class="row7 cell3 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'KHS<br>Гидросульфид калия')">Р</td>
+				<td class="row7 cell4 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'NaHS<br>Гидросульфид натрия')">Р</td>
+				<td class="row7 cell5 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'NH<sub>4</sub>HS<br>Гидросульфид аммония')">Р</td>
+				<td class="row7 cell6 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Ba(HS)<sub>2</sub><br>Гидросульфид бария')">Р</td>
+				<td class="row7 cell7 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Ca(HS)<sub>2</sub><br>Гидросульфид кальция')">Р</td>
+				<td class="row7 cell8 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Mg(HS)<sub>2</sub><br>Гидросульфид магния')">Р</td>
+				<td class="row7 cell9 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Sr(HS)<sub>2</sub><br>Гидросульфид стронция')">Р</td>
+				<td class="row7 cell10 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Al(HS)<sub>3</sub><br>Гидросульфид алюминия')">?</td>
+				<td class="row7 cell11 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Cr(HS)<sub>3</sub><br>Гидросульфид хрома')">?</td>
+				<td class="row7 cell12 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Fe(HS)<sub>2</sub><br>Гидросульфид железа (II)')">?</td>
+				<td class="row7 cell13 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Fe(HS)<sub>3</sub><br>Гидросульфид железа (III)')">?</td>
+				<td class="row7 cell14 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Mn(HS)<sub>2</sub><br>Гидросульфид марганца')">?</td>
+				<td class="row7 cell15 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Zn(HS)<sub>2</sub><br>Гидросульфид цинка')">?</td>
+				<td class="row7 cell16 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'AgHS<br>Гидросульфид серебра')">?</td>
+				<td class="row7 cell17 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Hg(HS)<sub>2</sub><br>Гидросульфид ртути')">?</td>
+				<td class="row7 cell18 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Pb(HS)<sub>2</sub><br>Гидросульфид свинца')">?</td>
+				<td class="row7 cell19 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Sn(HS)<sub>2</sub><br>Гидросульфид олова')">?</td>
+				<td class="row7 cell20 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Cu(HS)<sub>2</sub><br>Гидросульфид меди')">?</td>
 			</tr>
 			<tr>
 				<th class="header-cell">SO<sub>4</sub><sup>2-</sup></th>
-				<td bgcolor="#fe83b5" class="row8 cell1" data-textAlert="H<sub>2</sub>SO<sub>4</sub><br>Серная кислота">Р</td>
-				<td bgcolor="#fe83b5" class="row8 cell2" data-textAlert="Li<sub>2</sub>SO<sub>4</sub><br>Сульфат лития">Р</td>
-				<td bgcolor="#fe83b5" class="row8 cell3" data-textAlert="K<sub>2</sub>SO<sub>4</sub><br>Сульфат калия">Р</td>
-				<td bgcolor="#fe83b5" class="row8 cell4" data-textAlert="Na<sub>2</sub>SO<sub>4</sub><br>Сульфат натрия">Р</td>
-				<td bgcolor="#fe83b5" class="row8 cell5" data-textAlert="(NH<sub>4</sub>)<sub>2</sub>SO<sub>4</sub><br>Сульфат аммония">Р</td>
-				<td bgcolor="#90cd8e" class="row8 cell6" data-textAlert="BaSO<sub>4</sub><br>Сульфат бария<br>Барит">Н</td>
-				<td bgcolor="#5ca7e0" class="row8 cell7" data-textAlert="CaSO<sub>4</sub><br>Сульфат кальция">М</td>
-				<td bgcolor="#fe83b5" class="row8 cell8" data-textAlert="MgSO<sub>4</sub><br>Сульфат магния">Р</td>
-				<td bgcolor="#90cd8e" class="row8 cell9" data-textAlert="SrSO<sub>4</sub><br>Сульфат стронция">Н</td>
-				<td bgcolor="#fe83b5" class="row8 cell10" data-textAlert="Al<sub>2</sub>(SO<sub>4</sub>)<sub>3</sub><br>Сульфат алюминия">Р</td>
-				<td bgcolor="#fe83b5" class="row8 cell11" data-textAlert="Cr<sub>2</sub>(SO<sub>4</sub>)<sub>3</sub><br>Сульфат хрома">Р</td>
-				<td bgcolor="#fe83b5" class="row8 cell12" data-textAlert="FeSO<sub>4</sub><br>Сульфат железа (II)">Р</td>
-				<td bgcolor="#fe83b5" class="row8 cell13" data-textAlert="Fe<sub>2</sub>(SO<sub>4</sub>)<sub>3</sub><br>Сульфат железа (III)">Р</td>
-				<td bgcolor="#fe83b5" class="row8 cell14" data-textAlert="MnSO<sub>4</sub><br>Сульфат марганца">Р</td>
-				<td bgcolor="#fe83b5" class="row8 cell15" data-textAlert="ZnSO<sub>4</sub><br>Сульфат цинка">Р</td>
-				<td bgcolor="#5ca7e0" class="row8 cell16" data-textAlert="Ag<sub>2</sub>SO<sub>4</sub><br>Сульфат серебра">М</td>
-				<td bgcolor="#ffd737" class="row8 cell17" data-textAlert="HgSO<sub>4</sub><br>Сульфат ртути">-</td>
-				<td bgcolor="#90cd8e" class="row8 cell18" data-textAlert="PbSO<sub>4</sub><br>Сульфат свинца">Н</td>
-				<td bgcolor="#fe83b5" class="row8 cell19" data-textAlert="SnSO<sub>4</sub><br>Сульфат олова">Р</td>
-				<td bgcolor="#fe83b5" class="row8 cell20" data-textAlert="CuSO<sub>4</sub><br>Сульфат меди">Р</td>
+				<td class="row8 cell1 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'H<sub>2</sub>SO<sub>4</sub><br>Серная кислота')">Р</td>
+				<td class="row8 cell2 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Li<sub>2</sub>SO<sub>4</sub><br>Сульфат лития')">Р</td>
+				<td class="row8 cell3 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'K<sub>2</sub>SO<sub>4</sub><br>Сульфат калия')">Р</td>
+				<td class="row8 cell4 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Na<sub>2</sub>SO<sub>4</sub><br>Сульфат натрия')">Р</td>
+				<td class="row8 cell5 soluble" v-on:mouseover="showAlert($event, 'alert-text', '(NH<sub>4</sub>)<sub>2</sub>SO<sub>4</sub><br>Сульфат аммония')">Р</td>
+				<td class="row8 cell6 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'BaSO<sub>4</sub><br>Сульфат бария<br>Барит')">Н</td>
+				<td class="row8 cell7 slightlySoluble" v-on:mouseover="showAlert($event, 'alert-text', 'CaSO<sub>4</sub><br>Сульфат кальция')">М</td>
+				<td class="row8 cell8 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'MgSO<sub>4</sub><br>Сульфат магния')">Р</td>
+				<td class="row8 cell9 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'SrSO<sub>4</sub><br>Сульфат стронция')">Н</td>
+				<td class="row8 cell10 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Al<sub>2</sub>(SO<sub>4</sub>)<sub>3</sub><br>Сульфат алюминия')">Р</td>
+				<td class="row8 cell11 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Cr<sub>2</sub>(SO<sub>4</sub>)<sub>3</sub><br>Сульфат хрома')">Р</td>
+				<td class="row8 cell12 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'FeSO<sub>4</sub><br>Сульфат железа (II)')">Р</td>
+				<td class="row8 cell13 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Fe<sub>2</sub>(SO<sub>4</sub>)<sub>3</sub><br>Сульфат железа (III)')">Р</td>
+				<td class="row8 cell14 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'MnSO<sub>4</sub><br>Сульфат марганца')">Р</td>
+				<td class="row8 cell15 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'ZnSO<sub>4</sub><br>Сульфат цинка')">Р</td>
+				<td class="row8 cell16 slightlySoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Ag<sub>2</sub>SO<sub>4</sub><br>Сульфат серебра')">М</td>
+				<td class="row8 cell17 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'HgSO<sub>4</sub><br>Сульфат ртути')">-</td>
+				<td class="row8 cell18 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'PbSO<sub>4</sub><br>Сульфат свинца')">Н</td>
+				<td class="row8 cell19 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'SnSO<sub>4</sub><br>Сульфат олова')">Р</td>
+				<td class="row8 cell20 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'CuSO<sub>4</sub><br>Сульфат меди')">Р</td>
 			</tr>
 			<tr>
 				<th class="header-cell">HSO<sub>4</sub><sup>-</sup></th>
-				<td bgcolor="#fe83b5" class="row9 cell1">Р</td>
-				<td bgcolor="#fe83b5" bgcolor="#fe83b5" class="row9 cell2" data-textAlert="LiHSO<sub>4</sub><br>Гидросульфат лития">Р</td>
-				<td bgcolor="#fe83b5" bgcolor="#fe83b5" class="row9 cell3" data-textAlert="KHSO<sub>4</sub><br>Гидросульфат калия">Р</td>
-				<td bgcolor="#fe83b5" bgcolor="#fe83b5" class="row9 cell4" data-textAlert="NaHSO<sub>4</sub><br>Гидросульфат натрия">Р</td>
-				<td bgcolor="#fe83b5" bgcolor="#fe83b5" class="row9 cell5" data-textAlert="NH<sub>4</sub>HSO<sub>4</sub><br>Гидросульфат аммония">Р</td>
-				<td bgcolor="#ffd737" class="row9 cell6" data-textAlert="Ba(HSO<sub>4</sub>)<sub>2</sub><br>Гидросульфат бария">?</td>
-				<td bgcolor="#ffd737" class="row9 cell7" data-textAlert="Ca(HSO<sub>4</sub>)<sub>2</sub><br>Гидросульфат кальция">?</td>
-				<td bgcolor="#ffd737" class="row9 cell8" data-textAlert="Mg(HSO<sub>4</sub>)<sub>2</sub><br>Гидросульфат магния">?</td>
-				<td bgcolor="#ffd737" class="row9 cell9" data-textAlert="Sr(HSO<sub>4</sub>)<sub>2</sub><br>Гидросульфат стронция">-</td>
-				<td bgcolor="#ffd737" class="row9 cell10" data-textAlert="Al(HSO<sub>4</sub>)<sub>3</sub><br>Гидросульфат алюминия (III)">?</td>
-				<td bgcolor="#ffd737" class="row9 cell11" data-textAlert="Cr(HSO<sub>4</sub>)<sub>3</sub><br>Гидросульфат хрома">?</td>
-				<td bgcolor="#ffd737" class="row9 cell12" data-textAlert="Fe(HSO<sub>4</sub>)<sub>2</sub><br>Гидросульфат железа (II)">?</td>
-				<td bgcolor="#ffd737" class="row9 cell13" data-textAlert="Fe(HSO<sub>4</sub>)<sub>3</sub><br>Гидросульфат железа (III)">?</td>
-				<td bgcolor="#ffd737" class="row9 cell14" data-textAlert="Mn(HSO<sub>4</sub>)<sub>2</sub><br>Гидросульфат марганца">?</td>
-				<td bgcolor="#ffd737" class="row9 cell15" data-textAlert="Zn(HSO<sub>4</sub>)<sub>2</sub><br>Гидросульфат цинка">?</td>
-				<td bgcolor="#ffd737" class="row9 cell16" data-textAlert="AgHSO<sub>4</sub><br>Гидросульфат серебра">?</td>
-				<td bgcolor="#ffd737" class="row9 cell17" data-textAlert="Hg(HSO<sub>4</sub>)<sub>2</sub><br>Гидросульфат ртути">?</td>
-				<td bgcolor="#90cd8e" class="row9 cell18" data-textAlert="Pb(HSO<sub>4</sub>)<sub>2</sub><br>Гидросульфат свинца">Н</td>
-				<td bgcolor="#ffd737" class="row9 cell19" data-textAlert="Sn(HSO<sub>4</sub>)<sub>2</sub><br>Гидросульфат олова">?</td>
-				<td bgcolor="#ffd737" class="row9 cell20" data-textAlert="Cu(HSO<sub>4</sub>)<sub>2</sub><br>Гидросульфат меди">?</td>
+				<td class="row9 cell1 soluble">Р</td>
+				<td class="row9 cell2 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'LiHSO<sub>4</sub><br>Гидросульфат лития')">Р</td>
+				<td class="row9 cell3 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'KHSO<sub>4</sub><br>Гидросульфат калия')">Р</td>
+				<td class="row9 cell4 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'NaHSO<sub>4</sub><br>Гидросульфат натрия')">Р</td>
+				<td class="row9 cell5 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'NH<sub>4</sub>HSO<sub>4</sub><br>Гидросульфат аммония')">Р</td>
+				<td class="row9 cell6 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Ba(HSO<sub>4</sub>)<sub>2</sub><br>Гидросульфат бария')">?</td>
+				<td class="row9 cell7 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Ca(HSO<sub>4</sub>)<sub>2</sub><br>Гидросульфат кальция')">?</td>
+				<td class="row9 cell8 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Mg(HSO<sub>4</sub>)<sub>2</sub><br>Гидросульфат магния')">?</td>
+				<td class="row9 cell9 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Sr(HSO<sub>4</sub>)<sub>2</sub><br>Гидросульфат стронция')">-</td>
+				<td class="row9 cell10 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Al(HSO<sub>4</sub>)<sub>3</sub><br>Гидросульфат алюминия (III)')">?</td>
+				<td class="row9 cell11 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Cr(HSO<sub>4</sub>)<sub>3</sub><br>Гидросульфат хрома')">?</td>
+				<td class="row9 cell12 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Fe(HSO<sub>4</sub>)<sub>2</sub><br>Гидросульфат железа (II)')">?</td>
+				<td class="row9 cell13 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Fe(HSO<sub>4</sub>)<sub>3</sub><br>Гидросульфат железа (III)')">?</td>
+				<td class="row9 cell14 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Mn(HSO<sub>4</sub>)<sub>2</sub><br>Гидросульфат марганца')">?</td>
+				<td class="row9 cell15 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Zn(HSO<sub>4</sub>)<sub>2</sub><br>Гидросульфат цинка')">?</td>
+				<td class="row9 cell16 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'AgHSO<sub>4</sub><br>Гидросульфат серебра')">?</td>
+				<td class="row9 cell17 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Hg(HSO<sub>4</sub>)<sub>2</sub><br>Гидросульфат ртути')">?</td>
+				<td class="row9 cell18 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Pb(HSO<sub>4</sub>)<sub>2</sub><br>Гидросульфат свинца')">Н</td>
+				<td class="row9 cell19 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Sn(HSO<sub>4</sub>)<sub>2</sub><br>Гидросульфат олова')">?</td>
+				<td class="row9 cell20 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Cu(HSO<sub>4</sub>)<sub>2</sub><br>Гидросульфат меди')">?</td>
 			</tr>
 			<tr>
 				<th class="header-cell">SO<sub>3</sub><sup>2-</sup></th>
-				<td bgcolor="#fe83b5" class="row10 cell1" data-textAlert="H<sub>2</sub>SO<sub>3</sub><br>Сернистая кислота">Р</td>
-				<td bgcolor="#fe83b5" class="row10 cell2" data-textAlert="Li<sub>2</sub>SO<sub>3</sub><br>Сульфит лития">Р</td>
-				<td bgcolor="#fe83b5" class="row10 cell3" data-textAlert="K<sub>2</sub>SO<sub>3</sub><br>Сульфит калия">Р</td>
-				<td bgcolor="#fe83b5" class="row10 cell4" data-textAlert="Na<sub>2</sub>SO<sub>3</sub><br>Сульфит натрия">Р</td>
-				<td bgcolor="#fe83b5" class="row10 cell5" data-textAlert="(NH<sub>4</sub>)<sub>2</sub>SO<sub>3</sub><br>Сульфит аммония">Р</td>
-				<td bgcolor="#90cd8e" class="row10 cell6" data-textAlert="BaSO<sub>3</sub><br>Сульфит бария">Н</td>
-				<td bgcolor="#90cd8e" class="row10 cell7" data-textAlert="СaSO<sub>3</sub><br>Сульфит кальция">Н</td>
-				<td bgcolor="#5ca7e0" class="row10 cell8" data-textAlert="MgSO<sub>3</sub><br>Сульфит магния">М</td>
-				<td bgcolor="#90cd8e" class="row10 cell9" data-textAlert="SrSO<sub>3</sub><br>Сульфит стронция">Н</td>
-				<td bgcolor="#ffd737" class="row10 cell10" data-textAlert="Al<sub>2</sub>(SO<sub>3</sub>)<sub>3</sub><br>Сульфит алюминия">?</td>
-				<td bgcolor="#ffd737" class="row10 cell11" data-textAlert="Cr<sub>2</sub>(SO<sub>3</sub>)<sub>3</sub><br>Сульфит хрома">-</td>
-				<td bgcolor="#90cd8e" class="row10 cell12" data-textAlert="FeSO<sub>3</sub><br>Сульфит железа (II)">Н</td>
-				<td bgcolor="#ffd737" class="row10 cell13" data-textAlert="Fe<sub>2</sub>(SO<sub>3</sub>)<sub>3</sub><br>Сульфит железа (III)">?</td>
-				<td bgcolor="#ffd737" class="row10 cell14" data-textAlert="MnSO<sub>3</sub><br>Сульфит марганца">?</td>
-				<td bgcolor="#5ca7e0" class="row10 cell15" data-textAlert="ZnSO<sub>3</sub><br>Сульфит цинка">М</td>
-				<td bgcolor="#90cd8e" class="row10 cell16" data-textAlert="Ag<sub>2</sub>SO<sub>3</sub><br>Сульфит серебра">Н</td>
-				<td bgcolor="#90cd8e" class="row10 cell17" data-textAlert="HgSO<sub>3</sub><br>Сульфит ртути">Н</td>
-				<td bgcolor="#90cd8e" class="row10 cell18" data-textAlert="PbSO<sub>3</sub><br>Сульфит свинца">Н</td>
-				<td bgcolor="#ffd737" bgcolor="#ffd737" class="row10 cell19" data-textAlert="SnSO<sub>3</sub><br>Сульфит олова">?</td>
-				<td bgcolor="#ffd737" bgcolor="#ffd737" class="row10 cell20" data-textAlert="CuSO<sub>3</sub><br>Сульфит меди">?</td>
+				<td class="row10 cell1 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'H<sub>2</sub>SO<sub>3</sub><br>Сернистая кислота')">Р</td>
+				<td class="row10 cell2 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Li<sub>2</sub>SO<sub>3</sub><br>Сульфит лития')">Р</td>
+				<td class="row10 cell3 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'K<sub>2</sub>SO<sub>3</sub><br>Сульфит калия')">Р</td>
+				<td class="row10 cell4 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Na<sub>2</sub>SO<sub>3</sub><br>Сульфит натрия')">Р</td>
+				<td class="row10 cell5 soluble" v-on:mouseover="showAlert($event, 'alert-text', '(NH<sub>4</sub>)<sub>2</sub>SO<sub>3</sub><br>Сульфит аммония')">Р</td>
+				<td class="row10 cell6 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'BaSO<sub>3</sub><br>Сульфит бария')">Н</td>
+				<td class="row10 cell7 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'СaSO<sub>3</sub><br>Сульфит кальция')">Н</td>
+				<td class="row10 cell8 slightlySoluble" v-on:mouseover="showAlert($event, 'alert-text', 'MgSO<sub>3</sub><br>Сульфит магния')">М</td>
+				<td class="row10 cell9 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'SrSO<sub>3</sub><br>Сульфит стронция')">Н</td>
+				<td class="row10 cell10 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Al<sub>2</sub>(SO<sub>3</sub>)<sub>3</sub><br>Сульфит алюминия')">?</td>
+				<td class="row10 cell11 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Cr<sub>2</sub>(SO<sub>3</sub>)<sub>3</sub><br>Сульфит хрома')">-</td>
+				<td class="row10 cell12 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'FeSO<sub>3</sub><br>Сульфит железа (II)')">Н</td>
+				<td class="row10 cell13 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Fe<sub>2</sub>(SO<sub>3</sub>)<sub>3</sub><br>Сульфит железа (III)')">?</td>
+				<td class="row10 cell14 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'MnSO<sub>3</sub><br>Сульфит марганца')">?</td>
+				<td class="row10 cell15 slightlySoluble" v-on:mouseover="showAlert($event, 'alert-text', 'ZnSO<sub>3</sub><br>Сульфит цинка')">М</td>
+				<td class="row10 cell16 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Ag<sub>2</sub>SO<sub>3</sub><br>Сульфит серебра')">Н</td>
+				<td class="row10 cell17 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'HgSO<sub>3</sub><br>Сульфит ртути')">Н</td>
+				<td class="row10 cell18 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'PbSO<sub>3</sub><br>Сульфит свинца')">Н</td>
+				<td class="row10 cell19 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'SnSO<sub>3</sub><br>Сульфит олова')">?</td>
+				<td class="row10 cell20 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'CuSO<sub>3</sub><br>Сульфит меди')">?</td>
 			</tr>
 			<tr>
 				<th class="header-cell">HSO<sub>3</sub><sup>-</sup></th>
-				<td bgcolor="#fe83b5" bgcolor="#fe83b5" class="row11 cell1">Р</td>
-				<td bgcolor="#ffd737" class="row11 cell2" data-textAlert="LiHSO<sub>3</sub><br>Гидросульфит лития">?</td>
-				<td bgcolor="#fe83b5" bgcolor="#fe83b5" class="row11 cell3" data-textAlert="KHSO<sub>3</sub><br>Гидросульфит калия">Р</td>
-				<td bgcolor="#fe83b5" bgcolor="#fe83b5" class="row11 cell4" data-textAlert="NaHSO<sub>3</sub><br>Гидросульфит натрия">Р</td>
-				<td bgcolor="#fe83b5" bgcolor="#fe83b5" class="row11 cell5" data-textAlert="NH<sub>4</sub>HSO<sub>3</sub><br>Гидросульфит аммония">Р</td>
-				<td bgcolor="#fe83b5" bgcolor="#fe83b5" class="row11 cell6" data-textAlert="Ba(HSO<sub>3</sub>)<sub>2</sub><br>Гидросульфит бария">Р</td>
-				<td bgcolor="#fe83b5" bgcolor="#fe83b5" class="row11 cell7" data-textAlert="Ca(HSO<sub>3</sub>)<sub>2</sub><br>Гидросульфит кальция">Р</td>
-				<td bgcolor="#fe83b5" bgcolor="#fe83b5" class="row11 cell8" data-textAlert="Mg(HSO<sub>3</sub>)<sub>2</sub><br>Гидросульфит магния">Р</td>
-				<td bgcolor="#fe83b5" bgcolor="#fe83b5" class="row11 cell9" data-textAlert="Sr(HSO<sub>3</sub>)<sub>2</sub><br>Гидросульфит стронция">Р</td>
-				<td bgcolor="#ffd737" class="row11 cell10" data-textAlert="Al(HSO<sub>3</sub>)<sub>3</sub><br>Гидросульфит алюминия">?</td>
-				<td bgcolor="#ffd737" class="row11 cell11" data-textAlert="Cr(HSO<sub>3</sub>)<sub>3</sub><br>Гидросульфит хрома">?</td>
-				<td bgcolor="#ffd737" class="row11 cell12" data-textAlert="Fe(HSO<sub>3</sub>)<sub>2</sub><br>Гидросульфит железа (II)">?</td>
-				<td bgcolor="#ffd737" class="row11 cell13" data-textAlert="Fe(HSO<sub>3</sub>)<sub>3</sub><br>Гидросульфит железа (III)">?</td>
-				<td bgcolor="#ffd737" class="row11 cell14" data-textAlert="Mn(HSO<sub>3</sub>)<sub>2</sub><br>Гидросульфит марганца">?</td>
-				<td bgcolor="#ffd737" class="row11 cell15" data-textAlert="Zn(HSO<sub>3</sub>)<sub>2</sub><br>Гидросульфит цинка">?</td>
-				<td bgcolor="#ffd737" class="row11 cell16" data-textAlert="AgHSO<sub>3</sub><br>Гидросульфит серебра">?</td>
-				<td bgcolor="#ffd737" class="row11 cell17" data-textAlert="Hg(HSO<sub>3</sub>)<sub>2</sub><br>Гидросульфит ртути">?</td>
-				<td bgcolor="#ffd737" class="row11 cell18" data-textAlert="Pb(HSO<sub>3</sub>)<sub>2</sub><br>Гидросульфит свинца">?</td>
-				<td bgcolor="#ffd737" class="row11 cell19" data-textAlert="Sn(HSO<sub>3</sub>)<sub>2</sub><br>Гидросульфит олова">?</td>
-				<td bgcolor="#ffd737" class="row11 cell20" data-textAlert="Cu(HSO<sub>3</sub>)<sub>2</sub><br>Гидросульфит меди">?</td>
+				<td class="row11 cell1 soluble">Р</td>
+				<td class="row11 cell2 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'LiHSO<sub>3</sub><br>Гидросульфит лития')">?</td>
+				<td class="row11 cell3 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'KHSO<sub>3</sub><br>Гидросульфит калия')">Р</td>
+				<td class="row11 cell4 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'NaHSO<sub>3</sub><br>Гидросульфит натрия')">Р</td>
+				<td class="row11 cell5 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'NH<sub>4</sub>HSO<sub>3</sub><br>Гидросульфит аммония')">Р</td>
+				<td class="row11 cell6 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Ba(HSO<sub>3</sub>)<sub>2</sub><br>Гидросульфит бария')">Р</td>
+				<td class="row11 cell7 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Ca(HSO<sub>3</sub>)<sub>2</sub><br>Гидросульфит кальция')">Р</td>
+				<td class="row11 cell8 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Mg(HSO<sub>3</sub>)<sub>2</sub><br>Гидросульфит магния')">Р</td>
+				<td class="row11 cell9 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Sr(HSO<sub>3</sub>)<sub>2</sub><br>Гидросульфит стронция')">Р</td>
+				<td class="row11 cell10 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Al(HSO<sub>3</sub>)<sub>3</sub><br>Гидросульфит алюминия')">?</td>
+				<td class="row11 cell11 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Cr(HSO<sub>3</sub>)<sub>3</sub><br>Гидросульфит хрома')">?</td>
+				<td class="row11 cell12 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Fe(HSO<sub>3</sub>)<sub>2</sub><br>Гидросульфит железа (II)')">?</td>
+				<td class="row11 cell13 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Fe(HSO<sub>3</sub>)<sub>3</sub><br>Гидросульфит железа (III)')">?</td>
+				<td class="row11 cell14 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Mn(HSO<sub>3</sub>)<sub>2</sub><br>Гидросульфит марганца')">?</td>
+				<td class="row11 cell15 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Zn(HSO<sub>3</sub>)<sub>2</sub><br>Гидросульфит цинка')">?</td>
+				<td class="row11 cell16 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'AgHSO<sub>3</sub><br>Гидросульфит серебра')">?</td>
+				<td class="row11 cell17 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Hg(HSO<sub>3</sub>)<sub>2</sub><br>Гидросульфит ртути')">?</td>
+				<td class="row11 cell18 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Pb(HSO<sub>3</sub>)<sub>2</sub><br>Гидросульфит свинца')">?</td>
+				<td class="row11 cell19 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Sn(HSO<sub>3</sub>)<sub>2</sub><br>Гидросульфит олова')">?</td>
+				<td class="row11 cell20 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Cu(HSO<sub>3</sub>)<sub>2</sub><br>Гидросульфит меди')">?</td>
 			</tr>
 			<tr>
 				<th class="header-cell">NO<sub>3</sub><sup>-</sup></th>
-				<td bgcolor="#fe83b5" class="row12 cell1" data-textAlert="HNO<sub>3</sub><br>Азотная кислота">Р</td>
-				<td bgcolor="#fe83b5" class="row12 cell2" data-textAlert="LiNO<sub>3</sub><br>Нитрат лития">Р</td>
-				<td bgcolor="#fe83b5" class="row12 cell3" data-textAlert="KNO<sub>3</sub><br>Нитрат калия">Р</td>
-				<td bgcolor="#fe83b5" class="row12 cell4" data-textAlert="NaNO<sub>3</sub><br>Нитрат натрия">Р</td>
-				<td bgcolor="#fe83b5" class="row12 cell5" data-textAlert="NH<sub>4</sub>NO<sub>3</sub><br>Нитрат аммония">Р</td>
-				<td bgcolor="#fe83b5" class="row12 cell6" data-textAlert="Ba(NO<sub>3</sub>)<sub>2</sub><br>Нитрат бария">Р</td>
-				<td bgcolor="#fe83b5" class="row12 cell7" data-textAlert="Ca(NO<sub>3</sub>)<sub>2</sub><br>Нитрат кальция">Р</td>
-				<td bgcolor="#fe83b5" class="row12 cell8" data-textAlert="Mg(NO<sub>3</sub>)<sub>2</sub><br>Нитрат магния">Р</td>
-				<td bgcolor="#fe83b5" class="row12 cell9" data-textAlert="Sr(NO<sub>3</sub>)<sub>2</sub><br>Нитрат стронция">Р</td>
-				<td bgcolor="#fe83b5" class="row12 cell10" data-textAlert="Al(NO<sub>3</sub>)<sub>3</sub><br>Нитрат алюминия">Р</td>
-				<td bgcolor="#fe83b5" class="row12 cell11" data-textAlert="Cr(NO<sub>3</sub>)<sub>3</sub><br>Нитрат хрома">Р</td>
-				<td bgcolor="#fe83b5" class="row12 cell12" data-textAlert="Fe(NO<sub>3</sub>)<sub>2</sub><br>Нитрат железа (II)">Р</td>
-				<td bgcolor="#fe83b5" class="row12 cell13" data-textAlert="Fe(NO<sub>3</sub>)<sub>3</sub><br>Нитрат железа (III)">Р</td>
-				<td bgcolor="#fe83b5" class="row12 cell14" data-textAlert="Mn(NO<sub>3</sub>)<sub>2</sub><br>Нитрат марганца">Р</td>
-				<td bgcolor="#fe83b5" class="row12 cell15" data-textAlert="Zn(NO<sub>3</sub>)<sub>2</sub><br>Нитрат цинка">Р</td>
-				<td bgcolor="#fe83b5" class="row12 cell16" data-textAlert="AgNO<sub>3</sub><br>Нитрат серебра<br>Ляпис">Р</td>
-				<td bgcolor="#fe83b5" class="row12 cell17" data-textAlert="Hg(NO<sub>3</sub>)<sub>2</sub><br>Нитрат ртути">Р</td>
-				<td bgcolor="#fe83b5" class="row12 cell18" data-textAlert="Pb(NO<sub>3</sub>)<sub>2</sub><br>Нитрат свинца">Р</td>
-				<td bgcolor="#ffd737" class="row12 cell19" data-textAlert="Sn(NO<sub>3</sub>)<sub>2</sub><br>Нитрат олова">-</td>
-				<td bgcolor="#fe83b5" class="row12 cell20" data-textAlert="Cu(NO<sub>3</sub>)<sub>2</sub><br>Нитрат меди">Р</td>
+				<td class="row12 cell1 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'HNO<sub>3</sub><br>Азотная кислота')">Р</td>
+				<td class="row12 cell2 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'LiNO<sub>3</sub><br>Нитрат лития')">Р</td>
+				<td class="row12 cell3 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'KNO<sub>3</sub><br>Нитрат калия')">Р</td>
+				<td class="row12 cell4 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'NaNO<sub>3</sub><br>Нитрат натрия')">Р</td>
+				<td class="row12 cell5 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'NH<sub>4</sub>NO<sub>3</sub><br>Нитрат аммония')">Р</td>
+				<td class="row12 cell6 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Ba(NO<sub>3</sub>)<sub>2</sub><br>Нитрат бария')">Р</td>
+				<td class="row12 cell7 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Ca(NO<sub>3</sub>)<sub>2</sub><br>Нитрат кальция')">Р</td>
+				<td class="row12 cell8 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Mg(NO<sub>3</sub>)<sub>2</sub><br>Нитрат магния')">Р</td>
+				<td class="row12 cell9 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Sr(NO<sub>3</sub>)<sub>2</sub><br>Нитрат стронция')">Р</td>
+				<td class="row12 cell10 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Al(NO<sub>3</sub>)<sub>3</sub><br>Нитрат алюминия')">Р</td>
+				<td class="row12 cell11 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Cr(NO<sub>3</sub>)<sub>3</sub><br>Нитрат хрома')">Р</td>
+				<td class="row12 cell12 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Fe(NO<sub>3</sub>)<sub>2</sub><br>Нитрат железа (II)')">Р</td>
+				<td class="row12 cell13 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Fe(NO<sub>3</sub>)<sub>3</sub><br>Нитрат железа (III)')">Р</td>
+				<td class="row12 cell14 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Mn(NO<sub>3</sub>)<sub>2</sub><br>Нитрат марганца')">Р</td>
+				<td class="row12 cell15 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Zn(NO<sub>3</sub>)<sub>2</sub><br>Нитрат цинка')">Р</td>
+				<td class="row12 cell16 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'AgNO<sub>3</sub><br>Нитрат серебра<br>Ляпис')">Р</td>
+				<td class="row12 cell17 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Hg(NO<sub>3</sub>)<sub>2</sub><br>Нитрат ртути')">Р</td>
+				<td class="row12 cell18 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Pb(NO<sub>3</sub>)<sub>2</sub><br>Нитрат свинца')">Р</td>
+				<td class="row12 cell19 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Sn(NO<sub>3</sub>)<sub>2</sub><br>Нитрат олова')">-</td>
+				<td class="row12 cell20 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Cu(NO<sub>3</sub>)<sub>2</sub><br>Нитрат меди')">Р</td>
 			</tr>
 			<tr>
 				<th class="header-cell">NO<sub>2</sub><sup>-</sup></th>
-				<td bgcolor="#fe83b5" class="row13 cell1" data-textAlert="HNO<sub>2</sub><br>Азотистая кислота">Р</td>
-				<td bgcolor="#fe83b5" class="row13 cell2" data-textAlert="LiNO<sub>2</sub><br>Нитрит лития">Р</td>
-				<td bgcolor="#fe83b5" class="row13 cell3" data-textAlert="KNO<sub>2</sub><br>Нитрит калия">Р</td>
-				<td bgcolor="#fe83b5" class="row13 cell4" data-textAlert="NaNO<sub>2</sub><br>Нитрит натрия">Р</td>
-				<td bgcolor="#fe83b5" class="row13 cell5" data-textAlert="NH<sub>4</sub>NO<sub>2</sub><br>Нитрит аммония">Р</td>
-				<td bgcolor="#fe83b5" class="row13 cell6" data-textAlert="Ba(NO<sub>2</sub>)<sub>2</sub><br>Нитрит бария">Р</td>
-				<td bgcolor="#fe83b5" class="row13 cell7" data-textAlert="Ca(NO<sub>2</sub>)<sub>2</sub><br>Нитрит кальция">Р</td>
-				<td bgcolor="#fe83b5" class="row13 cell8" data-textAlert="Mg(NO<sub>2</sub>)<sub>2</sub><br>Нитрит магния">Р</td>
-				<td bgcolor="#fe83b5" class="row13 cell9" data-textAlert="Sr(NO<sub>2</sub>)<sub>2</sub><br>Нитрит стронция">Р</td>
-				<td bgcolor="#ffd737" class="row13 cell10" data-textAlert="Al(NO<sub>3</sub>)<sub>3</sub><br>Нитрит алюминия">?</td>
-				<td bgcolor="#ffd737" class="row13 cell11" data-textAlert="Cr(NO<sub>3</sub>)<sub>3</sub><br>Нитрит хрома">?</td>
-				<td bgcolor="#ffd737" class="row13 cell12" data-textAlert="Fe(NO<sub>3</sub>)<sub>3</sub><br>Нитрит железа (II)">?</td>
-				<td bgcolor="#ffd737" class="row13 cell13" data-textAlert="Fe(NO<sub>3</sub>)<sub>3</sub><br>Нитрит железа (III)">?</td>
-				<td bgcolor="#ffd737" class="row13 cell14" data-textAlert="Mn(NO<sub>2</sub>)<sub>2</sub><br>Нитрит марганца">?</td>
-				<td bgcolor="#ffd737" class="row13 cell15" data-textAlert="Zn(NO<sub>2</sub>)<sub>2</sub><br>Нитрит цинка">?</td>
-				<td bgcolor="#5ca7e0" class="row13 cell16" data-textAlert="AgNO<sub>2</sub><br>Нитрит серебра">М</td>
-				<td bgcolor="#ffd737" class="row13 cell17" data-textAlert="Hg(NO<sub>2</sub>)<sub>2</sub><br>Нитрит ртути">?</td>
-				<td bgcolor="#ffd737" class="row13 cell18" data-textAlert="Pb(NO<sub>2</sub>)<sub>2</sub><br>Нитрит свинца">?</td>
-				<td bgcolor="#ffd737" class="row13 cell19" data-textAlert="Sn(NO<sub>2</sub>)<sub>2</sub><br>Нитрит олова">?</td>
-				<td bgcolor="#ffd737" class="row13 cell20" data-textAlert="Cu(NO<sub>2</sub>)<sub>2</sub><br>Нитрит меди">?</td>
+				<td class="row13 cell1 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'HNO<sub>2</sub><br>Азотистая кислота')">Р</td>
+				<td class="row13 cell2 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'LiNO<sub>2</sub><br>Нитрит лития')">Р</td>
+				<td class="row13 cell3 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'KNO<sub>2</sub><br>Нитрит калия')">Р</td>
+				<td class="row13 cell4 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'NaNO<sub>2</sub><br>Нитрит натрия')">Р</td>
+				<td class="row13 cell5 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'NH<sub>4</sub>NO<sub>2</sub><br>Нитрит аммония')">Р</td>
+				<td class="row13 cell6 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Ba(NO<sub>2</sub>)<sub>2</sub><br>Нитрит бария')">Р</td>
+				<td class="row13 cell7 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Ca(NO<sub>2</sub>)<sub>2</sub><br>Нитрит кальция')">Р</td>
+				<td class="row13 cell8 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Mg(NO<sub>2</sub>)<sub>2</sub><br>Нитрит магния')">Р</td>
+				<td class="row13 cell9 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Sr(NO<sub>2</sub>)<sub>2</sub><br>Нитрит стронция')">Р</td>
+				<td class="row13 cell10 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Al(NO<sub>3</sub>)<sub>3</sub><br>Нитрит алюминия')">?</td>
+				<td class="row13 cell11 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Cr(NO<sub>3</sub>)<sub>3</sub><br>Нитрит хрома')">?</td>
+				<td class="row13 cell12 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Fe(NO<sub>3</sub>)<sub>3</sub><br>Нитрит железа (II)')">?</td>
+				<td class="row13 cell13 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Fe(NO<sub>3</sub>)<sub>3</sub><br>Нитрит железа (III)')">?</td>
+				<td class="row13 cell14 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Mn(NO<sub>2</sub>)<sub>2</sub><br>Нитрит марганца')">?</td>
+				<td class="row13 cell15 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Zn(NO<sub>2</sub>)<sub>2</sub><br>Нитрит цинка')">?</td>
+				<td class="row13 cell16 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'AgNO<sub>2</sub><br>Нитрит серебра')">М</td>
+				<td class="row13 cell17 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Hg(NO<sub>2</sub>)<sub>2</sub><br>Нитрит ртути')">?</td>
+				<td class="row13 cell18 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Pb(NO<sub>2</sub>)<sub>2</sub><br>Нитрит свинца')">?</td>
+				<td class="row13 cell19 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Sn(NO<sub>2</sub>)<sub>2</sub><br>Нитрит олова')">?</td>
+				<td class="row13 cell20 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Cu(NO<sub>2</sub>)<sub>2</sub><br>Нитрит меди')">?</td>
 			</tr>
 			<tr>
 				<th class="header-cell">PO<sub>4</sub><sup>3-</sup></th>
-				<td bgcolor="#fe83b5" class="row14 cell1" data-textAlert="H<sub>3</sub>PO<sub>4</sub><br>Ортофосфорная кислота">Р</td>
-				<td bgcolor="#90cd8e" class="row14 cell2" data-textAlert="Li<sub>3</sub>PO<sub>4</sub><br>Фосфат лития">Н</td>
-				<td bgcolor="#fe83b5" class="row14 cell3" data-textAlert="K<sub>3</sub>PO<sub>4</sub><br>Фосфат калия">Р</td>
-				<td bgcolor="#fe83b5" class="row14 cell4" data-textAlert="Na<sub>3</sub>PO<sub>4</sub><br>Фосфат натрия">Р</td>
-				<td bgcolor="#ffd737" class="row14 cell5" data-textAlert="(NH<sub>4</sub>)<sub>3</sub>PO<sub>4</sub><br>Нитрит аммония">-</td>
-				<td bgcolor="#90cd8e" class="row14 cell6" data-textAlert="Ba<sub>3</sub>(PO<sub>4</sub>)<sub>2</sub><br>Фосфат бария">Н</td>
-				<td bgcolor="#90cd8e" class="row14 cell7" data-textAlert="Ca<sub>3</sub>(PO<sub>4</sub>)<sub>2</sub><br>Фосфат кальция">Н</td>
-				<td bgcolor="#90cd8e" class="row14 cell8" data-textAlert="Mg<sub>3</sub>(PO<sub>4</sub>)<sub>2</sub><br>Фосфат магния">Н</td>
-				<td bgcolor="#90cd8e" class="row14 cell9" data-textAlert="Sr<sub>3</sub>(PO<sub>4</sub>)<sub>2</sub><br>Фосфат стронция">Н</td>
-				<td bgcolor="#90cd8e" class="row14 cell10" data-textAlert="AlPO<sub>4</sub><br>Фосфат алюминия">Н</td>
-				<td bgcolor="#90cd8e" class="row14 cell11" data-textAlert="CrPO<sub>4</sub><br>Фосфат хрома">Н</td>
-				<td bgcolor="#90cd8e" class="row14 cell12" data-textAlert="Fe<sub>3</sub>(PO<sub>4</sub>)<sub>2</sub><br>Фосфат железа (II)">Н</td>
-				<td bgcolor="#90cd8e" class="row14 cell13" data-textAlert="FePO<sub>4</sub><br>Фосфат железа (III)">Н</td>
-				<td bgcolor="#90cd8e" class="row14 cell14" data-textAlert="Mn<sub>3</sub>(PO<sub>4</sub>)<sub>2</sub><br>Фосфат марганца">Н</td>
-				<td bgcolor="#90cd8e" class="row14 cell15" data-textAlert="Zn<sub>3</sub>(PO<sub>4</sub>)<sub>2</sub><br>Фосфат цинка">Н</td>
-				<td bgcolor="#90cd8e" class="row14 cell16" data-textAlert="Ag<sub>3</sub>PO<sub>4</sub><br>Фосфат серебра">Н</td>
-				<td bgcolor="#90cd8e" class="row14 cell17" data-textAlert="Hg<sub>3</sub>(PO<sub>4</sub>)<sub>2</sub><br>Фосфат ртути">Н</td>
-				<td bgcolor="#90cd8e" class="row14 cell18" data-textAlert="Pb<sub>3</sub>(PO<sub>4</sub>)<sub>2</sub><br>Фосфат свинца">Н</td>
-				<td bgcolor="#90cd8e" class="row14 cell19" data-textAlert="Sn<sub>3</sub>(PO<sub>4</sub>)<sub>2</sub><br>Фосфат олова">Н</td>
-				<td bgcolor="#90cd8e" class="row14 cell20" data-textAlert="Cu<sub>3</sub>(PO<sub>4</sub>)<sub>2</sub><br>Фосфат меди">Н</td>
+				<td class="row14 cell1 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'H<sub>3</sub>PO<sub>4</sub><br>Ортофосфорная кислота')">Р</td>
+				<td class="row14 cell2 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Li<sub>3</sub>PO<sub>4</sub><br>Фосфат лития')">Н</td>
+				<td class="row14 cell3 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'K<sub>3</sub>PO<sub>4</sub><br>Фосфат калия')">Р</td>
+				<td class="row14 cell4 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Na<sub>3</sub>PO<sub>4</sub><br>Фосфат натрия')">Р</td>
+				<td class="row14 cell5 decomposes" v-on:mouseover="showAlert($event, 'alert-text', '(NH<sub>4</sub>)<sub>3</sub>PO<sub>4</sub><br>Нитрит аммония')">-</td>
+				<td class="row14 cell6 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Ba<sub>3</sub>(PO<sub>4</sub>)<sub>2</sub><br>Фосфат бария')">Н</td>
+				<td class="row14 cell7 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Ca<sub>3</sub>(PO<sub>4</sub>)<sub>2</sub><br>Фосфат кальция')">Н</td>
+				<td class="row14 cell8 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Mg<sub>3</sub>(PO<sub>4</sub>)<sub>2</sub><br>Фосфат магния')">Н</td>
+				<td class="row14 cell9 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Sr<sub>3</sub>(PO<sub>4</sub>)<sub>2</sub><br>Фосфат стронция')">Н</td>
+				<td class="row14 cell10 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'AlPO<sub>4</sub><br>Фосфат алюминия')">Н</td>
+				<td class="row14 cell11 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'CrPO<sub>4</sub><br>Фосфат хрома')">Н</td>
+				<td class="row14 cell12 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Fe<sub>3</sub>(PO<sub>4</sub>)<sub>2</sub><br>Фосфат железа (II)')">Н</td>
+				<td class="row14 cell13 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'FePO<sub>4</sub><br>Фосфат железа (III)')">Н</td>
+				<td class="row14 cell14 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Mn<sub>3</sub>(PO<sub>4</sub>)<sub>2</sub><br>Фосфат марганца')">Н</td>
+				<td class="row14 cell15 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Zn<sub>3</sub>(PO<sub>4</sub>)<sub>2</sub><br>Фосфат цинка')">Н</td>
+				<td class="row14 cell16 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Ag<sub>3</sub>PO<sub>4</sub><br>Фосфат серебра')">Н</td>
+				<td class="row14 cell17 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Hg<sub>3</sub>(PO<sub>4</sub>)<sub>2</sub><br>Фосфат ртути')">Н</td>
+				<td class="row14 cell18 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Pb<sub>3</sub>(PO<sub>4</sub>)<sub>2</sub><br>Фосфат свинца')">Н</td>
+				<td class="row14 cell19 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Sn<sub>3</sub>(PO<sub>4</sub>)<sub>2</sub><br>Фосфат олова')">Н</td>
+				<td class="row14 cell20 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Cu<sub>3</sub>(PO<sub>4</sub>)<sub>2</sub><br>Фосфат меди')">Н</td>
 			</tr>
 			<tr>
 				<th class="header-cell">HPO<sub>4</sub><sup>2-</sup></th>
-				<td bgcolor="#fe83b5" class="row15 cell1">Р</td>
-				<td bgcolor="#ffd737" class="row15 cell2" data-textAlert="Li<sub>2</sub>HPO<sub>4</sub><br>Гидрофосфат лития">?</td>
-				<td bgcolor="#fe83b5" class="row15 cell3" data-textAlert="K<sub>2</sub>HPO<sub>4</sub><br>Гидрофосфат калия">Р</td>
-				<td bgcolor="#fe83b5" class="row15 cell4" data-textAlert="Na<sub>2</sub>HPO<sub>4</sub><br>Гидрофосфат натрия">Р</td>
-				<td bgcolor="#fe83b5" class="row15 cell5" data-textAlert="(NH<sub>4</sub>)<sub>2</sub>HPO<sub>4</sub><br>Гидрофосфат аммония">Р</td>
-				<td bgcolor="#90cd8e" class="row15 cell6" data-textAlert="Ba(HPO<sub>4</sub>)<sub>2</sub><br>Гидрофосфат бария">Н</td>
-				<td bgcolor="#90cd8e" class="row15 cell7" data-textAlert="Ca(HPO<sub>4</sub>)<sub>2</sub><br>Гидрофосфат кальция">Н</td>
-				<td bgcolor="#5ca7e0" class="row15 cell8" data-textAlert="Mg(HPO<sub>4</sub>)<sub>2</sub><br>Гидрофосфат магния">М</td>
-				<td bgcolor="#90cd8e" class="row15 cell9" data-textAlert="Sr(HPO<sub>4</sub>)<sub>2</sub><br>Гидрофосфат стронция">Н</td>
-				<td bgcolor="#ffd737" class="row15 cell10" data-textAlert="Al(HPO<sub>4</sub>)<sub>3</sub><br>Гидрофосфат алюминия">?</td>
-				<td bgcolor="#ffd737" class="row15 cell11" data-textAlert="Cr(HPO<sub>4</sub>)<sub>3</sub><br>Гидрофосфат хрома">?</td>
-				<td bgcolor="#90cd8e" class="row15 cell12" data-textAlert="Fe(HPO<sub>4</sub>)<sub>2</sub><br>Гидрофосфат железа (II)">Н</td>
-				<td bgcolor="#ffd737" class="row15 cell13" data-textAlert="Fe(HPO<sub>4</sub>)<sub>3</sub><br>Гидрофосфат железа (III)">?</td>
-				<td bgcolor="#90cd8e" class="row15 cell14" data-textAlert="Mn<sub>2</sub>HPO<sub>4</sub><br>Гидрофосфат марганца">Н</td>
-				<td bgcolor="#ffd737" class="row15 cell15" data-textAlert="Zn<sub>2</sub>HPO<sub>4</sub><br>Гидрофосфат цинка">?</td>
-				<td bgcolor="#ffd737" class="row15 cell16" data-textAlert="Ag<sub>2</sub>HPO<sub>4</sub><br>Гидрофосфат серебра">?</td>
-				<td bgcolor="#ffd737" class="row15 cell17" data-textAlert="Hg(HPO<sub>4</sub>)<sub>2</sub><br>Гидрофосфат ртути">?</td>
-				<td bgcolor="#5ca7e0" class="row15 cell18" data-textAlert="Pb(HPO<sub>4</sub>)<sub>2</sub><br>Гидрофосфат свинца">М</td>
-				<td bgcolor="#90cd8e" class="row15 cell19" data-textAlert="Sn(HPO<sub>4</sub>)<sub>2</sub><br>Гидрофосфат олова">Н</td>
-				<td bgcolor="#ffd737" class="row15 cell20" data-textAlert="Cu(HPO<sub>4</sub>)<sub>2</sub><br>Гидрофосфат меди">?</td>
+				<td class="row15 cell1 soluble">Р</td>
+				<td class="row15 cell2 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Li<sub>2</sub>HPO<sub>4</sub><br>Гидрофосфат лития')">?</td>
+				<td class="row15 cell3 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'K<sub>2</sub>HPO<sub>4</sub><br>Гидрофосфат калия')">Р</td>
+				<td class="row15 cell4 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Na<sub>2</sub>HPO<sub>4</sub><br>Гидрофосфат натрия')">Р</td>
+				<td class="row15 cell5 soluble" v-on:mouseover="showAlert($event, 'alert-text', '(NH<sub>4</sub>)<sub>2</sub>HPO<sub>4</sub><br>Гидрофосфат аммония')">Р</td>
+				<td class="row15 cell6 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Ba(HPO<sub>4</sub>)<sub>2</sub><br>Гидрофосфат бария')">Н</td>
+				<td class="row15 cell7 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Ca(HPO<sub>4</sub>)<sub>2</sub><br>Гидрофосфат кальция')">Н</td>
+				<td class="row15 cell8 slightlySoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Mg(HPO<sub>4</sub>)<sub>2</sub><br>Гидрофосфат магния')">М</td>
+				<td class="row15 cell9 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Sr(HPO<sub>4</sub>)<sub>2</sub><br>Гидрофосфат стронция')">Н</td>
+				<td class="row15 cell10 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Al(HPO<sub>4</sub>)<sub>3</sub><br>Гидрофосфат алюминия')">?</td>
+				<td class="row15 cell11 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Cr(HPO<sub>4</sub>)<sub>3</sub><br>Гидрофосфат хрома')">?</td>
+				<td class="row15 cell12 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Fe(HPO<sub>4</sub>)<sub>2</sub><br>Гидрофосфат железа (II)')">Н</td>
+				<td class="row15 cell13 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Fe(HPO<sub>4</sub>)<sub>3</sub><br>Гидрофосфат железа (III)')">?</td>
+				<td class="row15 cell14 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Mn<sub>2</sub>HPO<sub>4</sub><br>Гидрофосфат марганца')">Н</td>
+				<td class="row15 cell15 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Zn<sub>2</sub>HPO<sub>4</sub><br>Гидрофосфат цинка')">?</td>
+				<td class="row15 cell16 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Ag<sub>2</sub>HPO<sub>4</sub><br>Гидрофосфат серебра')">?</td>
+				<td class="row15 cell17 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Hg(HPO<sub>4</sub>)<sub>2</sub><br>Гидрофосфат ртути')">?</td>
+				<td class="row15 cell18 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Pb(HPO<sub>4</sub>)<sub>2</sub><br>Гидрофосфат свинца')">М</td>
+				<td class="row15 cell19 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Sn(HPO<sub>4</sub>)<sub>2</sub><br>Гидрофосфат олова')">Н</td>
+				<td class="row15 cell20 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Cu(HPO<sub>4</sub>)<sub>2</sub><br>Гидрофосфат меди')">?</td>
 			</tr>
 			<tr>
 				<th class="header-cell">CO<sub>3</sub><sup>2-</sup></th>
-				<td bgcolor="#fe83b5" class="row16 cell1" data-textAlert="H<sub>2</sub>CO<sub>3</sub><br>Угольная кислота">Р</td>
-				<td bgcolor="#fe83b5" class="row16 cell2" data-textAlert="Li<sub>2</sub>CO<sub>3</sub><br>Карбонат лития">Р</td>
-				<td bgcolor="#fe83b5" class="row16 cell3" data-textAlert="K<sub>2</sub>CO<sub>3</sub><br>Карбонат калия">Р</td>
-				<td bgcolor="#fe83b5" class="row16 cell4" data-textAlert="Na<sub>2</sub>CO<sub>3</sub><br>Карбонат натрия">Р</td>
-				<td bgcolor="#fe83b5" class="row16 cell5" data-textAlert="(NH<sub>4</sub>)<sub>2</sub>CO<sub>3</sub><br>Карбонат аммония">Р</td>
-				<td bgcolor="#90cd8e" class="row16 cell6" data-textAlert="BaCO<sub>3</sub><br>Карбонат бария">Н</td>
-				<td bgcolor="#90cd8e" class="row16 cell7" data-textAlert="CaCO<sub>3</sub><br>Карбонат кальция">Н</td>
-				<td bgcolor="#90cd8e" class="row16 cell8" data-textAlert="MgCO<sub>3</sub><br>Карбонат магния">Н</td>
-				<td bgcolor="#90cd8e" class="row16 cell9" data-textAlert="SrCO<sub>3</sub><br>Карбонат стронция">Н</td>
-				<td bgcolor="#ffd737" class="row16 cell10" data-textAlert="Al<sub>2</sub>(CO<sub>3</sub>)<sub>3</sub><br>Карбонат алюминия">?</td>
-				<td bgcolor="#ffd737" class="row16 cell11" data-textAlert="Cr<sub>2</sub>(CO<sub>3</sub>)<sub>3</sub><br>Карбонат хрома">?</td>
-				<td bgcolor="#90cd8e" class="row16 cell12" data-textAlert="FeCO<sub>3</sub><br>Карбонат железа (II)">Н</td>
-				<td bgcolor="#ffd737" class="row16 cell13" data-textAlert="Fe<sub>2</sub>(CO<sub>3</sub>)<sub>3</sub><br>Карбонат железа (III)">-</td>
-				<td bgcolor="#90cd8e" class="row16 cell14" data-textAlert="MnCO<sub>3</sub><br>Карбонат марганца">Н</td>
-				<td bgcolor="#90cd8e" class="row16 cell15" data-textAlert="ZnCO<sub>3</sub><br>Карбонат цинка">Н</td>
-				<td bgcolor="#90cd8e" class="row16 cell16" data-textAlert="Ag<sub>2</sub>СO<sub>3</sub><br>Карбонат серебра">Н</td>
-				<td bgcolor="#90cd8e" class="row16 cell17" data-textAlert="HgCO<sub>3</sub><br>Карбонат ртути">Н</td>
-				<td bgcolor="#90cd8e" class="row16 cell18" data-textAlert="PbCO<sub>3</sub><br>Карбонат свинца">Н</td>
-				<td bgcolor="#ffd737" class="row16 cell19" data-textAlert="SnCO<sub>3</sub><br>Карбонат олова">?</td>
-				<td bgcolor="#90cd8e" class="row16 cell20" data-textAlert="CuCO<sub>3</sub><br>Карбонат меди">Н</td>
+				<td class="row16 cell1 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'H<sub>2</sub>CO<sub>3</sub><br>Угольная кислота')">Р</td>
+				<td class="row16 cell2 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Li<sub>2</sub>CO<sub>3</sub><br>Карбонат лития')">Р</td>
+				<td class="row16 cell3 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'K<sub>2</sub>CO<sub>3</sub><br>Карбонат калия')">Р</td>
+				<td class="row16 cell4 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Na<sub>2</sub>CO<sub>3</sub><br>Карбонат натрия')">Р</td>
+				<td class="row16 cell5 soluble" v-on:mouseover="showAlert($event, 'alert-text', '(NH<sub>4</sub>)<sub>2</sub>CO<sub>3</sub><br>Карбонат аммония')">Р</td>
+				<td class="row16 cell6 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'BaCO<sub>3</sub><br>Карбонат бария')">Н</td>
+				<td class="row16 cell7 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'CaCO<sub>3</sub><br>Карбонат кальция')">Н</td>
+				<td class="row16 cell8 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'MgCO<sub>3</sub><br>Карбонат магния')">Н</td>
+				<td class="row16 cell9 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'SrCO<sub>3</sub><br>Карбонат стронция')">Н</td>
+				<td class="row16 cell10 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Al<sub>2</sub>(CO<sub>3</sub>)<sub>3</sub><br>Карбонат алюминия')">?</td>
+				<td class="row16 cell11 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Cr<sub>2</sub>(CO<sub>3</sub>)<sub>3</sub><br>Карбонат хрома')">?</td>
+				<td class="row16 cell12 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'FeCO<sub>3</sub><br>Карбонат железа (II)')">Н</td>
+				<td class="row16 cell13 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Fe<sub>2</sub>(CO<sub>3</sub>)<sub>3</sub><br>Карбонат железа (III)')">-</td>
+				<td class="row16 cell14 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'MnCO<sub>3</sub><br>Карбонат марганца')">Н</td>
+				<td class="row16 cell15 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'ZnCO<sub>3</sub><br>Карбонат цинка')">Н</td>
+				<td class="row16 cell16 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Ag<sub>2</sub>СO<sub>3</sub><br>Карбонат серебра')">Н</td>
+				<td class="row16 cell17 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'HgCO<sub>3</sub><br>Карбонат ртути')">Н</td>
+				<td class="row16 cell18 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'PbCO<sub>3</sub><br>Карбонат свинца')">Н</td>
+				<td class="row16 cell19 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'SnCO<sub>3</sub><br>Карбонат олова')">?</td>
+				<td class="row16 cell20 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'CuCO<sub>3</sub><br>Карбонат меди')">Н</td>
 			</tr>
 			<tr>
 				<th class="header-cell">HCO<sub>3</sub><sup>-</sup></th>
-				<td bgcolor="#fe83b5" class="row17 cell1">Р</td>
-				<td bgcolor="#fe83b5" class="row17 cell2" data-textAlert="LiHCO<sub>3</sub><br>Гидрокарбонат лития">Р</td>
-				<td bgcolor="#fe83b5" class="row17 cell3" data-textAlert="KHCO<sub>3</sub><br>Гидрокарбонат калия">Р</td>
-				<td bgcolor="#fe83b5" class="row17 cell4" data-textAlert="NaHCO<sub>3</sub><br>Гидрокарбонат натрия">Р</td>
-				<td bgcolor="#fe83b5" class="row17 cell5" data-textAlert="NH<sub>4</sub>HCO<sub>3</sub><br>Гидрокарбонат аммония">Р</td>
-				<td bgcolor="#fe83b5" class="row17 cell6" data-textAlert="Ba(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат бария">Р</td>
-				<td bgcolor="#fe83b5" class="row17 cell7" data-textAlert="Ca(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат кальция">Р</td>
-				<td bgcolor="#fe83b5" class="row17 cell8" data-textAlert="Mg(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат магния">Р</td>
-				<td bgcolor="#fe83b5" class="row17 cell9" data-textAlert="Sr(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат стронция">Р</td>
-				<td bgcolor="#ffd737" class="row17 cell10" data-textAlert="Mn(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат марганца">?</td>
-				<td bgcolor="#ffd737" class="row17 cell11" data-textAlert="Mn(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат марганца">?</td>
-				<td bgcolor="#fe83b5" class="row17 cell12" data-textAlert="Mn(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат марганца">Р</td>
-				<td bgcolor="#ffd737" class="row17 cell13" data-textAlert="Mn(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат марганца">?</td>
-				<td bgcolor="#ffd737" class="row17 cell14" data-textAlert="Mn(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат железа ">?</td>
-				<td bgcolor="#ffd737" class="row17 cell15" data-textAlert="Zn(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат цинка">?</td>
-				<td bgcolor="#ffd737" class="row17 cell16" data-textAlert="AgHCO<sub>3</sub><br>Гидрокарбонат серебра">?</td>
-				<td bgcolor="#ffd737" class="row17 cell17" data-textAlert="Hg(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат ртути">?</td>
-				<td bgcolor="#fe83b5" class="row17 cell18" data-textAlert="Pb(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат свинца">Р</td>
-				<td bgcolor="#ffd737" class="row17 cell19" data-textAlert="Sn(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат олова">?</td>
-				<td bgcolor="#ffd737" class="row17 cell20" data-textAlert="Cu(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат меди">?</td>
+				<td class="row17 cell1 soluble">Р</td>
+				<td class="row17 cell2 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'LiHCO<sub>3</sub><br>Гидрокарбонат лития')">Р</td>
+				<td class="row17 cell3 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'KHCO<sub>3</sub><br>Гидрокарбонат калия')">Р</td>
+				<td class="row17 cell4 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'NaHCO<sub>3</sub><br>Гидрокарбонат натрия')">Р</td>
+				<td class="row17 cell5 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'NH<sub>4</sub>HCO<sub>3</sub><br>Гидрокарбонат аммония')">Р</td>
+				<td class="row17 cell6 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Ba(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат бария')">Р</td>
+				<td class="row17 cell7 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Ca(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат кальция')">Р</td>
+				<td class="row17 cell8 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Mg(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат магния')">Р</td>
+				<td class="row17 cell9 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Sr(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат стронция')">Р</td>
+				<td class="row17 cell10 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Mn(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат марганца')">?</td>
+				<td class="row17 cell11 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Mn(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат марганца')">?</td>
+				<td class="row17 cell12 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Mn(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат марганца')">Р</td>
+				<td class="row17 cell13 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Mn(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат марганца')">?</td>
+				<td class="row17 cell14 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Mn(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат железа ')">?</td>
+				<td class="row17 cell15 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Zn(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат цинка')">?</td>
+				<td class="row17 cell16 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'AgHCO<sub>3</sub><br>Гидрокарбонат серебра')">?</td>
+				<td class="row17 cell17 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Hg(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат ртути')">?</td>
+				<td class="row17 cell18 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Pb(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат свинца')">Р</td>
+				<td class="row17 cell19 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Sn(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат олова')">?</td>
+				<td class="row17 cell20 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Cu(HCO<sub>3</sub>)<sub>2</sub><br>Гидрокарбонат меди')">?</td>
 			</tr>
 			<tr>
 				<th class="header-cell">CH<sub>3</sub>COO<sup>-</sup></th>
-				<td bgcolor="#fe83b5" class="row18 cell1" data-textAlert="CH<sub>3</sub>COOH<br>Этановая кислота<br>Уксусная кислота">Р</td>
-				<td bgcolor="#fe83b5" class="row18 cell2" data-textAlert="CH<sub>3</sub>COOLi<br>Ацетат лития">Р</td>
-				<td bgcolor="#fe83b5" class="row18 cell3" data-textAlert="CH<sub>3</sub>COOK<br>Ацетат калия">Р</td>
-				<td bgcolor="#fe83b5" class="row18 cell4" data-textAlert="CH<sub>3</sub>COONa<br>Ацетат натрия">Р</td>
-				<td bgcolor="#fe83b5" class="row18 cell5" data-textAlert="CH<sub>3</sub>COONH<sub>4</sub><br>Ацетат аммония">Р</td>
-				<td bgcolor="#fe83b5" class="row18 cell6" data-textAlert="(CH<sub>3</sub>COO)<sub>2</sub>Ba<br>Ацетат бария">Р</td>
-				<td bgcolor="#fe83b5" class="row18 cell7" data-textAlert="(CH<sub>3</sub>COO)<sub>2</sub>Ca<br>Ацетат кальция">Р</td>
-				<td bgcolor="#fe83b5" class="row18 cell8" data-textAlert="(CH<sub>3</sub>COO)<sub>2</sub>Mg<br>Ацетат магния">Р</td>
-				<td bgcolor="#fe83b5" class="row18 cell9" data-textAlert="(CH<sub>3</sub>COO)<sub>2</sub>Sr<br>Ацетат стронция">Р</td>
-				<td bgcolor="#ffd737" class="row18 cell10" data-textAlert="(CH<sub>3</sub>COO)<sub>3</sub>Al<br>Ацетат алюминия">-</td>
-				<td bgcolor="#fe83b5" class="row18 cell11" data-textAlert="(CH<sub>3</sub>COO)<sub>3</sub>Cr<br>Ацетат хрома">Р</td>
-				<td bgcolor="#fe83b5" class="row18 cell12" data-textAlert="(CH<sub>3</sub>COO)<sub>2</sub>Fe<br>Ацетат железа (II)">Р</td>
-				<td bgcolor="#ffd737" class="row18 cell13" data-textAlert="(CH<sub>3</sub>COO)<sub>3</sub>Fe<br>Ацетат железа (III)">-</td>
-				<td bgcolor="#fe83b5" class="row18 cell14" data-textAlert="(CH<sub>3</sub>COO)<sub>2</sub>Mn<br>Ацетат марганца">Р</td>
-				<td bgcolor="#fe83b5" class="row18 cell15" data-textAlert="(CH<sub>3</sub>COO)<sub>2</sub>Zn<br>Ацетат цинка">Р</td>
-				<td bgcolor="#fe83b5" class="row18 cell16" data-textAlert="CH<sub>3</sub>COOAg<br>Ацетат серебра">Р</td>
-				<td bgcolor="#fe83b5" class="row18 cell17" data-textAlert="(CH<sub>3</sub>COO)<sub>2</sub>Hg<br>Ацетат ртути">Р</td>
-				<td bgcolor="#fe83b5" class="row18 cell18" data-textAlert="(CH<sub>3</sub>COO)<sub>2</sub>Pb<br>Ацетат свинца">Р</td>
-				<td bgcolor="#ffd737" class="row18 cell19" data-textAlert="(CH<sub>3</sub>COO)<sub>2</sub>Sn<br>Ацетат олова">-</td>
-				<td bgcolor="#fe83b5" class="row18 cell20" data-textAlert="(CH<sub>3</sub>COO)<sub>2</sub>Cu<br>Ацетат меди">Р</td>
+				<td class="row18 cell1 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'CH<sub>3</sub>COOH<br>Этановая кислота<br>Уксусная кислота')">Р</td>
+				<td class="row18 cell2 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'CH<sub>3</sub>COOLi<br>Ацетат лития')">Р</td>
+				<td class="row18 cell3 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'CH<sub>3</sub>COOK<br>Ацетат калия')">Р</td>
+				<td class="row18 cell4 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'CH<sub>3</sub>COONa<br>Ацетат натрия')">Р</td>
+				<td class="row18 cell5 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'CH<sub>3</sub>COONH<sub>4</sub><br>Ацетат аммония')">Р</td>
+				<td class="row18 cell6 soluble" v-on:mouseover="showAlert($event, 'alert-text', '(CH<sub>3</sub>COO)<sub>2</sub>Ba<br>Ацетат бария')">Р</td>
+				<td class="row18 cell7 soluble" v-on:mouseover="showAlert($event, 'alert-text', '(CH<sub>3</sub>COO)<sub>2</sub>Ca<br>Ацетат кальция')">Р</td>
+				<td class="row18 cell8 soluble" v-on:mouseover="showAlert($event, 'alert-text', '(CH<sub>3</sub>COO)<sub>2</sub>Mg<br>Ацетат магния')">Р</td>
+				<td class="row18 cell9 soluble" v-on:mouseover="showAlert($event, 'alert-text', '(CH<sub>3</sub>COO)<sub>2</sub>Sr<br>Ацетат стронция')">Р</td>
+				<td class="row18 cell10 decomposes" v-on:mouseover="showAlert($event, 'alert-text', '(CH<sub>3</sub>COO)<sub>3</sub>Al<br>Ацетат алюминия')">-</td>
+				<td class="row18 cell11 soluble" v-on:mouseover="showAlert($event, 'alert-text', '(CH<sub>3</sub>COO)<sub>3</sub>Cr<br>Ацетат хрома')">Р</td>
+				<td class="row18 cell12 soluble" v-on:mouseover="showAlert($event, 'alert-text', '(CH<sub>3</sub>COO)<sub>2</sub>Fe<br>Ацетат железа (II)')">Р</td>
+				<td class="row18 cell13 decomposes" v-on:mouseover="showAlert($event, 'alert-text', '(CH<sub>3</sub>COO)<sub>3</sub>Fe<br>Ацетат железа (III)')">-</td>
+				<td class="row18 cell14 soluble" v-on:mouseover="showAlert($event, 'alert-text', '(CH<sub>3</sub>COO)<sub>2</sub>Mn<br>Ацетат марганца')">Р</td>
+				<td class="row18 cell15 soluble" v-on:mouseover="showAlert($event, 'alert-text', '(CH<sub>3</sub>COO)<sub>2</sub>Zn<br>Ацетат цинка')">Р</td>
+				<td class="row18 cell16 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'CH<sub>3</sub>COOAg<br>Ацетат серебра')">Р</td>
+				<td class="row18 cell17 soluble" v-on:mouseover="showAlert($event, 'alert-text', '(CH<sub>3</sub>COO)<sub>2</sub>Hg<br>Ацетат ртути')">Р</td>
+				<td class="row18 cell18 soluble" v-on:mouseover="showAlert($event, 'alert-text', '(CH<sub>3</sub>COO)<sub>2</sub>Pb<br>Ацетат свинца')">Р</td>
+				<td class="row18 cell19 decomposes" v-on:mouseover="showAlert($event, 'alert-text', '(CH<sub>3</sub>COO)<sub>2</sub>Sn<br>Ацетат олова')">-</td>
+				<td class="row18 cell20 soluble" v-on:mouseover="showAlert($event, 'alert-text', '(CH<sub>3</sub>COO)<sub>2</sub>Cu<br>Ацетат меди')">Р</td>
 			</tr>
 			<tr>
 				<th class="header-cell">SiO<sub>3</sub><sup>2-</sup></th>
-				<td bgcolor="#90cd8e" class="row19 cell1" data-textAlert="H<sub>2</sub>SiO<sub>3</sub><br>Кремниевая кислота">Н</td>
-				<td bgcolor="#90cd8e" class="row19 cell2" data-textAlert="Li<sub>2</sub>SiO<sub>3</sub><br>Силикат лития">Н</td>
-				<td bgcolor="#fe83b5" class="row19 cell3" data-textAlert="K<sub>2</sub>SiO<sub>3</sub><br>Силикат калия">Р</td>
-				<td bgcolor="#fe83b5" class="row19 cell4" data-textAlert="Na<sub>2</sub>SiO<sub>3</sub><br>Силикат натрия">Р</td>
-				<td bgcolor="#ffd737" class="row19 cell5" data-textAlert="(NH<sub>4</sub>)<sub>2</sub>SiO<sub>3</sub><br>Силикат аммония">?</td>
-				<td bgcolor="#90cd8e" class="row19 cell6" data-textAlert="BaSiO<sub>3</sub><br>Силикат бария">Н</td>
-				<td bgcolor="#90cd8e" class="row19 cell7" data-textAlert="CaSiO<sub>3</sub><br>Силикат кальция">Н</td>
-				<td bgcolor="#90cd8e" class="row19 cell8" data-textAlert="MgSiO<sub>3</sub><br>Силикат магния">Н</td>
-				<td bgcolor="#90cd8e" class="row19 cell9" data-textAlert="SrSiO<sub>3</sub><br>Силикат стронция">Н</td>
-				<td bgcolor="#ffd737" class="row19 cell10" data-textAlert="Al<sub>2</sub>(SiO<sub>3</sub>)<sub>3</sub><br>Силикат алюминия">?</td>
-				<td bgcolor="#ffd737" class="row19 cell11" data-textAlert="Cr<sub>2</sub>(SiO<sub>3</sub>)<sub>3</sub><br>Силикат хрома">?</td>
-				<td bgcolor="#90cd8e" class="row19 cell12" data-textAlert="FeSiO<sub>3</sub><br>Силикат железа (II)">Н</td>
-				<td bgcolor="#ffd737" class="row19 cell13" data-textAlert="Fe<sub>2</sub>(SiO<sub>3</sub>)<sub>3</sub><br>Силикат железа (III)">?</td>
-				<td bgcolor="#90cd8e" class="row19 cell14" data-textAlert="MnSiO<sub>3</sub><br>Силикат марганца">Н</td>
-				<td bgcolor="#90cd8e" class="row19 cell15" data-textAlert="ZnSiO<sub>3</sub><br>Силикат цинка">Н</td>
-				<td bgcolor="#ffd737" class="row19 cell16" data-textAlert="Ag<sub>2</sub>SiO<sub>3</sub><br>Силикат серебра">?</td>
-				<td bgcolor="#ffd737" class="row19 cell17" data-textAlert="HgSiO<sub>3</sub><br>Силикат ртути">?</td>
-				<td bgcolor="#90cd8e" class="row19 cell18" data-textAlert="PbSiO<sub>3</sub><br>Силикат свинца">Н</td>
-				<td bgcolor="#ffd737" class="row19 cell19" data-textAlert="SnSiO<sub>3</sub><br>Силикат олова">?</td>
-				<td bgcolor="#ffd737" class="row19 cell20" data-textAlert="CuSiO<sub>3</sub><br>Силикат меди">?</td>
+				<td class="row19 cell1 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'H<sub>2</sub>SiO<sub>3</sub><br>Кремниевая кислота')">Н</td>
+				<td class="row19 cell2 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'Li<sub>2</sub>SiO<sub>3</sub><br>Силикат лития')">Н</td>
+				<td class="row19 cell3 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'K<sub>2</sub>SiO<sub>3</sub><br>Силикат калия')">Р</td>
+				<td class="row19 cell4 soluble" v-on:mouseover="showAlert($event, 'alert-text', 'Na<sub>2</sub>SiO<sub>3</sub><br>Силикат натрия')">Р</td>
+				<td class="row19 cell5 decomposes" v-on:mouseover="showAlert($event, 'alert-text', '(NH<sub>4</sub>)<sub>2</sub>SiO<sub>3</sub><br>Силикат аммония')">?</td>
+				<td class="row19 cell6 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'BaSiO<sub>3</sub><br>Силикат бария')">Н</td>
+				<td class="row19 cell7 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'CaSiO<sub>3</sub><br>Силикат кальция')">Н</td>
+				<td class="row19 cell8 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'MgSiO<sub>3</sub><br>Силикат магния')">Н</td>
+				<td class="row19 cell9 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'SrSiO<sub>3</sub><br>Силикат стронция')">Н</td>
+				<td class="row19 cell10 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Al<sub>2</sub>(SiO<sub>3</sub>)<sub>3</sub><br>Силикат алюминия')">?</td>
+				<td class="row19 cell11 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Cr<sub>2</sub>(SiO<sub>3</sub>)<sub>3</sub><br>Силикат хрома')">?</td>
+				<td class="row19 cell12 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'FeSiO<sub>3</sub><br>Силикат железа (II)')">Н</td>
+				<td class="row19 cell13 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Fe<sub>2</sub>(SiO<sub>3</sub>)<sub>3</sub><br>Силикат железа (III)')">?</td>
+				<td class="row19 cell14 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'MnSiO<sub>3</sub><br>Силикат марганца')">Н</td>
+				<td class="row19 cell15 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'ZnSiO<sub>3</sub><br>Силикат цинка')">Н</td>
+				<td class="row19 cell16 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'Ag<sub>2</sub>SiO<sub>3</sub><br>Силикат серебра')">?</td>
+				<td class="row19 cell17 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'HgSiO<sub>3</sub><br>Силикат ртути')">?</td>
+				<td class="row19 cell18 insoluble" v-on:mouseover="showAlert($event, 'alert-text', 'PbSiO<sub>3</sub><br>Силикат свинца')">Н</td>
+				<td class="row19 cell19 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'SnSiO<sub>3</sub><br>Силикат олова')">?</td>
+				<td class="row19 cell20 decomposes" v-on:mouseover="showAlert($event, 'alert-text', 'CuSiO<sub>3</sub><br>Силикат меди')">?</td>
 			</tr>
 		</table>
-		<div class="alert" :class="alert.class" :style="alert.coords" v-show="alert.active">
+		<div class="alert" :class="alertClass" :style="alert.coords" v-show="alert.active">
 			<component :is="alert.component"><div v-html="alert.text"></div></component>
 		</div>
 	</div>
