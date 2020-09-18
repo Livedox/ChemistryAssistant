@@ -584,30 +584,36 @@
 	<script src="vue/components.js"></script>
 	<script src="vue/mixin.js"></script>
 	<script>
-		let app = new Vue({
-			mixins: [mixinAlert],
-			el: "#app",
-			data: {
-				isMenuActive: false,
-				isSubMenuActive: false,
-				settings: {
-					isActive: false,
-				},
-			},
-			methods: {
-				toggleMenu: function() {
-					this.isMenuActive = !this.isMenuActive;
-					this.settings.isActive = false;
-					this.isSubMenuActive = false;
-				}
-			},
-		});
-		colorSetting.init("S");
-		document.body.onload = function() {
-			picker.init(function(color) {colorSetting.changeColorsElements(color) });
-		}
-		document.getElementById("solubilityTable").addEventListener("mouseover", highlightColumnAndRow);
-		document.getElementById("solubilityTable").addEventListener("mouseout", highlightColumnAndRow);
+		"use strict";
+
+var app = new Vue({
+  mixins: [mixinAlert],
+  el: "#app",
+  data: {
+    isMenuActive: false,
+    isSubMenuActive: false,
+    settings: {
+      isActive: false
+    }
+  },
+  methods: {
+    toggleMenu: function toggleMenu() {
+      this.isMenuActive = !this.isMenuActive;
+      this.settings.isActive = false;
+      this.isSubMenuActive = false;
+    }
+  }
+});
+colorSetting.init("S");
+
+document.body.onload = function () {
+  picker.init(function (color) {
+    colorSetting.changeColorsElements(color);
+  });
+};
+
+document.getElementById("solubilityTable").addEventListener("mouseover", highlightColumnAndRow);
+document.getElementById("solubilityTable").addEventListener("mouseout", highlightColumnAndRow);
 	</script>
 </body>
 
